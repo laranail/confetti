@@ -49,7 +49,7 @@
     },
     "require-dev": {
         "filament/filament": "^4.0 || ^5.0",
-        "inertiajs/inertia-laravel": "^2.0",
+        "inertiajs/inertia-laravel": "^2.0 || ^3.0",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.18",
         "livewire/livewire": "^4.0",
