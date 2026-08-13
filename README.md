@@ -35,8 +35,9 @@ Confetti::realistic()->shoot();
 Full documentation is at
 **[opensource.simtabi.com/documentation/laranail/confetti](https://opensource.simtabi.com/documentation/laranail/confetti/)**
 covering installation and the three ways to get the runtime onto a page, the builder
-and every canvas-confetti option, the nine presets, the client-side animation
-engine, asset delivery, transports, validation, testing, the Artisan commands,
+and every canvas-confetti option, the nine presets, named effects, hooks and
+events, the client-side animation engine, asset delivery, transports,
+validation, testing, the Artisan commands,
 and recipes for Blade, Livewire, Inertia, Filament, custom shapes, custom
 presets, Content-Security-Policy and reduced motion.
 

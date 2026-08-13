@@ -17,6 +17,7 @@ use Simtabi\Laranail\Confetti\Enums\TransportDriver;
 use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\Support\EffectRegistry;
 use Simtabi\Laranail\Confetti\Testing\ConfettiFake;
 use Simtabi\Laranail\Confetti\Transport\TransportManager;
 
@@ -27,7 +28,12 @@ use Simtabi\Laranail\Confetti\Transport\TransportManager;
  * @method static void flush()
  * @method static ConfettiFake fake()
  * @method static void restore()
+ * @method static ConfettiBuilder effect(string $name)
+ * @method static ConfettiService before(callable $hook)
+ * @method static ConfettiService forgetHooks()
  * @method static ConfettiService registerPreset(string $name, callable $factory)
+ * @method static ConfettiService registerEffect(string $name, array $definition)
+ * @method static EffectRegistry effects()
  * @method static ConfettiService extend(string $driver, \Closure $factory)
  * @method static ConfettiConfig config()
  * @method static PresetRegistry presets()

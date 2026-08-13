@@ -19,6 +19,7 @@ use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
 use Simtabi\Laranail\Confetti\Support\Assets;
 use Simtabi\Laranail\Confetti\Support\BootConfig;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\Support\EffectRegistry;
 use Simtabi\Laranail\Confetti\Transport\TransportManager;
 use Simtabi\Laranail\Confetti\View\ConfettiTags;
 use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
@@ -100,11 +101,17 @@ final class ConfettiServiceProvider extends PackageServiceProvider
             events: $this->app->bound(Dispatcher::class) ? $this->app->make(Dispatcher::class) : null,
         ));
 
+        $this->app->singleton(EffectRegistry::class, fn (): EffectRegistry => new EffectRegistry(
+            $this->app->make(ConfettiConfig::class)->effects,
+        ));
+
         $this->app->singleton(Confetti::class, fn (): Confetti => new Confetti(
             container: $this->app,
             config: $this->app->make(ConfettiConfig::class),
             presets: $this->app->make(PresetRegistry::class),
             transports: $this->app->make(TransportManager::class),
+            effects: $this->app->make(EffectRegistry::class),
+            events: $this->app->bound(Dispatcher::class) ? $this->app->make(Dispatcher::class) : null,
         ));
 
         $this->app->bind(BootConfig::class, fn (): BootConfig => new BootConfig(
@@ -124,6 +131,7 @@ final class ConfettiServiceProvider extends PackageServiceProvider
             config: $this->app->make(ConfettiConfig::class),
             boot: $this->app->make(BootConfig::class),
             tag: $this->app->make(ScriptTagBuilder::class),
+            events: $this->app->bound(Dispatcher::class) ? $this->app->make(Dispatcher::class) : null,
         ));
 
         $this->app->alias(Confetti::class, 'laranail.confetti');

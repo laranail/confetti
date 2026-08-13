@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\View;
 
+use Illuminate\Contracts\Events\Dispatcher;
+use Simtabi\Laranail\Confetti\Events\ConfettiRendered;
 use Simtabi\Laranail\Confetti\Support\BootConfig;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 
@@ -24,15 +26,23 @@ final readonly class ConfettiTags
         private ConfettiConfig $config,
         private BootConfig $boot,
         private ScriptTagBuilder $tag,
+        private ?Dispatcher $events = null,
     ) {}
 
-    public function render(): string
+    public function render(string $source = 'component'): string
     {
         if (! $this->config->enabled) {
             return '';
         }
 
-        return view(self::VIEW, $this->data())->render();
+        $data = $this->data();
+
+        $this->events?->dispatch(new ConfettiRendered(
+            source: $source,
+            hasPayload: str_contains((string) $data['bootJson'], '"payload":{'),
+        ));
+
+        return view(self::VIEW, $data)->render();
     }
 
     /** @return array<string, mixed> */

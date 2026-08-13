@@ -16,6 +16,7 @@ import { registerLivewireAdapter } from './adapters/livewire.js'
 import { animationNames, registerAnimation } from './animations/index.js'
 import { readBootConfig } from './core/boot.js'
 import { ERROR_EVENT } from './core/errors.js'
+import { beforeFire, EVENTS, off, on } from './core/events.js'
 import { Runtime } from './core/runtime.js'
 import { clearShapeCache } from './core/shapes.js'
 
@@ -46,6 +47,33 @@ function boot() {
 const api = {
   version,
   ERROR_EVENT,
+  EVENTS,
+
+  /**
+   * Subscribe to a runtime event, by key or full name.
+   *
+   *     LaranailConfetti.on('burst', (e) => console.log(e.detail.options))
+   *
+   * Returns its own unsubscribe function, so a listener added on a soft
+   * navigation can be removed without keeping the handler around.
+   */
+  on(event, handler) {
+    return on(event, handler)
+  },
+
+  off(event, handler) {
+    off(event, handler)
+  },
+
+  /**
+   * Transform every burst before it fires, for the things only the browser
+   * knows: viewport size, theme, whether the tab is busy.
+   *
+   *     LaranailConfetti.beforeFire((o) => ({ ...o, particleCount: o.particleCount / 2 }))
+   */
+  beforeFire(hook) {
+    return beforeFire(hook)
+  },
 
   /** Fire a full payload, in the shape the server sends. */
   fire(payload) {

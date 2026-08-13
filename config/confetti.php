@@ -129,6 +129,50 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Named effects
+    |--------------------------------------------------------------------------
+    |
+    | Your own confetti configurations, named so the call site says what it
+    | means rather than how it looks:
+    |
+    |     Confetti::effect('checkout')->shoot();
+    |
+    | Each key is a builder method and each value its arguments, so anything the
+    | builder can do an effect can declare. A list is spread as separate
+    | arguments, which is how origin => [0.5, 0.7] reaches origin(0.5, 0.7).
+    |
+    | The indirection is the point: what "checkout" looks like becomes a config
+    | decision, and the controller keeps saying effect('checkout').
+    |
+    */
+
+    'effects' => [
+
+        'celebrate' => [
+            'preset' => 'realistic',
+        ],
+
+        'subtle' => [
+            'count' => 40,
+            'spread' => 45,
+            'position' => 'top',
+            'ticks' => 120,
+        ],
+
+        'award' => [
+            'preset' => 'stars',
+            'palette' => 'gold',
+        ],
+
+        'party' => [
+            'preset' => 'schoolPride',
+            'duration' => 6000,
+        ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Asset delivery
     |--------------------------------------------------------------------------
     |

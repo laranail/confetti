@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Named effects. Declare your own confetti configurations in
+  `laranail.confetti.effects` and fire them by name with
+  `Confetti::effect('checkout')`, so what an effect looks like is a config
+  decision rather than a code change. Registrable at runtime too, with
+  `Confetti::registerEffect()`.
+- `Confetti::before()` hooks, applied to every builder the application creates.
+  They run first, so an individual call site still overrides them.
+- `ConfettiPreparing` and `ConfettiRendered` events, joining `ConfettiFired` and
+  `ConfettiDiscarded`. The first carries the mutable builder so policy can be
+  applied application-wide; the second says the runtime reached a page, which
+  is what separates "nothing was sent" from "nothing could have run".
+- A browser event vocabulary: `confetti:booted`, `confetti:burst`,
+  `confetti:animation-start`, `confetti:animation-end`, `confetti:skipped`,
+  `confetti:stopped` and `confetti:error`, each a `CustomEvent` on `window`.
+  `confetti:skipped` names which of the three silent outcomes occurred.
+- `LaranailConfetti.on()` and `.off()`, where `on()` returns its own
+  unsubscribe function, and `LaranailConfetti.beforeFire()` for transforming
+  bursts from the browser.
+
 ### Fixed
 
 - `duration()` set a builder property that nothing read, so

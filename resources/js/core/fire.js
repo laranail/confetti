@@ -1,6 +1,7 @@
 import confetti from 'canvas-confetti'
 
 import { report } from './errors.js'
+import { applyBeforeFire, emit, EVENTS } from './events.js'
 import { mergeOptions } from './normalize.js'
 import { reduceBurst, shouldReduce, shouldSkip } from './reduced-motion.js'
 import { resolveShapes } from './shapes.js'
@@ -68,11 +69,19 @@ export function createCannon(runtime = {}) {
 export function fire(options, context) {
   const { cannon = confetti, defaults = {}, policy = 'reduce' } = context || {}
 
-  if (shouldSkip(policy)) return null
+  if (shouldSkip(policy)) {
+    emit(EVENTS.skipped, { reason: 'reduced-motion', policy, options })
+
+    return null
+  }
 
   let merged = mergeOptions(defaults, options)
 
-  if (shouldReduce(policy)) merged = reduceBurst(merged)
+  const reduced = shouldReduce(policy)
+
+  if (reduced) merged = reduceBurst(merged)
+
+  merged = applyBeforeFire(merged)
 
   const shapes = resolveShapes(merged.shapes)
 
@@ -94,6 +103,8 @@ export function fire(options, context) {
 
   // Guard the return value: canvas-confetti hands back null when there is no
   // global Promise, and the previous implementation called .catch on it.
+  emit(EVENTS.burst, { options: merged, reduced })
+
   if (result && typeof result.then === 'function') {
     result.catch((error) => report(error, { phase: 'settle', options: merged }))
   }
@@ -105,7 +116,11 @@ export function fire(options, context) {
 export function fireBursts(bursts, context) {
   const { policy = 'reduce' } = context || {}
 
-  if (shouldSkip(policy)) return []
+  if (shouldSkip(policy)) {
+    emit(EVENTS.skipped, { reason: 'reduced-motion', policy, bursts: bursts.length })
+
+    return []
+  }
 
   // Under a reduced-motion preference, the first burst stands in for the whole
   // sequence; nine emoji volleys is exactly what the preference is asking us

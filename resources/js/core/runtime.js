@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti'
 import { getAnimation, registerAnimation } from '../animations/index.js'
 import { readBootConfig } from './boot.js'
 import { debug, report, setDebug } from './errors.js'
+import { emit, EVENTS } from './events.js'
 import { createCannon, fireBursts } from './fire.js'
 import { normalizePayload } from './normalize.js'
 import { shouldSkip } from './reduced-motion.js'
@@ -51,6 +52,7 @@ export class Runtime {
     if (payload.id) {
       if (this.seen.has(payload.id)) {
         debug('Ignored a payload already fired.', { id: payload.id })
+        emit(EVENTS.skipped, { reason: 'already-fired', id: payload.id })
 
         return
       }
@@ -62,6 +64,7 @@ export class Runtime {
 
     if (shouldSkip(policy)) {
       debug('Suppressed by the reduced-motion policy.', { policy })
+      emit(EVENTS.skipped, { reason: 'reduced-motion', policy, id: payload.id })
 
       return
     }
@@ -103,13 +106,19 @@ export class Runtime {
       oldest.abort()
       this.animations.delete(oldest)
       debug('Aborted the oldest animation to stay under the concurrency cap.', { limit })
+      emit(EVENTS.skipped, { reason: 'concurrency-cap', limit })
     }
 
     const controller = new AbortController()
 
     this.animations.add(controller)
 
-    const done = () => this.animations.delete(controller)
+    emit(EVENTS.animationStart, { animation: descriptor.animation, duration: descriptor.duration })
+
+    const done = () => {
+      this.animations.delete(controller)
+      emit(EVENTS.animationEnd, { animation: descriptor.animation })
+    }
 
     Promise.resolve(handler(descriptor, { ...context, signal: controller.signal }))
       .then(done)
@@ -126,11 +135,15 @@ export class Runtime {
    * `wire:navigate` would otherwise keep falling over the next page.
    */
   stop() {
+    const count = this.animations.size
+
     for (const controller of this.animations) {
       controller.abort()
     }
 
     this.animations.clear()
+
+    if (count > 0) emit(EVENTS.stopped, { animations: count })
   }
 
   /** Stop everything and clear the canvas. */
@@ -173,6 +186,8 @@ export class Runtime {
 
   /** Fire whatever the server put in the boot block. */
   fireBootPayload() {
+    emit(EVENTS.booted, { event: this.boot.event, hasPayload: !!this.boot.payload })
+
     if (this.boot.payload) this.fire(this.boot.payload)
 
     return this

@@ -48,7 +48,7 @@ final readonly class InjectConfetti
             return $response;
         }
 
-        $response->setContent($this->splice($content, $this->tags->render()));
+        $response->setContent($this->splice($content, $this->tags->render('middleware')));
 
         // The body changed length; a stale Content-Length truncates the page.
         $response->headers->remove('Content-Length');

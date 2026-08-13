@@ -52,6 +52,7 @@ final readonly class ConfettiConfig
         public Limits $limits = new Limits,
         public bool $strict = true,
         public array $integrations = [],
+        public array $effects = [],
     ) {}
 
     /** @param array<string, mixed> $config */
@@ -96,6 +97,7 @@ final readonly class ConfettiConfig
             limits: Limits::fromArray(self::section($config, 'limits')),
             strict: (bool) ($validation['strict'] ?? true),
             integrations: self::section($config, 'integrations'),
+            effects: self::section($config, 'effects'),
         );
     }
 

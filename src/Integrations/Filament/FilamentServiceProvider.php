@@ -68,7 +68,7 @@ final class FilamentServiceProvider extends ServiceProvider
 
             $panel->renderHook(
                 is_string($hook) && $hook !== '' ? $hook : self::BODY_END,
-                fn (): string => $this->app->make(ConfettiTags::class)->render(),
+                fn (): string => $this->app->make(ConfettiTags::class)->render('filament-auto'),
             );
         } catch (Throwable) {
             //

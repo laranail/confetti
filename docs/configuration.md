@@ -63,6 +63,12 @@ default colours".
 Colours must be hex. See [Validation](tools/validation.md) for why that is
 enforced rather than assumed.
 
+## Named effects
+
+`effects` holds your own confetti configurations, fired by name with
+`Confetti::effect('checkout')`. Each key is a builder method and each value its
+arguments. See [Named effects](tools/effects.md).
+
 ## Presets
 
 | Key | Default | Notes |

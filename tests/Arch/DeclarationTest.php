@@ -26,6 +26,12 @@ declare(strict_types=1);
  */
 $root = dirname(__DIR__, 2);
 
+/** @param list<string> $sections */
+function isDataSection(string $path, array $sections): bool
+{
+    return array_any($sections, fn (string $section): bool => str_starts_with($path, $section));
+}
+
 /**
  * Every leaf key in the config file, as a dotted path.
  *
@@ -97,6 +103,15 @@ $dataKeys = [
     'inject.only', 'inject.except',
 ];
 
+/**
+ * Whole sections that are the application's own data rather than the package's
+ * settings. Their keys are chosen by whoever edits the config, so there is no
+ * fixed set to check against, and the shipped entries are examples.
+ *
+ * @var list<string>
+ */
+$dataSections = ['effects.', 'palettes.'];
+
 it('has a reader for every setting in the config file', function () use ($configKeys, $readers, $dataKeys): void {
     $code = $readers();
     $orphans = [];
@@ -161,13 +176,14 @@ it('documents only settings that exist', function () use ($root, $configKeys): v
     ));
 });
 
-it('documents every setting that exists', function () use ($root, $configKeys, $dataKeys): void {
+it('documents every setting that exists', function () use ($root, $configKeys, $dataKeys, $dataSections): void {
     $docs = (string) file_get_contents($root.'/docs/configuration.md');
     $undocumented = [];
 
     foreach ($configKeys() as $path) {
-        // Palette and default entries are described as a group, not row by row.
-        if (in_array($path, $dataKeys, true)) {
+        // Palettes, effects and defaults are described as a group rather than
+        // row by row, because their keys belong to the application.
+        if (in_array($path, $dataKeys, true) || isDataSection($path, $dataSections)) {
             continue;
         }
 

@@ -89,7 +89,7 @@ final class ConfettiPlugin implements Plugin
         $panel->renderHook(
             $this->hook,
             fn (): string => $this->isEnabled()
-                ? app(ConfettiTags::class)->render()
+                ? app(ConfettiTags::class)->render('filament')
                 : '',
         );
     }
