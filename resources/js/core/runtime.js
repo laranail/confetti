@@ -2,7 +2,7 @@ import confetti from 'canvas-confetti'
 
 import { getAnimation, registerAnimation } from '../animations/index.js'
 import { readBootConfig } from './boot.js'
-import { report } from './errors.js'
+import { debug, report, setDebug } from './errors.js'
 import { createCannon, fireBursts } from './fire.js'
 import { normalizePayload } from './normalize.js'
 import { shouldSkip } from './reduced-motion.js'
@@ -28,6 +28,7 @@ export class Runtime {
     this.listeners = []
 
     configureShapeCache({ size: this.runtime.shapeCacheSize })
+    setDebug(this.runtime.debug)
   }
 
   /** Fire a payload in whatever shape it arrived. */
@@ -48,14 +49,22 @@ export class Runtime {
     // a soft navigation can hand us the same payload twice. Without an id there
     // is no way to tell either from a genuine second effect.
     if (payload.id) {
-      if (this.seen.has(payload.id)) return
+      if (this.seen.has(payload.id)) {
+        debug('Ignored a payload already fired.', { id: payload.id })
+
+        return
+      }
 
       this.seen.add(payload.id)
     }
 
     const policy = payload.reducedMotion || this.runtime.reducedMotion || 'reduce'
 
-    if (shouldSkip(policy)) return
+    if (shouldSkip(policy)) {
+      debug('Suppressed by the reduced-motion policy.', { policy })
+
+      return
+    }
 
     const context = {
       cannon: this.cannon,
@@ -93,6 +102,7 @@ export class Runtime {
       const oldest = this.animations.values().next().value
       oldest.abort()
       this.animations.delete(oldest)
+      debug('Aborted the oldest animation to stay under the concurrency cap.', { limit })
     }
 
     const controller = new AbortController()

@@ -54,16 +54,6 @@ final class Seed
         return $min + $this->float() * ($max - $min);
     }
 
-    /** An integer in `[$min, $max]`, inclusive at both ends. */
-    public function int(int $min, int $max): int
-    {
-        if ($max <= $min) {
-            return $min;
-        }
-
-        return $min + (int) floor($this->float() * (($max - $min) + 1));
-    }
-
     /** Round to a fixed precision so expanded payloads stay compact. */
     public function betweenRounded(float $min, float $max, int $precision = 4): float
     {

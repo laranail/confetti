@@ -26,23 +26,6 @@ final readonly class Burst implements JsonSerializable
         public int $delay = 0,
     ) {}
 
-    /** @param array<string, mixed> $options */
-    public static function make(array $options = [], int $delay = 0): self
-    {
-        return new self($options, $delay);
-    }
-
-    /** @param array<string, mixed> $options */
-    public function with(array $options): self
-    {
-        return new self([...$this->options, ...$options], $this->delay);
-    }
-
-    public function delayedBy(int $delay): self
-    {
-        return new self($this->options, $delay);
-    }
-
     /** @return array{delay: int, options: array<string, mixed>} */
     public function toArray(): array
     {

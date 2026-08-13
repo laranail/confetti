@@ -124,18 +124,6 @@ final class TransportManager
         return $this;
     }
 
-    /** @return list<string> */
-    public function available(): array
-    {
-        $names = array_map(static fn (TransportDriver $d): string => $d->value, TransportDriver::cases());
-
-        return array_values(array_filter(
-            [...$names, ...array_keys($this->custom)],
-            fn (string $name): bool => $name !== TransportDriver::Auto->value
-                && $this->resolve($name)->available(),
-        ));
-    }
-
     private function resolve(string $driver): Transport
     {
         return $this->resolved[$driver] ??= $this->build($driver);
@@ -182,7 +170,11 @@ final class TransportManager
 
     private function createLivewireDriver(): Transport
     {
-        return new LivewireTransport($this->container, $this->config->event);
+        return new LivewireTransport(
+            container: $this->container,
+            event: $this->config->event,
+            enabled: $this->config->integrationEnabled('livewire'),
+        );
     }
 
     private function createInertiaDriver(): Transport

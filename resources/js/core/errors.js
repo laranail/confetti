@@ -61,3 +61,25 @@ export function warnOnce(message) {
 export function resetWarnings() {
   warned.clear()
 }
+
+/**
+ * Diagnostic logging, off unless `runtime.debug` is set.
+ *
+ * The failure worth explaining is the quiet one: confetti was fired, nothing
+ * appeared, and no error was raised. That happens when the reduced-motion gate
+ * suppressed it, when a payload was recognised as one already seen, or when an
+ * animation was evicted to stay under the concurrency cap. All three are
+ * correct behaviour and all three look identical from the outside.
+ */
+let debugEnabled = false
+
+export function setDebug(enabled) {
+  debugEnabled = !!enabled
+}
+
+export function debug(message, context) {
+  if (!debugEnabled) return
+
+  // eslint-disable-next-line no-console
+  console.info('[laranail/confetti]', message, context ?? '')
+}

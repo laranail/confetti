@@ -66,7 +66,7 @@ mismatch renders blurred and at the wrong size.
 | Method | Notes |
 |---|---|
 | `delay(int $ms)` | Wait before this burst |
-| `duration(int $ms)` | How long a continuous effect runs |
+| `duration(int $ms)` | How long a continuous effect runs, however the preset was reached |
 | `stagger(int $ms)` | Each `then()` advances the delay by this |
 
 ## Accessibility

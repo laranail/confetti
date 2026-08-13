@@ -298,7 +298,6 @@ return [
             'enabled' => env('CONFETTI_FILAMENT', true),
             'auto' => false,
             'hook' => null,
-            'use_filament_assets' => false,
         ],
 
         'livewire' => [

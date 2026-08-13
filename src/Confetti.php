@@ -63,6 +63,17 @@ class Confetti
         $this->transports->send(ConfettiPayload::stop());
     }
 
+    /**
+     * Stop everything and clear the canvas.
+     *
+     * Stronger than {@see stop()}: that lets particles already in the air
+     * finish falling, this removes them.
+     */
+    public function reset(): void
+    {
+        $this->transports->send(ConfettiPayload::reset());
+    }
+
     /** Clear any effect queued for this request without sending it. */
     public function flush(): void
     {
@@ -85,11 +96,6 @@ class Confetti
         }
 
         return $this->fake = new ConfettiFake($recorder);
-    }
-
-    public function isFaked(): bool
-    {
-        return $this->fake instanceof ConfettiFake;
     }
 
     /** The active fake, for the assertion methods proxied through the facade. */

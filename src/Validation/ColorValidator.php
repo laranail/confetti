@@ -88,9 +88,4 @@ final class ColorValidator
 
         return '#'.$digits;
     }
-
-    public static function isValid(mixed $color): bool
-    {
-        return self::normalise($color) !== null;
-    }
 }

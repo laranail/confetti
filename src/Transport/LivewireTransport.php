@@ -34,6 +34,7 @@ final readonly class LivewireTransport implements Transport
     public function __construct(
         private Container $container,
         private string $event,
+        private bool $enabled = true,
     ) {}
 
     public function name(): string
@@ -43,7 +44,13 @@ final readonly class LivewireTransport implements Transport
 
     public function available(): bool
     {
-        return $this->isLivewireRequest() && $this->currentComponent() !== null;
+        // Turning the integration off makes a Livewire request fall through to
+        // the session transport, so confetti still arrives, just a navigation
+        // later. Useful when a component dispatches so much that the extra
+        // browser event is unwelcome.
+        return $this->enabled
+            && $this->isLivewireRequest()
+            && $this->currentComponent() !== null;
     }
 
     public function send(ConfettiPayload $payload): void

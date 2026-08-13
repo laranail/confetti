@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `duration()` set a builder property that nothing read, so
+  `snow()->duration(5000)` silently ran for the default fifteen seconds. It now
+  applies however the preset was reached.
+- `integrations.livewire.enabled` was documented but never read, so turning the
+  Livewire transport off did nothing.
+- `runtime.debug` was shipped to the browser and ignored there. It now logs the
+  three reasons an effect can draw nothing without raising: the reduced-motion
+  gate, a payload already fired, and an animation evicted at the concurrency cap.
+
+### Added
+
+- `Confetti::reset()`, which stops running effects and clears the canvas. The
+  runtime already handled the action; nothing could produce one.
+
+### Removed
+
+- `integrations.filament.use_filament_assets`, which was documented but never
+  implemented. The asset-delivery modes already cover panels.
+
 ## [0.1.0] - 2026-08-13
 
 Initial release. A vanilla Laravel 13 confetti package built on the laranail

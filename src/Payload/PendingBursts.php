@@ -35,11 +35,6 @@ final class PendingBursts
         $this->payload = $this->payload?->merge($payload) ?? $payload;
     }
 
-    public function payload(): ?ConfettiPayload
-    {
-        return $this->payload;
-    }
-
     /** @return array<string, mixed> */
     public function toArray(): array
     {

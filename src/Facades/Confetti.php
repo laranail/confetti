@@ -23,6 +23,7 @@ use Simtabi\Laranail\Confetti\Transport\TransportManager;
 /**
  * @method static ConfettiBuilder make()
  * @method static void stop()
+ * @method static void reset()
  * @method static void flush()
  * @method static ConfettiFake fake()
  * @method static void restore()

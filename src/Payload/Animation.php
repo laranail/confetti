@@ -59,6 +59,11 @@ final readonly class Animation implements JsonSerializable
         return new self($this->animation, $this->duration, $options, $this->params);
     }
 
+    public function withDuration(int $duration): self
+    {
+        return new self($this->animation, $duration, $this->options, $this->params);
+    }
+
     /** @return array{animation: string, duration: int, options: array<string, mixed>, params: array<string, mixed>} */
     public function toArray(): array
     {

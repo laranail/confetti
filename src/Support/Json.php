@@ -57,14 +57,4 @@ final class Json
             JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR | $extraFlags
         );
     }
-
-    /**
-     * @return array<array-key, mixed>
-     *
-     * @throws JsonException
-     */
-    public static function decode(string $json): array
-    {
-        return (array) json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-    }
 }

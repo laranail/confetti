@@ -21,12 +21,4 @@ final class InvalidPreset extends InvalidArgumentException implements ConfettiEx
             .'Register your own with Confetti::registerPreset().'
         );
     }
-
-    public static function notExpandable(string $name): self
-    {
-        return new self(
-            "Preset '{$name}' has nothing to expand: expand() applies to continuous effects "
-            .'(fireworks, snow, schoolPride), which otherwise run as an animation loop in the browser.'
-        );
-    }
 }

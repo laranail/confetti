@@ -43,9 +43,9 @@ if (! interface_exists(Plugin::class)) {
  *
  * The plugin renders the same Blade component a plain Laravel application uses,
  * so a panel and the rest of the site share one runtime, one bundle and one
- * asset-delivery setting. Nothing is registered with Filament's own asset
- * pipeline by default, because that pipeline only covers panel pages and confetti
- * fired from a marketing page would have nothing to run it.
+ * asset-delivery setting. Filament's own asset pipeline is deliberately not
+ * used: it only covers panel pages, so confetti fired from a marketing page
+ * would have nothing to run it.
  */
 final class ConfettiPlugin implements Plugin
 {

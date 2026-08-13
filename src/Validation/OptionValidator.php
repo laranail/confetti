@@ -42,11 +42,6 @@ final readonly class OptionValidator
         return new self;
     }
 
-    public function limits(): Limits
-    {
-        return $this->limits;
-    }
-
     public function isStrict(): bool
     {
         return $this->strict;

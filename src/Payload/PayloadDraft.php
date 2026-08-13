@@ -98,9 +98,13 @@ final class PayloadDraft
         return $this->entries === [] && $this->animations === [];
     }
 
-    public function hasBursts(): bool
+    /** Override the duration of every animation held, for `duration()`. */
+    public function setAnimationDuration(int $duration): void
     {
-        return $this->entries !== [];
+        $this->animations = array_map(
+            static fn (Animation $animation): Animation => $animation->withDuration($duration),
+            $this->animations,
+        );
     }
 
     /**

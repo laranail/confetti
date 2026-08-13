@@ -13,7 +13,8 @@ are inert when they are not.
 ## Stopping one yourself
 
 ```php
-Confetti::stop();
+Confetti::stop();   // abort running animations
+Confetti::reset();  // abort and clear the canvas
 ```
 
 From the browser:

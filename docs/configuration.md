@@ -125,13 +125,19 @@ See the [CSP recipe](recipes/csp.md).
 | `runtime.pause_when_hidden` | `true` | Animations pause in a background tab |
 | `runtime.max_concurrent_animations` | `3` | The oldest is aborted past this |
 | `runtime.shape_cache_size` | `32` | Rasterised text shapes held in memory |
-| `runtime.debug` | `false` (`CONFETTI_DEBUG`) | |
+| `runtime.debug` | `false` (`CONFETTI_DEBUG`) | Logs why an effect drew nothing |
 
 Two of these have sharp edges worth knowing.
 
 **`use_worker`** builds a worker from a blob URL. Under a strict CSP without
 `worker-src blob:`, canvas-confetti logs a warning and falls back to the main
 thread on its own: degraded, not broken.
+
+**`debug`** explains the quiet outcomes. Confetti can fire, draw nothing and
+raise no error for three legitimate reasons: the reduced-motion gate suppressed
+it, the payload was one the runtime had already fired, or an animation was
+evicted to stay under the concurrency cap. From the outside all three look like
+a broken install, so with this on each is logged to the console.
 
 **`canvas`** points at your own element. canvas-confetti ignores `zIndex` on a
 canvas it did not create and applies no positioning to it, so the runtime styles
@@ -168,7 +174,6 @@ mean staging and production can differ silently.
 | `integrations.filament.enabled` | `true` (`CONFETTI_FILAMENT`) |
 | `integrations.filament.auto` | `false` |
 | `integrations.filament.hook` | `null`, meaning `panels::body.end` |
-| `integrations.filament.use_filament_assets` | `false` |
 | `integrations.livewire.enabled` | `true` |
 | `integrations.inertia.enabled` | `false` (`CONFETTI_INERTIA`) |
 

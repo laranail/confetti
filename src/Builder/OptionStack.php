@@ -47,27 +47,9 @@ final class OptionStack
     /** @param array<string, mixed> $defaults */
     public function __construct(private array $defaults = []) {}
 
-    /** @param array<string, mixed> $defaults */
-    public function withDefaults(array $defaults): self
-    {
-        $this->defaults = $defaults;
-
-        return $this;
-    }
-
     public function setUser(string $key, mixed $value): self
     {
         $this->user[$key] = $value;
-
-        return $this;
-    }
-
-    /** @param array<string, mixed> $values */
-    public function setUserMany(array $values): self
-    {
-        foreach ($values as $key => $value) {
-            $this->user[$key] = $value;
-        }
 
         return $this;
     }
@@ -100,26 +82,6 @@ final class OptionStack
             ?? $fallback;
     }
 
-    /** Whether the caller set this key explicitly. */
-    public function userHas(string $key): bool
-    {
-        return array_key_exists($key, $this->user);
-    }
-
-    public function has(string $key): bool
-    {
-        return array_key_exists($key, $this->user)
-            || array_key_exists($key, $this->preset)
-            || array_key_exists($key, $this->defaults);
-    }
-
-    public function forget(string $key): self
-    {
-        unset($this->user[$key], $this->preset[$key]);
-
-        return $this;
-    }
-
     /** Every option a burst would carry, defaults included. */
     public function resolve(): array
     {
@@ -150,26 +112,6 @@ final class OptionStack
         return $delta;
     }
 
-    /** @return array<string, mixed> */
-    public function defaults(): array
-    {
-        return $this->defaults;
-    }
-
-    public function clearPreset(): self
-    {
-        $this->preset = [];
-
-        return $this;
-    }
-
-    public function clearUser(): self
-    {
-        $this->user = [];
-
-        return $this;
-    }
-
     /** Drop everything the defaults did not supply. */
     public function clearVolatile(): self
     {
@@ -177,10 +119,5 @@ final class OptionStack
         $this->user = [];
 
         return $this;
-    }
-
-    public function isPristine(): bool
-    {
-        return $this->preset === [] && $this->user === [];
     }
 }

@@ -45,10 +45,22 @@ seconds of *visible* effect. Turn that off with
 oldest is aborted past that, so a page firing a fifteen-second effect on every
 action does not stack them until the tab gives up.
 
+## Setting the duration
+
+Either as an argument to the shorthand, or with `duration()`, which also covers
+the generic `preset()` call and any custom animation preset:
+
+```php
+Confetti::snow(5000)->shoot();
+Confetti::snow()->duration(5000)->shoot();
+Confetti::preset('snow')->duration(5000)->shoot();
+```
+
 ## Stopping one
 
 ```php
-Confetti::stop();
+Confetti::stop();   // let the particles already in the air fall
+Confetti::reset();  // clear the canvas as well
 ```
 
 Sends an abort instruction. Worth having, because fifteen seconds is a long time

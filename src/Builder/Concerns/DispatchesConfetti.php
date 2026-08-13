@@ -128,6 +128,15 @@ trait DispatchesConfetti
 
         $base = $this->baseOptions();
 
+        // duration() has to be applied here rather than where the preset is
+        // built, because a preset can be reached three ways (its shorthand, the
+        // generic preset(), or a registered custom one) and only the first
+        // takes a duration argument. Applying it once, over whatever the draft
+        // ended up holding, covers all three.
+        if ($this->duration !== null) {
+            $draft->setAnimationDuration($this->duration);
+        }
+
         if ($this->shouldExpand() && $draft->hasAnimations()) {
             $draft->replaceAnimationsWithBursts($this->expandAnimations($draft->animations($base)));
         }

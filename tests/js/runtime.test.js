@@ -158,3 +158,48 @@ describe('runtime', () => {
     expect(error).toHaveBeenCalledOnce()
   })
 })
+
+describe('debug logging', () => {
+  beforeEach(() => {
+    confetti.mockClear()
+    window.matchMedia = vi.fn(() => ({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() }))
+  })
+
+  it('says nothing unless runtime.debug is set', () => {
+    const info = vi.spyOn(console, 'info').mockImplementation(() => {})
+
+    new Runtime({ defaults: {}, runtime: { reducedMotion: 'skip' } }).fire(payload())
+
+    expect(info).not.toHaveBeenCalled()
+  })
+
+  it('explains the quiet outcomes when it is', () => {
+    // Confetti fired, nothing drawn, no error raised. Without this the three
+    // legitimate reasons for that are indistinguishable from a broken install.
+    const info = vi.spyOn(console, 'info').mockImplementation(() => {})
+
+    const runtime = new Runtime({ defaults: {}, runtime: { debug: true, reducedMotion: 'skip' } })
+    runtime.fire(payload())
+
+    expect(info).toHaveBeenCalledWith(
+      '[laranail/confetti]',
+      'Suppressed by the reduced-motion policy.',
+      { policy: 'skip' },
+    )
+  })
+
+  it('reports a payload it has already fired', () => {
+    const info = vi.spyOn(console, 'info').mockImplementation(() => {})
+    window.matchMedia = vi.fn(() => ({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }))
+
+    const runtime = new Runtime({ defaults: {}, runtime: { debug: true } })
+    runtime.fire(payload({ id: 'twice' }))
+    runtime.fire(payload({ id: 'twice' }))
+
+    expect(info).toHaveBeenCalledWith(
+      '[laranail/confetti]',
+      'Ignored a payload already fired.',
+      { id: 'twice' },
+    )
+  })
+})
