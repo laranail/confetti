@@ -29,8 +29,8 @@ final class InvalidEffect extends InvalidArgumentException implements ConfettiEx
     {
         return new self(
             "Confetti effect '{$effect}' sets '{$option}', which is not a builder method. "
-            .'Each key in an effect names a method on the builder, so use the method name '
-            ."— 'count' rather than 'particleCount', 'palette' rather than 'colours'."
+            .'Each key in an effect names a method on the builder, so use the method name: '
+            ."'count' rather than 'particleCount', 'palette' rather than 'colours'."
         );
     }
 }

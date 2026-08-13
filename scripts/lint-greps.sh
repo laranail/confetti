@@ -63,7 +63,29 @@ else
     pass 'No repository-relative images in the README'
 fi
 
-# 5. The built bundle carries its third-party licence notice.
+# 5. No em-dashes, en-dashes or ellipsis glyphs in prose or code comments.
+#
+# The org shipping checklist bans them outright. This was cleaned up by hand
+# once and regressed within a day, because the check lived in a shell history
+# rather than here. The glyphs are built with printf so this file does not trip
+# its own rule, and every grep is guarded with `|| true`, since `set -e` treats
+# "no matches" as a failure.
+EM=$(printf '\342\200\224')
+EN=$(printf '\342\200\223')
+EL=$(printf '\342\200\246')
+
+GLYPH_HITS=$(git ls-files \
+    | grep -vE '^(art/|resources/dist/|scripts/lint-greps\.sh)' \
+    | xargs grep -nE "$EM|$EN|$EL" 2>/dev/null || true)
+
+if [ -n "$GLYPH_HITS" ]; then
+    printf '%s\n' "$GLYPH_HITS" | head -10 | sed 's/^/      /'
+    fail 'Em-dash, en-dash or ellipsis glyph found. Use a comma, colon, full stop or three dots.'
+else
+    pass 'No banned punctuation glyphs'
+fi
+
+# 6. The built bundle carries its third-party licence notice.
 if [ -f resources/dist/confetti.iife.js ]; then
     if grep -q 'Kiril Vatev' resources/dist/confetti.iife.js; then
         pass 'Bundle carries the canvas-confetti ISC notice'

@@ -108,8 +108,8 @@ const stop = LaranailConfetti.on('burst', (e) => track('confetti', e.detail))
 stop()
 ```
 
-It accepts either the short key or the full name, so `on('burst', …)` and
-`on('confetti:burst', …)` are the same thing.
+It accepts either the short key or the full name, so `on('burst', ...)` and
+`on('confetti:burst', ...)` are the same thing.
 
 ## Browser hooks
 
