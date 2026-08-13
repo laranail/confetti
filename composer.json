@@ -1,0 +1,134 @@
+{
+    "name": "laranail/confetti",
+    "description": "A fluent confetti builder for Laravel — canvas-confetti wrapped in a typed, validated PHP API, with Blade, Livewire, Inertia and Filament adapters.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "laravel-13",
+        "confetti",
+        "canvas-confetti",
+        "blade",
+        "livewire",
+        "inertia",
+        "filament",
+        "effects",
+        "ui",
+        "laranail",
+        "simtabi"
+    ],
+    "homepage": "https://opensource.simtabi.com/products/laranail/confetti",
+    "authors": [
+        {
+            "name": "Simtabi LLC",
+            "email": "opensource@simtabi.com",
+            "homepage": "https://opensource.simtabi.com",
+            "role": "Organization"
+        },
+        {
+            "name": "Imani Manyara",
+            "email": "imani@simtabi.com",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "email": "opensource@simtabi.com",
+        "issues": "https://github.com/laranail/confetti/issues",
+        "source": "https://github.com/laranail/confetti",
+        "docs": "https://opensource.simtabi.com/documentation/laranail/confetti/"
+    },
+    "require": {
+        "php": "^8.4.1 || ^8.5",
+        "illuminate/contracts": "^13.0",
+        "illuminate/http": "^13.0",
+        "illuminate/support": "^13.0",
+        "illuminate/view": "^13.0",
+        "laranail/console": "^0.1",
+        "laranail/enumerator": "^0.1",
+        "laranail/package-tools": "^0.1"
+    },
+    "require-dev": {
+        "filament/filament": "^4.0 || ^5.0",
+        "inertiajs/inertia-laravel": "^2.0",
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.18",
+        "livewire/livewire": "^4.0",
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^11.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-arch": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "phpstan/phpstan": "^2.0",
+        "rector/rector": "^2.0",
+        "roave/security-advisories": "dev-latest"
+    },
+    "suggest": {
+        "filament/filament": "Register ConfettiPlugin on a panel to fire confetti from Filament actions.",
+        "livewire/livewire": "Fire confetti straight from a component with the InteractsWithConfetti trait.",
+        "inertiajs/inertia-laravel": "Deliver the payload as a page prop instead of a session flash."
+    },
+    "autoload": {
+        "psr-4": {
+            "Simtabi\\Laranail\\Confetti\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Simtabi\\Laranail\\Confetti\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest --colors=always",
+        "test-coverage": "@test --coverage",
+        "pint": "vendor/bin/pint --test",
+        "pint-fix": "vendor/bin/pint",
+        "phpstan": "vendor/bin/phpstan analyse --no-progress",
+        "analyse": "@phpstan",
+        "rector": "vendor/bin/rector process --dry-run",
+        "rector-fix": "vendor/bin/rector process",
+        "greps": "bash scripts/lint-greps.sh",
+        "lint": [
+            "@pint",
+            "@phpstan",
+            "@rector",
+            "@greps"
+        ],
+        "audit": "@composer audit"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laranail/console"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/laranail/enumerator"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/laranail/package-tools"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Simtabi\\Laranail\\Confetti\\Providers\\ConfettiServiceProvider"
+            ],
+            "aliases": {
+                "Confetti": "Simtabi\\Laranail\\Confetti\\Facades\\Confetti"
+            }
+        },
+        "branch-alias": {
+            "dev-main": "0.1.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

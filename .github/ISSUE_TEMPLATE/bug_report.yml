@@ -1,0 +1,73 @@
+name: Bug report
+description: Something does not behave the way the documentation says it should.
+labels: [bug]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening an issue, run `php artisan laranail::confetti.doctor` — it
+        reports the setup that decides whether confetti actually appears, and
+        catches most of what gets reported here.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you expected, and what you got instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce it
+      description: The smallest confetti call and setup that shows the problem.
+      render: php
+    validations:
+      required: true
+
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Doctor output
+      description: The output of `php artisan laranail::confetti.doctor`.
+      render: shell
+
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+    validations:
+      required: true
+
+  - type: dropdown
+    id: stack
+    attributes:
+      label: Where is it firing from?
+      multiple: true
+      options:
+        - Blade
+        - Livewire
+        - Inertia
+        - Filament
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: php
+    attributes:
+      label: PHP and Laravel versions
+      placeholder: 'PHP 8.4.3, Laravel 13.2'
+    validations:
+      required: true
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Browser console output
+      description: >
+        The runtime reports failures to the console and dispatches a
+        `confetti:error` event. Anything it logged is usually the answer.
+      render: text

@@ -1,0 +1,28 @@
+{
+    "name": "@laranail/confetti",
+    "version": "0.1.0",
+    "description": "Browser runtime for laranail/confetti — a canvas-confetti engine driven by a declarative JSON payload.",
+    "license": "MIT",
+    "private": true,
+    "type": "module",
+    "main": "./resources/dist/confetti.esm.mjs",
+    "module": "./resources/dist/confetti.esm.mjs",
+    "exports": {
+        ".": "./resources/dist/confetti.esm.mjs",
+        "./source": "./resources/js/index.esm.js"
+    },
+    "scripts": {
+        "build": "node bin/build.mjs",
+        "dev": "node bin/build.mjs --dev",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "dependencies": {
+        "canvas-confetti": "^1.9.4"
+    },
+    "devDependencies": {
+        "esbuild": "^0.25.5",
+        "happy-dom": "^15.0.0",
+        "vitest": "^2.1.0"
+    }
+}

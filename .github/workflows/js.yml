@@ -1,0 +1,55 @@
+name: Browser runtime
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: js-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  runtime:
+    name: Vitest · bundle
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Syntax-check every module
+        run: find resources/js -name '*.js' -exec node --check {} \;
+
+      - name: Run the test suite
+        run: npm test
+
+      - name: Rebuild the bundle
+        run: npm run build
+
+      # resources/dist is committed, because consumers install through Composer
+      # and never run npm. That only works if the committed bundle actually
+      # matches its source — so a drift here is a build that ships stale
+      # behaviour to every application.
+      - name: Verify the committed bundle is up to date
+        run: git diff --exit-code resources/dist
+
+      # canvas-confetti is ISC, and that licence requires the notice to travel
+      # with the code. Minification will silently strip it if the esbuild
+      # legalComments setting regresses.
+      - name: Verify the third-party licence notice survived minification
+        run: |
+          grep -q "Kiril Vatev" resources/dist/confetti.iife.js
+          grep -q "Kiril Vatev" resources/dist/confetti.esm.mjs
+          test -f resources/dist/LICENSE-canvas-confetti.txt

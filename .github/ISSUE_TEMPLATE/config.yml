@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Documentation
+    url: https://opensource.simtabi.com/documentation/laranail/confetti/
+    about: Installation, configuration, presets and the recipes for each stack.
+
+  - name: Security vulnerability
+    url: https://github.com/laranail/confetti/security/policy
+    about: Report privately to opensource@simtabi.com — please do not open an issue.
