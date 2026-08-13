@@ -45,6 +45,14 @@ drift between source and bundle.
   `canvas-confetti` actually reads. When in doubt, check its source rather than
   its README, because several documented details there are incomplete and a few
   DefinitelyTyped signatures are wrong.
+- Three guards exist because the same defect shipped four times: something
+  declared that nothing reads. `tests/Unit/BuilderContractTest.php` calls every
+  public builder method and requires the payload to change, with an exempt list
+  so a new setter cannot be added without classifying it.
+  `tests/Arch/DeclarationTest.php` cross-checks the config file, the code that
+  reads it and the documentation that describes it.
+  `tests/Feature/IntegrationTogglesTest.php` covers the toggles a string search
+  cannot, by reading the flag the manager actually handed the transport.
 - Arch tests enforce the module boundaries (no `Filament\` outside
   `src/Integrations/Filament/`, no `session()` outside `SessionTransport`, no
   `mt_rand()` outside `Support\Seed`). If one fails, the boundary is the thing
