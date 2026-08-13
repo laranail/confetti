@@ -11,7 +11,7 @@ use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
 /**
  * A green palette for the "that worked" moment.
  *
- * Options only — it changes colours and nothing else, so combine it with a
+ * Options only: it changes colours and nothing else, so combine it with a
  * position or another effect. Not an upstream recipe.
  */
 final readonly class SuccessPreset implements Preset

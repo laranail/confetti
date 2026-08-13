@@ -14,6 +14,6 @@
 
 <!--
 If you changed anything about how the package detects Livewire, Inertia or
-Filament, say so here — those are duck-typed on purpose so the package works
+Filament, say so here. Those are duck-typed on purpose so the package works
 without them, and it is easy to "tidy" that into a hard dependency.
 -->

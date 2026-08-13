@@ -7,9 +7,9 @@
  * `null` rather than a promise when there is no global `Promise`, so `.catch`
  * would itself throw.
  *
- * The failures that actually happen here are synchronous — `shapeFromText`
+ * The failures that actually happen here are synchronous: `shapeFromText`
  * throws a TypeError without `OffscreenCanvas`, `shapeFromPath` throws without
- * `Path2D` or `DOMMatrix` — and the promise canvas-confetti returns never
+ * `Path2D` or `DOMMatrix`, and the promise canvas-confetti returns never
  * rejects at all. So the sync path is the one that matters; the async catch is
  * defensive.
  *

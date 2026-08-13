@@ -10,7 +10,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | When false, shoot() becomes a no-op. Everything still builds and can be
-    | inspected with toArray(), so tests keep working — nothing is sent.
+    | inspected with toArray(), so tests keep working. Nothing is sent.
     |
     */
 
@@ -36,8 +36,8 @@ return [
     | Transport
     |--------------------------------------------------------------------------
     |
-    | How a payload reaches the browser. "auto" picks per request — Livewire,
-    | then Inertia, then a session flash — and falls back to discarding the
+    | How a payload reaches the browser. "auto" picks per request (Livewire,
+    | then Inertia, then a session flash) and falls back to discarding the
     | payload outside HTTP, so firing confetti from a queued job is harmless
     | rather than fatal.
     |
@@ -58,7 +58,7 @@ return [
     |
     | Applied to every burst unless a preset or a builder call overrides them.
     | These travel to the browser once, in the boot payload, and individual
-    | bursts carry only what differs — which is why a five-burst effect is a few
+    | bursts carry only what differs, which is why a five-burst effect is a few
     | hundred bytes rather than a few thousand.
     |
     | Every key here is a canvas-confetti option. Note that "gravity" is tripled
@@ -83,7 +83,7 @@ return [
     | Named palettes
     |--------------------------------------------------------------------------
     |
-    | Reach for one with palette('gold'). Colours must be hex — canvas-confetti
+    | Reach for one with palette('gold'). Colours must be hex, because canvas-confetti
     | parses a colour by discarding non-hex characters, so a CSS colour name
     | does not fail, it just paints something arbitrary.
     |
@@ -105,8 +105,8 @@ return [
     | Presets
     |--------------------------------------------------------------------------
     |
-    | "expansion" decides where the continuous effects — fireworks, snow,
-    | schoolPride — are turned into individual bursts.
+    | "expansion" decides where the continuous effects (fireworks, snow,
+    | schoolPride) are turned into individual bursts.
     |
     |   client  Send a compact descriptor and let the browser run the loop.
     |           Roughly 250 bytes, and each visitor gets their own randomness.
@@ -173,7 +173,7 @@ return [
     | With "auto" enabled, a middleware appends the confetti tags before the
     | closing </body> of every HTML response, so no layout changes are needed.
     | It is off by default because silently rewriting responses should be a
-    | decision, not a surprise — place <x-confetti::scripts /> yourself if you
+    | decision, not a surprise. Place <x-confetti::scripts /> yourself if you
     | would rather be explicit.
     |
     | The middleware skips redirects, streamed responses, non-HTML content
@@ -201,7 +201,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | A nonce to place on the script tag under a strict Content-Security-Policy.
-    | The boot payload needs no nonce — it is a JSON data block, which the
+    | The boot payload needs no nonce; it is a JSON data block, which the
     | browser never executes.
     |
     */
@@ -247,7 +247,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Ceilings on anything that could be threaded through from user input.
-    | canvas-confetti has no limits of its own — it will accept a million
+    | canvas-confetti has no limits of its own; it will accept a million
     | particles and then spend the frame budget on them.
     |
     */
@@ -266,7 +266,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Strict mode raises on an out-of-range option. With it off, values are
-    | clamped and logged instead — appropriate if confetti is driven by data you
+    | clamped and logged instead, which is appropriate if confetti is driven by data you
     | do not control and a decorative effect must never break a page, but it
     | does mean staging and production can differ silently.
     |

@@ -4,7 +4,7 @@
  * Deliberately built on `requestAnimationFrame` rather than `setInterval`, even
  * for the interval-based fireworks recipe. Browsers throttle or suspend timers
  * in a background tab, and `setInterval` compensates by firing the backlog all
- * at once when the tab is focused again — coming back to a page and being met
+ * at once when the tab is focused again: coming back to a page and being met
  * with sixty simultaneous fireworks. An rAF clock with an accumulator simply
  * does not advance while the tab is hidden.
  *

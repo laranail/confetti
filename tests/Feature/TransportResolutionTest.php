@@ -57,7 +57,7 @@ it('throws when a driver is named explicitly but cannot run', function (): void 
 });
 
 it('probes Livewire without calling back into itself', function (): void {
-    // The duck-typed probe calls [self::MANAGER, 'isLivewireRequest'] — a
+    // The duck-typed probe calls [self::MANAGER, 'isLivewireRequest'], a
     // dynamic call on a class that may not exist. Rewriting that to a
     // first-class callable rebinds it to this class, which has a private method
     // of the same name, and the probe then recurses until the stack gives out.
@@ -67,7 +67,7 @@ it('probes Livewire without calling back into itself', function (): void {
 
     expect($livewire->available())->toBeFalse();
     expect($livewire->name())->toBe('livewire');
-    // Named as a string, like the transport itself does — so this file has no
+    // Named as a string, like the transport itself does, so this file has no
     // compiled Livewire reference either.
 })->skip(fn (): bool => ! class_exists('Livewire\\Livewire'), 'livewire/livewire is not installed.');
 

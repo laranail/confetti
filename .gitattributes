@@ -2,7 +2,7 @@
 * text=auto eol=lf
 
 # Dev-only paths stripped from the Composer dist tarball.
-# NOTE: /resources is deliberately NOT export-ignored — resources/dist holds the
+# NOTE: /resources is deliberately NOT export-ignored, because resources/dist holds the
 # built browser bundle, which must ship to consumers.
 /.github            export-ignore
 /art                export-ignore

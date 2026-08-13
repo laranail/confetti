@@ -1,8 +1,8 @@
 /**
  * Livewire adapter.
  *
- * Livewire's own events already reach the runtime — they are dispatched on
- * `window`, which is what the runtime listens to — so this exists for
+ * Livewire's own events already reach the runtime, dispatched on
+ * `window`, which is what the runtime listens to, so this exists for
  * navigation, not for firing.
  *
  * `wire:navigate` swaps the page without a load. A fifteen-second snowfall

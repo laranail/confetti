@@ -2,7 +2,7 @@
  * The reduced-motion gate.
  *
  * canvas-confetti has an option for this, but it evaluates the media query once
- * when it builds its cannon and caches the answer — so passing the option on a
+ * when it builds its cannon and caches the answer, so passing the option on a
  * later burst does nothing. We forward it for completeness and check the query
  * ourselves before every fire, which also means someone changing the setting
  * mid-session is respected without a reload.
@@ -20,7 +20,7 @@ export const IGNORE = 'ignore'
 export const REDUCE = 'reduce'
 export const SKIP = 'skip'
 
-/** Checked per call, not cached — the preference can change mid-session. */
+/** Checked per call, not cached: the preference can change mid-session. */
 export function prefersReducedMotion() {
   if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
     return false

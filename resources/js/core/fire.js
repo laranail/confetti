@@ -15,7 +15,7 @@ import { resolveShapes } from './shapes.js'
 /**
  * Build the cannon.
  *
- * The default export is not the same as `confetti.create()` with no arguments —
+ * The default export is not the same as `confetti.create()` with no arguments.
  * it is pre-built with `useWorker: true` and `resize: true`, and `create()`
  * defaults both to false. So a custom canvas has to opt back in explicitly, or
  * it renders at the canvas's intrinsic size and stretches.
@@ -62,7 +62,7 @@ export function createCannon(runtime = {}) {
  * Fire one burst.
  *
  * @returns {Promise|null} whatever canvas-confetti returned, so callers can
- *   chain — but note its promise resolves when the animation finishes and never
+ *   chain, but note its promise resolves when the animation finishes and never
  *   rejects.
  */
 export function fire(options, context) {
@@ -85,7 +85,7 @@ export function fire(options, context) {
   let result
 
   try {
-    // The real failures land here — an unbuildable shape, a canvas already
+    // The real failures land here: an unbuildable shape, a canvas already
     // owned by another instance.
     result = cannon(merged)
   } catch (error) {
@@ -108,7 +108,7 @@ export function fireBursts(bursts, context) {
   if (shouldSkip(policy)) return []
 
   // Under a reduced-motion preference, the first burst stands in for the whole
-  // sequence — nine emoji volleys is exactly what the preference is asking us
+  // sequence; nine emoji volleys is exactly what the preference is asking us
   // not to do.
   const list = shouldReduce(policy) ? bursts.slice(0, 1) : bursts
 

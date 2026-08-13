@@ -1,5 +1,5 @@
 /**
- * Alpine adapter — entirely optional.
+ * Alpine adapter. Entirely optional.
  *
  * The runtime needs no framework; this only adds sugar for pages that already
  * have Alpine, so confetti can be fired from markup:
@@ -7,7 +7,7 @@
  *     <button x-data="confetti" @click="realistic()">Celebrate</button>
  *
  * Registered only when Alpine is already present. Alpine is never imported or
- * loaded here — shipping a second copy alongside the one Livewire bundles is a
+ * loaded here; shipping a second copy alongside the one Livewire bundles is a
  * well-known way to break a page.
  *
  * Only named methods are exposed, so the component works under the CSP build of

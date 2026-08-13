@@ -14,7 +14,7 @@ use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
  * The ready-made effects the builder can apply.
  *
  * Two pieces of metadata matter here. `kind` says whether the preset resolves
- * to concrete bursts or to an animation descriptor — which determines both the
+ * to concrete bursts or to an animation descriptor, which determines both the
  * payload size and whether `->expand()` has anything to do. `official` records
  * whether the effect is a faithful port of a canvas-confetti demo recipe or a
  * laranail addition, so the documentation and the doctor command can be honest

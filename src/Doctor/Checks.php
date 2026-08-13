@@ -15,7 +15,7 @@ use Throwable;
  * Diagnostics for the things that fail quietly.
  *
  * Every check here corresponds to a way confetti can be configured into a state
- * where nothing appears and nothing errors — an unbuilt bundle, a CDN mode with
+ * where nothing appears and nothing errors: an unbuilt bundle, a CDN mode with
  * no URL, a Vite entry that is not in the manifest, a custom canvas whose
  * z-index the library silently ignores.
  */
@@ -54,13 +54,13 @@ final readonly class Checks
         if (! $this->assets->exists()) {
             return $this->result('Browser bundle', self::FAIL, sprintf(
                 'Missing at %s. It ships with the package, so this usually means an incomplete '
-                .'checkout — run `npm install && npm run build` in the package directory.',
+                .'checkout. Run `npm install && npm run build` in the package directory.',
                 $this->assets->directory(),
             ));
         }
 
         return $this->result('Browser bundle', self::OK, sprintf(
-            'Built — %s, %s (hash %s).',
+            'Built: %s, %s (hash %s).',
             Assets::IIFE,
             $this->humanBytes($this->assets->size()),
             $this->assets->hash(),
@@ -91,7 +91,7 @@ final readonly class Checks
             AssetMode::Vite => $this->viteEntry(),
 
             AssetMode::Off => $this->result('Asset delivery', self::WARN,
-                'Mode is "off" — no script tag is emitted. The application must load the runtime itself, '
+                'Mode is "off": no script tag is emitted. The application must load the runtime itself, '
                 .'or nothing will fire.'),
         };
     }
@@ -129,7 +129,7 @@ final readonly class Checks
         if ((int) $zIndex !== 100) {
             return $this->result('Canvas', self::WARN, sprintf(
                 'runtime.canvas is set to "%s" and defaults.zIndex to %d. canvas-confetti ignores zIndex on a '
-                .'canvas it did not create, so the runtime applies the positioning and stacking itself — check '
+                .'canvas it did not create, so the runtime applies the positioning and stacking itself. Check '
                 .'the element is not clipped by an ancestor.',
                 $canvas,
                 (int) $zIndex,
@@ -181,7 +181,7 @@ final readonly class Checks
         }
 
         return $this->result('Detected stacks', self::OK, $detected === []
-            ? 'None — the session transport will carry payloads across redirects.'
+            ? 'None. The session transport will carry payloads across redirects.'
             : implode(', ', $detected).'.');
     }
 

@@ -6,7 +6,7 @@ use Simtabi\Laranail\Confetti\Tests\TestCase;
 
 uses(TestCase::class)->in('Feature', 'Unit');
 
-// tests/Isolation deliberately opts in per file — each one boots the package
+// tests/Isolation deliberately opts in per file, because each one boots the package
 // under a different environment, so they cannot share a single base case.
 
 /**

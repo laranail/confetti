@@ -9,7 +9,7 @@ use Simtabi\Laranail\Console\Tools\Commands\Command;
 use Simtabi\Laranail\Console\Tools\Commands\Concerns\SupportsNamespacedNames;
 
 /**
- * `laranail::confetti.doctor` — reports the configuration that decides whether
+ * `laranail::confetti.doctor` reports the configuration that decides whether
  * confetti actually appears.
  */
 final class DoctorCommand extends Command

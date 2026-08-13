@@ -25,8 +25,8 @@ jobs:
         php: ['8.4', '8.5']
         stability: [prefer-lowest, prefer-stable]
         # "minimal" removes Filament, Livewire and Inertia entirely. It is the
-        # leg that proves the package works on a plain Laravel application —
-        # without it, "Filament is optional" is a claim rather than a fact.
+        # leg that proves the package works on a plain Laravel application.
+        # Without it, "Filament is optional" is a claim rather than a fact.
         deps: [full, minimal]
 
     steps:

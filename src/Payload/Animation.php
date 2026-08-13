@@ -17,7 +17,7 @@ use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
  * descriptor it is about 250 bytes and each browser rolls its own.
  *
  * `options` are canvas-confetti options applied to every particle the loop
- * emits. `params` are the loop's own knobs — interval, ranges, decay curves —
+ * emits. `params` are the loop's own knobs (interval, ranges, decay curves)
  * expressed as `[min, max]` pairs where a value is randomised per frame. Keeping
  * them separate is what lets the runtime stay a faithful port of the upstream
  * recipe while still being configurable from PHP.

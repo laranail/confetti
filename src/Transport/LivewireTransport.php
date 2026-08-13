@@ -13,7 +13,7 @@ use Throwable;
  * Dispatches a browser event from the Livewire component handling the request.
  *
  * Livewire forwards dispatched events to the browser as `window` events, so the
- * runtime picks them up without Alpine and without a page load — which is what
+ * runtime picks them up without Alpine and without a page load, which is what
  * makes confetti work on a component action rather than only after a redirect.
  *
  * Everything here is duck-typed through string class names and `is_callable`,
@@ -21,7 +21,7 @@ use Throwable;
  * matters: applications that do not use Livewire should not be made to install
  * it, and `isLivewireRequest()` and `current()` are manager internals that have
  * moved between major versions. If either disappears, this transport reports
- * itself unavailable and the session transport takes over — confetti arrives a
+ * itself unavailable and the session transport takes over, so confetti arrives a
  * navigation later instead of not at all.
  *
  * The payload is dispatched as a single object argument rather than positional

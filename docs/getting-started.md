@@ -14,7 +14,7 @@ Confetti::realistic()->shoot();
 
 Confetti fired during a request that ends in a redirect arrives on the page you
 redirect to; fired from a Livewire component it arrives immediately, with no
-page load. You do not have to choose — see [Transports](tools/transports.md).
+page load. You do not have to choose. See [Transports](tools/transports.md).
 
 ## Presets
 
@@ -133,9 +133,9 @@ See [Testing](tools/testing.md).
 
 ## Where next
 
-- [Configuration](configuration.md) — every setting and what it changes
-- [The builder](tools/builder.md) — the complete API
-- [Architecture](architecture.md) — why the pieces are shaped the way they are
+- [Configuration](configuration.md): every setting and what it changes
+- [The builder](tools/builder.md): the complete API
+- [Architecture](architecture.md): why the pieces are shaped the way they are
 - Recipes for [Blade](recipes/blade.md), [Livewire](recipes/livewire.md),
   [Inertia](recipes/inertia.md) and [Filament](recipes/filament.md)
 

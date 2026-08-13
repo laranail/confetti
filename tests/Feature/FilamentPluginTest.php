@@ -24,7 +24,7 @@ beforeEach(function (): void {
  * Read the hooks a panel has collected.
  *
  * A panel only hands them to FilamentView while it boots, and the property is
- * protected until then — so reflection is the way to see what a plugin
+ * protected until then, so reflection is the way to see what a plugin
  * registered without standing up a whole panel lifecycle.
  *
  * @return array<string, array<string, array<Closure>>>

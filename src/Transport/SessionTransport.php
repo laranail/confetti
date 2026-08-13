@@ -21,7 +21,7 @@ use Simtabi\Laranail\Confetti\Payload\PendingBursts;
  *
  *     session()->flash($key, array_merge(session()->get($key, []), $new));
  *
- * But on a flashed key, `get()` returns what the *previous* request flashed —
+ * But on a flashed key, `get()` returns what the *previous* request flashed:
  * the payload currently being rendered. Merging it into the new flash extends
  * its life by another request, so the same confetti fires again on the next
  * page, and the one after that, indefinitely. It reads as "confetti is stuck
@@ -53,7 +53,7 @@ final readonly class SessionTransport implements Transport
         $this->pending->push($payload);
 
         // Write only. Reading the key back would resurrect the previous
-        // request's payload — see the class docblock.
+        // request's payload. See the class docblock.
         $this->session->flash($this->key, $this->pending->toArray());
     }
 }

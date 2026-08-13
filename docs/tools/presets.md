@@ -1,8 +1,8 @@
 # Presets
 
 Nine ready-made effects. Six are faithful ports of the canvas-confetti demo
-recipes — the particle counts, timings and physics are copied from upstream, and
-a test asserts each number — and three are this package's own.
+recipes (the particle counts, timings and physics are copied from upstream, and
+a test asserts each number) and three are this package's own.
 
 | Preset | Kind | Upstream recipe |
 |---|---|---|
@@ -18,7 +18,7 @@ a test asserts each number — and three are this package's own.
 
 "Options only" means the preset changes settings and nothing else, so it
 combines with a position or another effect. "Bursts" means it produces several
-`confetti()` calls. "Animation" means it runs as a loop in the browser — see
+`confetti()` calls. "Animation" means it runs as a loop in the browser. See
 [Animations](animations.md).
 
 ## realistic()
@@ -42,7 +42,7 @@ Gold stars bursting outward and hanging in the air: `spread: 360`, `ticks: 50`,
 `gravity: 0`, `decay: 0.94`, `startVelocity: 30`. Each volley pairs 40 stars at
 scalar 1.2 with 10 small circles at 0.75, fired three times 100ms apart.
 
-Zero gravity is what makes it work — the particles stop where they land and fade
+Zero gravity is what makes it work: the particles stop where they land and fade
 over the tick budget rather than falling.
 
 > This is a whole effect, not a colour scheme. If you only want the gold
@@ -51,9 +51,9 @@ over the tick budget rather than falling.
 ## emoji()
 
 Emoji particles hanging and fading rather than falling: `gravity: 0`,
-`decay: 0.96`, `ticks: 60`, `scalar: 2`. Each volley is three bursts — thirty
+`decay: 0.96`, `ticks: 60`, `scalar: 2`. Each volley is three bursts: thirty
 tumbling glyphs, five flat ones facing the viewer, and fifteen half-size circles
-that stop it looking like clip-art — fired three times 100ms apart.
+that stop it looking like clip-art, fired three times 100ms apart.
 
 ```php
 Confetti::emoji('🎉')->shoot();
@@ -66,7 +66,7 @@ bitmap and the drawn size in agreement.
 
 A pair of 360-degree bursts every 250ms for the duration, one on each side, with
 the particle count falling in step with the time remaining so the display tapers
-rather than stopping dead. Launch heights run from `-0.2` to `0.8` — above the
+rather than stopping dead. Launch heights run from `-0.2` to `0.8`, above the
 fold at one end, because particles fall.
 
 ```php
@@ -154,7 +154,7 @@ Confetti::registerPreset('brand', fn (): Preset => new BrandPreset);
 Confetti::preset('brand')->shoot();
 ```
 
-Write to `setPreset`, never `setUser` — the `user` layer belongs to the caller,
+Write to `setPreset`, never `setUser`. The `user` layer belongs to the caller,
 and that separation is what keeps preset and caller order-independent.
 
 See the [custom-preset recipe](../recipes/custom-preset.md) for a worked example.

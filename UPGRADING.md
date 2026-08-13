@@ -28,7 +28,7 @@ Filament registration moves:
  ]);
 ```
 
-And outside Filament — which is the point of the rewrite — add the component to
+And outside Filament, which is the point of the rewrite, add the component to
 your layout instead:
 
 ```blade
@@ -62,7 +62,7 @@ Confetti::palette('gold')->shapes('star')->scalar(1.2)->shoot();
 ### Corrected effects
 
 `fireworks()` was merging its options in the wrong order, so the package
-defaults overwrote them — a 360-degree burst became a 70-degree one, and a
+defaults overwrote them: a 360-degree burst became a 70-degree one, and a
 60-tick budget became 200. `realistic()` was missing the upstream `origin: {y:
 0.7}`. Both now match the recipes they are named after, which means they *look*
 different from before. They look correct.
@@ -89,13 +89,13 @@ Confetti::snow(5000)->seed(1234)->expand()->shoot();
 |---|---|
 | `Confetti::EVENT` (`fire-confetti`) | `config('laranail.confetti.event')`, default `confetti:fire`. The old name is still listened for. |
 | `Alpine.data('filamentConfetti')` | `window.LaranailConfetti`. Alpine is no longer required at all. |
-| `FilamentConfettiPlugin::get()` | Removed — it was unreferenced. Use `filament('laranail-confetti')`. |
+| `FilamentConfettiPlugin::get()` | Removed, as it was unreferenced. Use `filament('laranail-confetti')`. |
 | `FilamentAsset::register(...)` | Removed. Delivery is configured through `assets.mode`, which also covers pages outside a panel. |
 
 ### Stricter input
 
 Colours must now be hex. canvas-confetti parses a colour by discarding non-hex
-characters, so `colors(['red'])` never failed — it painted something arbitrary.
+characters, so `colors(['red'])` never failed; it painted something arbitrary.
 It now throws. Shapes are checked against the three the library actually draws;
 anything else used to render silently as a square.
 

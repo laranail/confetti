@@ -14,7 +14,7 @@ use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
  * Named launch points, each pairing a viewport origin with the angle that fires
  * confetti away from the nearest edge.
  *
- * Origin runs `0..1` across the viewport — `x: 0` is the left edge, `y: 0` the
+ * Origin runs `0..1` across the viewport: `x: 0` is the left edge, `y: 0` the
  * top. Angles are canvas-confetti's: 90° is straight up, 0° is to the right,
  * and they increase anticlockwise. So `Top` sits at `y: 0` and fires *downward*
  * at 270°, which reads backwards until you remember the origin is the corner

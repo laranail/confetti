@@ -14,8 +14,8 @@ use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
  * Gold stars bursting outward and hanging in the air.
  *
  * A faithful port of the upstream "Stars" recipe. Zero gravity is what makes it
- * work — the particles stop where they land and fade over the 50-tick budget
- * instead of falling — and each volley pairs 40 stars with 10 small circles so
+ * work: the particles stop where they land and fade over the 50-tick budget
+ * instead of falling, and each volley pairs 40 stars with 10 small circles so
  * the effect has some grit in it. Fired three times, 100ms apart.
  *
  * This is a whole effect, not a colour scheme. If all you want is the gold

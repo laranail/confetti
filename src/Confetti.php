@@ -19,7 +19,7 @@ use Simtabi\Laranail\Confetti\Transport\TransportManager;
 use Simtabi\Laranail\Confetti\Validation\OptionValidator;
 
 /**
- * The confetti service — bound as a singleton and reached through the
+ * The confetti service, bound as a singleton and reached through the
  * {@see Facades\Confetti} facade.
  *
  * Every builder method is available statically through the facade, because

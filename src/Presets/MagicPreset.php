@@ -11,7 +11,7 @@ use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
 use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
 
 /**
- * Small purple and cyan circles — sparkles rather than paper.
+ * Small purple and cyan circles: sparkles rather than paper.
  *
  * Options only. Not an upstream recipe.
  */

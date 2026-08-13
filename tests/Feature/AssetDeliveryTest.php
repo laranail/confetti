@@ -42,7 +42,7 @@ it('serves the module bundle too', function (): void {
 });
 
 it('refuses a filename outside the two it ships', function (): void {
-    // The route constraint means this never reaches the controller — there is
+    // The route constraint means this never reaches the controller. There is
     // no path built from user input anywhere in the asset pipeline.
     $this->get('/vendor/confetti/../../.env')->assertNotFound();
     $this->get('/vendor/confetti/anything.js')->assertNotFound();

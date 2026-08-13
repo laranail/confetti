@@ -10,7 +10,7 @@ use RuntimeException;
  * A transport was asked for explicitly but cannot run in this context.
  *
  * Only raised for a driver named through `via()` or configuration. Automatic
- * resolution never throws — it falls through to the null transport, because
+ * resolution never throws; it falls through to the null transport, because
  * confetti is decorative and should not be able to break a console command or
  * a queued job.
  */

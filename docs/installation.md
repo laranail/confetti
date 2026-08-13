@@ -4,7 +4,7 @@ Install the package, put the runtime on your pages, and fire.
 
 ## Requirements
 
-PHP `^8.4.1` or `^8.5`, on Laravel `^13`. Nothing else is required — Filament,
+PHP `^8.4.1` or `^8.5`, on Laravel `^13`. Nothing else is required. Filament,
 Livewire and Inertia are optional adapters, and the browser bundle ships with
 the package, so there is no npm step.
 
@@ -76,7 +76,7 @@ see, and the Content-Security-Policy directives you will need if you have one.
 
 ## Publish the configuration
 
-Optional — every setting has a working default.
+Optional; every setting has a working default.
 
 ```bash
 php artisan laranail::confetti.install

@@ -1,6 +1,6 @@
 {
     "name": "laranail/confetti",
-    "description": "A fluent confetti builder for Laravel — canvas-confetti wrapped in a typed, validated PHP API, with Blade, Livewire, Inertia and Filament adapters.",
+    "description": "A fluent confetti builder for Laravel: canvas-confetti wrapped in a typed, validated PHP API, with Blade, Livewire, Inertia and Filament adapters.",
     "type": "library",
     "license": "MIT",
     "keywords": [

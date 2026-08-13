@@ -131,7 +131,7 @@ final class Confetti extends Facade
 
             if ($fake === null) {
                 throw new \RuntimeException(
-                    'Call Confetti::fake() before asserting on confetti — otherwise payloads are sent, not recorded.'
+                    'Call Confetti::fake() before asserting on confetti; otherwise payloads are sent, not recorded.'
                 );
             }
 

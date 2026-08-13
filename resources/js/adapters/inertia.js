@@ -6,7 +6,7 @@
  * picked up here on `inertia:success`.
  *
  * Running animations are aborted before each visit for the same reason as the
- * Livewire adapter — an effect belongs to the page that started it.
+ * Livewire adapter, for the same reason: an effect belongs to the page that started it.
  */
 export function registerInertiaAdapter(
   runtime,

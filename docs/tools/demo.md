@@ -31,7 +31,7 @@ is the point:
     Wire size   19 KB
 ```
 
-Expanding a full-length continuous effect is refused rather than printed —
+Expanding a full-length continuous effect is refused rather than printed:
 fifteen seconds of snow is five hundred bursts, past the `limits.max_bursts`
 ceiling. The command says so and suggests a duration, which is the useful shape
 of that answer:
@@ -39,7 +39,7 @@ of that answer:
 ```
   Expanding this effect produced 500 bursts, over the configured limit of 200.
   Shorten the duration, raise laranail.confetti.limits.max_bursts, or drop
-  expand() and let the browser run the animation loop instead — which is both
+  expand() and let the browser run the animation loop instead, which is both
   the default and far smaller on the wire.
 
   Try a shorter duration, for example:

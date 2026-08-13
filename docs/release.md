@@ -14,7 +14,7 @@ git diff --exit-code resources/dist
 ```
 
 The last two matter more than they look. `resources/dist` is tracked, because
-consumers install through Composer and never run npm — so a bundle that has
+consumers install through Composer and never run npm, so a bundle that has
 drifted from its source ships stale behaviour to every application. CI fails on
 that drift, and so should you before tagging.
 
@@ -38,7 +38,7 @@ Two things count as breaking even though they look cosmetic:
 ## Changelog
 
 Every release needs a real description, sourced from that version's
-`CHANGELOG.md` section — not auto-generated notes, and not "see the changelog".
+`CHANGELOG.md` section, not auto-generated notes and not "see the changelog".
 `release.yml` extracts the `## [X.Y.Z]` block and uses it as the release body,
 so the changelog entry is the release notes.
 

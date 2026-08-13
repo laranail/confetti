@@ -16,7 +16,7 @@ use Throwable;
  * into and no full page load to carry a session flash. The payload rides along
  * as a page prop instead, and the client adapter fires it on `inertia:success`.
  *
- * Duck-typed for the same reasons as the Livewire transport — Inertia stays a
+ * Duck-typed for the same reasons as the Livewire transport: Inertia stays a
  * development dependency, and an unavailable transport degrades to the session
  * one rather than failing.
  *

@@ -1,7 +1,7 @@
 # The builder
 
 `Simtabi\Laranail\Confetti\Builder\ConfettiBuilder`, reached through the
-`Confetti` facade — 40-odd fluent methods describing an effect, and four ways to
+`Confetti` facade: 40-odd fluent methods describing an effect, and four ways to
 inspect or send it.
 
 Any method not on the facade is forwarded to a fresh builder, so
@@ -11,16 +11,16 @@ Any method not on the facade is forwarded to a fresh builder, so
 
 | Method | canvas-confetti option | Notes |
 |---|---|---|
-| `count(int)` | `particleCount` | 0–1000 by default |
-| `spread(float)` | `spread` | Degrees, 0–360 |
+| `count(int)` | `particleCount` | 0-1000 by default |
+| `spread(float)` | `spread` | Degrees, 0-360 |
 | `angle(float)` | `angle` | 90 is up, 0 is right, increasing anticlockwise |
-| `startVelocity(float)` | `startVelocity` | Each particle gets 0.5×–1.5× this |
+| `startVelocity(float)` | `startVelocity` | Each particle gets 0.5×-1.5× this |
 | `decay(float)` | `decay` | Strictly between 0 and 1 |
 | `gravity(float)` | `gravity` | Tripled internally; negative floats upward |
 | `drift(float)` | `drift` | Negative left, positive right |
 | `ticks(int)` | `ticks` | Frames a particle lives; also drives the fade |
 | `scalar(float)` | `scalar` | 1 is the default 10 pixels |
-| `flat(bool)` | `flat` | No tumbling — for text particles |
+| `flat(bool)` | `flat` | No tumbling, for text particles |
 | `zIndex(int)` | `zIndex` | Ignored on a canvas you supplied |
 | `option(string, mixed)` | *(any)* | Escape hatch, unvalidated |
 
@@ -31,7 +31,7 @@ Any method not on the facade is forwarded to a fresh builder, so
 | `origin(float $x, float $y)` | `0,0` top-left, `1,1` bottom-right; off-screen allowed |
 | `originX(float)` / `originY(float)` | Move one axis |
 | `position(ConfettiPosition\|string)` | A named point |
-| `center()` | Origin only — keeps whatever angle is set |
+| `center()` | Origin only; keeps whatever angle is set |
 | `top()` `bottom()` `left()` `right()` | Origin and the angle firing inward |
 | `topLeft()` `topRight()` `bottomLeft()` `bottomRight()` | Same, from the corners |
 
@@ -53,7 +53,7 @@ Shapes are picked per particle from the list, so repeating one weights it:
 `shapes('circle', 'circle', 'star')` gives roughly two circles per star.
 
 `shapeFromPath()`'s matrix is optional but worth supplying for anything that
-fires often — without one, canvas-confetti derives the transform by sampling a
+fires often. Without one, canvas-confetti derives the transform by sampling a
 1000×1000 grid in the browser, on the main thread.
 
 `shapeFromText()`'s scalar defaults to null, meaning "inherit the burst's". Keep
@@ -73,7 +73,7 @@ mismatch renders blurred and at the wrong size.
 
 | Method | Notes |
 |---|---|
-| `reducedMotion(ReducedMotionPolicy\|string)` | `ignore`, `reduce` or `skip` — re-checked before every fire |
+| `reducedMotion(ReducedMotionPolicy\|string)` | `ignore`, `reduce` or `skip`; re-checked before every fire |
 | `skipForReducedMotion()` | Shorthand for `skip` |
 | `disableForReducedMotion(bool)` | canvas-confetti's own flag, evaluated once at construction |
 
@@ -103,7 +103,7 @@ for why the two are not interchangeable.
 | Method | Returns |
 |---|---|
 | `toPayload()` | The `ConfettiPayload` object |
-| `toArray()` | The wire payload — deltas only |
+| `toArray()` | The wire payload, deltas only |
 | `toResolvedArray()` | With the defaults merged into every burst |
 | `toJson(int $flags = 0)` | |
 | `resolvedOptions()` | The options a burst would currently use |
@@ -139,8 +139,8 @@ $base = Confetti::make()->colors('#bb0000', '#ffffff');
 
 ## Option layers
 
-Options live in three layers — `defaults` from configuration, `preset`, and
-`user` — merged in that order at serialisation. A preset can only write to its
+Options live in three layers (`defaults` from configuration, `preset`, and
+`user`) merged in that order at serialisation. A preset can only write to its
 own layer, so your calls always win and the order does not matter:
 
 ```php

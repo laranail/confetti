@@ -1,6 +1,6 @@
 # Livewire
 
-Confetti fires immediately on a component action, with no page load — the
+Confetti fires immediately on a component action, with no page load. The
 transport detects the Livewire request on its own.
 
 ```php
@@ -33,8 +33,8 @@ class Checkout extends Component
 }
 ```
 
-Livewire dispatches the event on `window`, which is where the runtime listens —
-no Alpine involved. `livewire/livewire` is not a dependency of this package; the
+Livewire dispatches the event on `window`, which is where the runtime listens,
+with no Alpine involved. `livewire/livewire` is not a dependency of this package; the
 transport is duck-typed and degrades to a session flash if Livewire's internals
 move.
 

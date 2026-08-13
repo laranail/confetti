@@ -13,7 +13,7 @@ use Simtabi\Laranail\Confetti\Exceptions\AssetNotBuilt;
  * applications that import it into their own build.
  *
  * The content hash is what makes the `route` delivery mode safe to cache
- * forever — the URL changes when the bundle does, so a browser can hold onto it
+ * forever: the URL changes when the bundle does, so a browser can hold onto it
  * indefinitely and still never serve a stale copy after an upgrade. xxh128 is
  * used because this runs on every page render and a cryptographic digest would
  * be wasted effort for a cache key.
@@ -84,7 +84,7 @@ final class Assets
     /**
      * A short content hash, or `dev` when the bundle has not been built.
      *
-     * Never throws — a missing bundle costs a page its confetti, and returning
+     * Never throws; a missing bundle costs a page its confetti, and returning
      * a placeholder keeps the page itself rendering.
      */
     public function hash(string $filename = self::IIFE): string

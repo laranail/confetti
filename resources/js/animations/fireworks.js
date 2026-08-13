@@ -8,7 +8,7 @@ import { randomInRange, runLoop } from './loop.js'
  * count falling in step with the time remaining so the display tapers rather
  * than stopping dead.
  *
- * Launch heights run from -0.2 to 0.8 — above the top of the viewport at one
+ * Launch heights run from -0.2 to 0.8, above the top of the viewport at one
  * end. Particles fall, so starting them all on screen would put every firework
  * in the bottom half of it.
  */

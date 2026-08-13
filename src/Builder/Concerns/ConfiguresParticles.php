@@ -8,7 +8,7 @@ namespace Simtabi\Laranail\Confetti\Builder\Concerns;
  * The numeric options describing how particles behave.
  *
  * Every one maps to a canvas-confetti option of the same name, except `count()`
- * which sets `particleCount` — the shorter name reads better in a chain and
+ * which sets `particleCount`; the shorter name reads better in a chain and
  * matches the original package's API.
  *
  * Values are validated here, in the setter, so a bad number is reported at the
@@ -50,8 +50,8 @@ trait ConfiguresParticles
     }
 
     /**
-     * How quickly particles slow down — a per-frame velocity multiplier, so it
-     * must sit strictly between 0 and 1. Lower is stickier.
+     * How quickly particles slow down. This is a per-frame velocity
+     * multiplier, so it must sit strictly between 0 and 1. Lower is stickier.
      */
     public function decay(float|int $decay): static
     {
@@ -76,8 +76,8 @@ trait ConfiguresParticles
     /**
      * How many frames a particle lives.
      *
-     * Also drives the fade — opacity is one minus the fraction of the budget
-     * spent — so shortening this makes particles vanish sooner *and* faster.
+     * Also drives the fade: opacity is one minus the fraction of the budget
+     * spent, so shortening this makes particles vanish sooner *and* faster.
      */
     public function ticks(int $ticks): static
     {
@@ -104,8 +104,8 @@ trait ConfiguresParticles
     /**
      * Stacking order for the canvas the library creates.
      *
-     * Ignored when the runtime draws onto a canvas you supplied — canvas-confetti
-     * only styles the element it made itself. Configure `runtime.canvas` and the
+     * Ignored when the runtime draws onto a canvas you supplied, because
+     * canvas-confetti only styles the element it made itself. Configure `runtime.canvas` and the
      * package applies the z-index for you.
      */
     public function zIndex(int $zIndex): static

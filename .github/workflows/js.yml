@@ -40,7 +40,7 @@ jobs:
 
       # resources/dist is committed, because consumers install through Composer
       # and never run npm. That only works if the committed bundle actually
-      # matches its source — so a drift here is a build that ships stale
+      # matches its source, so a drift here is a build that ships stale
       # behaviour to every application.
       - name: Verify the committed bundle is up to date
         run: git diff --exit-code resources/dist

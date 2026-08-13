@@ -15,7 +15,7 @@ use Simtabi\Laranail\Confetti\Support\Assets;
  * so there is no traversal surface even before the route constraint.
  *
  * Responses are immutable and cached for a year, which is safe because the URL
- * carries the bundle's content hash — a new version is a new URL. The ETag lets
+ * carries the bundle's content hash: a new version is a new URL. The ETag lets
  * a client that ignores the hash revalidate cheaply.
  *
  * A missing bundle returns 404 with an explanatory comment rather than a 500.

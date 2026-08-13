@@ -7,15 +7,15 @@ namespace Simtabi\Laranail\Confetti\Support;
 /**
  * A small deterministic pseudo-random generator for server-side expansion.
  *
- * Expanding a continuous effect in PHP has one purpose — producing a payload a
- * test can assert against — and that only works if the sequence is reproducible.
+ * Expanding a continuous effect in PHP has one purpose (producing a payload a
+ * test can assert against) and that only works if the sequence is reproducible.
  * Reseeding PHP's global generator would achieve it while silently changing the
  * randomness of everything else in the request, so this carries its own state
  * instead.
  *
  * The algorithm is xorshift32: three shifts and three xors, a period of 2^32-1,
  * and no dependency on the platform's RNG. It is not cryptographic and is not
- * meant to be — it decides where a paper triangle lands.
+ * meant to be; it decides where a paper triangle lands.
  */
 final class Seed
 {

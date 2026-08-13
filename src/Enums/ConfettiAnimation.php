@@ -17,7 +17,7 @@ use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
  * These three are the canvas-confetti recipes built on `requestAnimationFrame`
  * or `setInterval`, so they emit particles for a duration rather than all at
  * once. Expanding them server-side would mean serialising hundreds of shots
- * with the randomness already resolved — every visitor seeing identical
+ * with the randomness already resolved, and every visitor seeing identical
  * "random" snow. Instead the payload carries a descriptor and the browser runs
  * the loop.
  *

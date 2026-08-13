@@ -11,7 +11,7 @@ use Simtabi\Laranail\Confetti\Exceptions\InvalidColor;
  *
  * canvas-confetti reads a colour by deleting every character that is not a hex
  * digit and interpreting the remainder, expanding it as shorthand if fewer than
- * six digits survive. That means invalid input never raises — it just paints
+ * six digits survive. That means invalid input never raises; it just paints
  * the wrong colour. `'red'` reduces to `'ed'`, expands, and produces something
  * unrelated; `'rgb(255, 0, 0)'` reduces to `'2550'` and does the same.
  *

@@ -7,7 +7,7 @@ The bundled runtime handles this. On `livewire:navigating` and `inertia:before`
 it aborts every running animation; on `livewire:navigated` it re-reads the boot
 block, because the new page brings its own payload.
 
-Nothing to configure — the adapters attach when those frameworks are present and
+Nothing to configure. The adapters attach when those frameworks are present and
 are inert when they are not.
 
 ## Stopping one yourself

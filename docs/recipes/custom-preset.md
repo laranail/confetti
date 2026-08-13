@@ -17,7 +17,7 @@ final class BrandPreset implements Preset
     public function apply(OptionStack $stack, PayloadDraft $draft): void
     {
         // Shared settings go on the preset layer, so a caller can override any
-        // of them — in either order.
+        // of them, in either order.
         $stack->setPresetMany([
             'colors' => ['#0d9488', '#f59e0b', '#ffffff'],
             'scalar' => 1.1,

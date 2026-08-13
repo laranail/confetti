@@ -20,7 +20,7 @@ use Throwable;
  * cannot rescue a class whose `implements` clause fails at compile time.
  *
  * With `auto` enabled every panel gets the confetti tags without a
- * `PanelProvider` edit. It is off by default — registering the plugin by hand
+ * `PanelProvider` edit. It is off by default; registering the plugin by hand
  * is clearer, and a package silently modifying every panel in an application is
  * the kind of helpfulness that becomes hard to trace.
  *

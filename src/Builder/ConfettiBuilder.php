@@ -26,8 +26,8 @@ use Simtabi\Laranail\Confetti\Validation\OptionValidator;
  *     Confetti::colors('#bb0000', '#ffffff')->schoolPride(8000)->shoot();
  *     Confetti::make()->topLeft()->count(80)->then()->topRight()->count(80)->shoot();
  *
- * The builder is **mutable**, which is load-bearing rather than an oversight —
- * accumulating bursts in a loop is a documented usage, and each iteration has
+ * The builder is **mutable**, which is load-bearing rather than an oversight.
+ * Accumulating bursts in a loop is a documented usage, and each iteration has
  * to see the previous one's work:
  *
  *     $confetti = Confetti::make();
@@ -75,7 +75,7 @@ class ConfettiBuilder
      * Whether anything has been set since the last commit.
      *
      * Because options carry forward through `then()`, "the stack is not empty"
-     * cannot mean "there is a burst waiting" — after a loop of `then()` calls
+     * cannot mean "there is a burst waiting": after a loop of `then()` calls
      * the stack is full but everything in it has already been committed.
      * Tracking the change explicitly is what stops that loop producing one
      * burst too many.

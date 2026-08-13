@@ -6,7 +6,7 @@ declare(strict_types=1);
  * The module boundaries, enforced.
  *
  * Each of these encodes a mistake that would be easy to reintroduce and hard to
- * notice — a `session()` call somewhere new breaks queue workers, an
+ * notice: a `session()` call somewhere new breaks queue workers, an
  * `mt_rand()` makes server-side expansion non-reproducible, a compiled
  * `Filament\` reference makes the package fail to autoload on a plain Laravel
  * app.
@@ -87,7 +87,7 @@ $referencing = static function (string $vendor, string ...$allowed) use ($root, 
             }
 
             // Only the first segment matters: our own
-            // Confetti\Integrations\Filament\… is not a Filament class.
+            // Confetti\Integrations\Filament\... is not a Filament class.
             if (explode('\\', ltrim($token[1], '\\'))[0] === $vendor) {
                 $found[] = str_replace($root.'/', '', $path);
 

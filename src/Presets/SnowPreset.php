@@ -29,7 +29,7 @@ use Simtabi\Laranail\Confetti\Support\Seed;
  * than being cut off mid-fall.
  *
  * At the default duration this is roughly five hundred separate `confetti()`
- * calls — around 150KB if serialised, with the randomness fixed at render time
+ * calls, around 150KB if serialised, with the randomness fixed at render time
  * so every visitor watches an identical snowfall. As a descriptor it is about
  * 250 bytes and each browser rolls its own.
  */

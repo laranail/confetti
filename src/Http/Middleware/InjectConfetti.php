@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as BaseResponse;
  * carry no body worth touching, streamed responses have no body to read
  * without buffering it, Inertia and Livewire responses are JSON envelopes that
  * would break if HTML were appended to them, and a response that already
- * carries the boot block means the Blade component is on the page — injecting
+ * carries the boot block means the Blade component is on the page, and injecting
  * again would fire everything twice.
  */
 final readonly class InjectConfetti

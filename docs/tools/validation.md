@@ -38,7 +38,7 @@ everything else, so an unrecognised name renders silently.
 ```php
 Confetti::shapes('triangle');
 // InvalidShape: Unknown confetti shape 'triangle'. canvas-confetti draws only
-// 'square', 'circle', 'star' natively — any other name renders as a square
+// 'square', 'circle', 'star' natively; any other name renders as a square
 // without warning. For anything else use shapeFromPath() or shapeFromText().
 ```
 
@@ -47,18 +47,18 @@ Confetti::shapes('triangle');
 | Option | Rule | Why |
 |---|---|---|
 | `decay` | strictly 0 < d < 1 | A per-frame velocity multiplier. At 1 or more particles never slow down and the burst runs out its whole tick budget at speed. |
-| `particleCount` | 0–`limits.max_particles` | |
-| `ticks` | 1–`limits.max_ticks` | |
-| `spread` | 0–360 | |
+| `particleCount` | 0-`limits.max_particles` | |
+| `ticks` | 1-`limits.max_ticks` | |
+| `spread` | 0-360 | |
 | `scalar` | 0 < s ≤ 10 | |
 | `angle` | any finite; normalised into one turn | |
 | `gravity`, `drift` | any finite, including negative | Negative gravity floats particles upward, which several recipes rely on |
-| `origin` | any finite — **not** clamped | |
+| `origin` | any finite; **not** clamped | |
 
 ### Origins are deliberately unbounded
 
 Off-screen origins are load-bearing. The upstream fireworks and snow recipes
-both launch from `y ≈ -0.2`, above the fold, because particles fall — clamping
+both launch from `y ≈ -0.2`, above the fold, because particles fall. Clamping
 to 0..1 would put every firework in the bottom half of the screen and quietly
 break both effects.
 
@@ -72,7 +72,7 @@ Confetti::shapeFromPath('M0 10 L5 0 L10 10z', [1, 0, 0, 1, 0, 0]);
 ```
 
 The DefinitelyTyped stubs describe this as a `DOMMatrix` instance, which is
-wrong at runtime — the drawing code guards on `Array.isArray`, so an object is
+wrong at runtime: the drawing code guards on `Array.isArray`, so an object is
 ignored and the shape draws untransformed.
 
 Passing `null` lets canvas-confetti derive one, which it does by sampling a
@@ -81,7 +81,7 @@ once; worth computing and hard-coding for anything that fires often.
 
 ## Strict mode
 
-`validation.strict` defaults to `true` — invalid input throws.
+`validation.strict` defaults to `true`, so invalid input throws.
 
 With it off, values are clamped to the nearest legal one and logged once per key
 per request. That is appropriate when confetti is driven by data you do not
@@ -116,7 +116,7 @@ try {
 
 ## In the browser
 
-The runtime validates nothing — the server already did. What it does do is
+The runtime validates nothing; the server already did. What it does do is
 surface failures instead of swallowing them: a shape it cannot build is reported
 to the console and dispatched as a `confetti:error` event, and the burst falls
 back to the default shapes rather than failing outright.

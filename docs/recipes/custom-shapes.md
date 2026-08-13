@@ -38,7 +38,7 @@ Confetti::make()
     ->shoot();
 ```
 
-The matrix is six numbers in DOMMatrix order, as a plain array — the
+The matrix is six numbers in DOMMatrix order, as a plain array. The
 DefinitelyTyped stubs say `DOMMatrix`, which is wrong at runtime.
 
 Passing `null` lets canvas-confetti work one out, which it does by sampling a

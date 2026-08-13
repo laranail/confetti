@@ -24,7 +24,7 @@ use Simtabi\Laranail\Confetti\Support\Seed;
  * The emitters live in `params.sides` as a list rather than being hard-coded,
  * so a three- or four-sided variant needs configuration and not a new preset.
  *
- * Set your own team's colours with `colors()` — the red and white here are the
+ * Set your own team's colours with `colors()`; the red and white here are the
  * upstream default, and being on the preset layer they yield to anything the
  * caller sets, in either order.
  */

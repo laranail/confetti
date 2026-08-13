@@ -7,7 +7,7 @@ php artisan laranail::confetti.doctor
 ```
 
 Every check here corresponds to a way the package can be configured into a state
-where nothing shows up and nothing errors — which is the failure mode worth
+where nothing shows up and nothing errors, which is the failure mode worth
 having a command for.
 
 ## What it checks
@@ -17,7 +17,7 @@ missing, which normally means an incomplete checkout.
 
 **Asset delivery.** That the resolved mode can deliver anything at all:
 `published` with nothing in `public/vendor/confetti`, `cdn` with no URL
-configured, a `vite` entry missing from the manifest, or `off` — which is
+configured, a `vite` entry missing from the manifest, or `off`, which is
 legitimate but means the application must load the runtime itself.
 
 **Canvas.** Warns when `runtime.canvas` is set alongside a non-default
@@ -37,7 +37,7 @@ you can tell at a glance whether the transport you expected is available.
 
 ## Exit codes
 
-`0` when everything passes or only warns; `1` when a check fails — so it works
+`0` when everything passes or only warns; `1` when a check fails, so it works
 in a deploy pipeline as a gate.
 
 ## Example
@@ -46,7 +46,7 @@ in a deploy pipeline as a gate.
   laranail/confetti
 
   ✓ Browser bundle
-    Built — confetti.js, 21.5 KB (hash a3f9c21e4d70).
+    Built: confetti.js, 21.5 KB (hash a3f9c21e4d70).
 
   ✓ Asset delivery
     Served from a content-hashed route. No publish step, and a stale bundle is

@@ -27,7 +27,7 @@ Confetti::stars()->reducedMotion('ignore')->shoot();
 
 ## Why not canvas-confetti's own option
 
-canvas-confetti has `disableForReducedMotion`, and it works — but it evaluates
+canvas-confetti has `disableForReducedMotion`, and it works, but it evaluates
 the media query once, when the library builds its cannon, and caches the answer.
 Setting it on a later burst does nothing, and a visitor who changes the setting
 mid-session is not picked up until a reload.

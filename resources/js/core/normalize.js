@@ -2,7 +2,7 @@
  * Turns whatever arrived into the shape the runtime works with.
  *
  * Two things need normalising. Payloads carry only the options that differ from
- * the package defaults, so the defaults have to be merged back in — the same
+ * the package defaults, so the defaults have to be merged back in, using the same
  * precedence PHP applies:
  *
  *     canvas-confetti built-ins  <  boot defaults  <  burst options
@@ -77,7 +77,7 @@ function legacyBurst(entry) {
 /**
  * Merge the boot defaults underneath a burst's own options.
  *
- * `delay` is stripped — it schedules the call and is not a canvas-confetti
+ * `delay` is stripped; it schedules the call and is not a canvas-confetti
  * option; passing it through would be harmless but pointless.
  */
 export function mergeOptions(defaults, options) {

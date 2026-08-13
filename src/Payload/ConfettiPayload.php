@@ -9,7 +9,7 @@ use JsonSerializable;
 use Simtabi\Laranail\Confetti\Support\Json;
 
 /**
- * The wire envelope — everything a single `shoot()` sends to the browser.
+ * The wire envelope: everything a single `shoot()` sends to the browser.
  *
  * ```json
  * {

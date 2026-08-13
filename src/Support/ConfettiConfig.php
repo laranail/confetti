@@ -16,8 +16,8 @@ use Simtabi\Laranail\Confetti\Validation\Limits;
  * A typed reading of `config('laranail.confetti')`.
  *
  * Resolved once and shared, so the config array is parsed and coerced in one
- * place rather than at every call site. Everything that reads configuration —
- * the builder, the transports, the script tag, the boot payload — goes through
+ * place rather than at every call site. Everything that reads configuration
+ * (the builder, the transports, the script tag, the boot payload) goes through
  * here, which also means a test can construct one directly instead of writing
  * to the config repository.
  */

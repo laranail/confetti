@@ -7,7 +7,7 @@ namespace Simtabi\Laranail\Confetti\Payload\Shapes;
 use Simtabi\Laranail\Confetti\Contracts\Shape;
 
 /**
- * A particle drawn from text — in practice, an emoji.
+ * A particle drawn from text, in practice an emoji.
  *
  * `scalar` deliberately defaults to null, meaning "inherit the burst's own
  * `scalar`". This matters more than it looks: canvas-confetti rasterises the
@@ -17,7 +17,7 @@ use Simtabi\Laranail\Confetti\Contracts\Shape;
  * default makes the two agree unless someone deliberately separates them.
  *
  * The wire `type` stays `"text"` even though the object canvas-confetti builds
- * reports itself as `"bitmap"` — the payload describes what to construct, not
+ * reports itself as `"bitmap"`: the payload describes what to construct, not
  * what comes out.
  */
 final readonly class TextShape implements Shape

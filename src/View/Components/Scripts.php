@@ -9,7 +9,7 @@ use Illuminate\View\Component;
 use Simtabi\Laranail\Confetti\View\ConfettiTags;
 
 /**
- * `<x-confetti::scripts />` — the boot payload and the runtime.
+ * `<x-confetti::scripts />` renders the boot payload and the runtime.
  *
  * Place it once, before `</body>`. The same markup is what the auto-inject
  * middleware splices in and what the Filament plugin renders into a panel, so

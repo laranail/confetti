@@ -8,7 +8,7 @@ parameters:
         - config
 
     # No baseline. A baseline is standing permission to be wrong, and this is a
-    # greenfield package — if analysis fails, the code is what should change.
+    # greenfield package; if analysis fails, the code is what should change.
 
     excludePaths:
         # Conditionally defined: the class only exists when Filament is
@@ -27,7 +27,7 @@ parameters:
         -
             identifier: missingType.iterableValue
 
-        # env() is exactly what belongs in a config file — the rule targets
+        # env() is exactly what belongs in a config file. The rule targets
         # application code, where a cached config would make the call return
         # null. Scoped to this one file so it still applies everywhere else.
         -
@@ -36,7 +36,7 @@ parameters:
 
         # Larastan resolves view-string by looking in the application's view
         # paths, and `confetti::` is a namespace this package registers at boot
-        # — there is no directory for it to find. The view is covered by the
+        # so there is no directory for it to find. The view is covered by the
         # Blade component, middleware and Filament tests instead.
         -
             identifier: argument.type

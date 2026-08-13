@@ -25,7 +25,7 @@ enum TransportDriver: string implements Enumerator
     #[Label('Automatic'), Help('Pick a driver per request: Livewire, then Inertia, then session, then null.')]
     case Auto = 'auto';
 
-    #[Label('Session'), Help('Flash the payload so it renders on the next response — the classic redirect flow.')]
+    #[Label('Session'), Help('Flash the payload so it renders on the next response: the classic redirect flow.')]
     case Session = 'session';
 
     #[Label('Livewire'), Help('Dispatch a browser event from the current component, with no page load.')]
@@ -34,7 +34,7 @@ enum TransportDriver: string implements Enumerator
     #[Label('Inertia'), Help('Share the payload as a page prop on the current response.')]
     case Inertia = 'inertia';
 
-    #[Label('Discard'), Help('Drop the payload. Resolved outside HTTP — console commands and queued jobs.')]
+    #[Label('Discard'), Help('Drop the payload. Resolved outside HTTP: console commands and queued jobs.')]
     case Null = 'null';
 
     #[Label('Record'), Help('Record payloads in memory instead of sending them. Backs Confetti::fake().')]

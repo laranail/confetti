@@ -10,7 +10,7 @@ use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
  * Carries a payload from PHP to the browser.
  *
  * Add your own with `Confetti::extend('broadcast', fn ($app) => new MyTransport)`
- * — a websocket transport for firing confetti at other people's screens is the
+ * A websocket transport for firing confetti at other people's screens is the
  * obvious case the built-in drivers do not cover.
  */
 interface Transport

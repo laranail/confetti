@@ -5,7 +5,7 @@
 [![Static analysis](https://img.shields.io/github/actions/workflow/status/laranail/confetti/static-analysis.yml?branch=main&label=static%20analysis&style=flat-square)](https://github.com/laranail/confetti/actions/workflows/static-analysis.yml)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 
-> A fluent confetti builder for Laravel — canvas-confetti wrapped in a typed, validated PHP API, with Blade, Livewire, Inertia and Filament adapters.
+> A fluent confetti builder for Laravel: canvas-confetti wrapped in a typed, validated PHP API, with Blade, Livewire, Inertia and Filament adapters.
 
 PHP `^8.4.1` on Laravel `^13`.
 
@@ -34,7 +34,7 @@ Confetti::realistic()->shoot();
 
 Full documentation is at
 **[opensource.simtabi.com/documentation/laranail/confetti](https://opensource.simtabi.com/documentation/laranail/confetti/)**
-— installation and the three ways to get the runtime onto a page, the builder
+covering installation and the three ways to get the runtime onto a page, the builder
 and every canvas-confetti option, the nine presets, the client-side animation
 engine, asset delivery, transports, validation, testing, the Artisan commands,
 and recipes for Blade, Livewire, Inertia, Filament, custom shapes, custom

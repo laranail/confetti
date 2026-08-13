@@ -7,7 +7,7 @@ namespace Simtabi\Laranail\Confetti\Validation;
 /**
  * The configurable ceilings on confetti input.
  *
- * These are not canvas-confetti constraints — the library will happily accept a
+ * These are not canvas-confetti constraints; the library will happily accept a
  * million particles and then spend the frame budget on them. They exist so a
  * value threaded through from user input cannot turn a decorative effect into a
  * denial of service on the visitor's own browser.

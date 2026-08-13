@@ -97,7 +97,7 @@ expect($payload['animations'])->toHaveCount(1);
 expect($payload['animations'][0]['animation'])->toBe('snow');
 ```
 
-For concrete bursts, expand with a seed — the output is then byte-for-byte
+For concrete bursts, expand with a seed. The output is then byte-for-byte
 reproducible:
 
 ```php
@@ -115,9 +115,9 @@ expect($first)->toBe($second);
 Confetti::restore();
 ```
 
-Puts the real transports back. Rarely needed — the container is rebuilt between
-tests — but useful in a test that asserts on the faked state and then on real
-behaviour.
+Puts the real transports back. Rarely needed, since the container is rebuilt
+between tests, but useful in a test that asserts on the faked state and then on
+real behaviour.
 
 ## Testing the browser runtime
 

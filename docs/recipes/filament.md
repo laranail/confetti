@@ -42,7 +42,7 @@ ConfettiPlugin::make()
 'integrations' => ['filament' => ['auto' => true]],
 ```
 
-Off by default — a package silently modifying every panel in an application is
+Off by default, because a package silently modifying every panel in an application is
 the kind of helpfulness that becomes hard to trace.
 
 ## Filament is not a dependency

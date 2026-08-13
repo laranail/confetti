@@ -11,7 +11,7 @@ use InvalidArgumentException;
  *
  * The library parses colours by stripping every non-hex character from the
  * string and reading what is left, so a CSS colour name or an `rgb()` call does
- * not fail — it silently becomes a different colour. `'red'` survives as `'ed'`,
+ * not fail; it silently becomes a different colour. `'red'` survives as `'ed'`,
  * gets expanded as shorthand, and paints something arbitrary. Rejecting
  * non-hex input up front is the only way to make that visible.
  */

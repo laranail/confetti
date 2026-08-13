@@ -20,8 +20,8 @@ use Simtabi\Laranail\Confetti\Support\Seed;
  * bursts every 250ms, one on each side of the screen, with the particle count
  * falling linearly so the display tapers instead of stopping dead.
  *
- * The launch height is deliberately random *above* the fold — `y` runs from
- * -0.2 to 0.8 — because particles fall, and starting them at the top of the
+ * The launch height is deliberately random *above* the fold (`y` runs from
+ * -0.2 to 0.8) because particles fall, and starting them at the top of the
  * viewport would put every firework in the bottom half of the screen.
  *
  * This preset is the reason the option stack exists. Its predecessor merged its

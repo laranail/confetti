@@ -37,7 +37,7 @@ final class ShapeValidator
      *
      * canvas-confetti indexes the matrix positionally as `[a, b, c, d, e, f]`,
      * the DOMMatrix component order. The DefinitelyTyped stubs describe this as
-     * a `DOMMatrix` instance, which is wrong at runtime — the draw routine
+     * a `DOMMatrix` instance, which is wrong at runtime: the draw routine
      * guards on `Array.isArray`, so anything but a plain array of six numbers is
      * ignored and the shape draws untransformed.
      *

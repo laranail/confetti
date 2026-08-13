@@ -10,7 +10,7 @@ use Simtabi\Laranail\Console\Tools\Commands\Command;
 use Simtabi\Laranail\Console\Tools\Commands\Concerns\SupportsNamespacedNames;
 
 /**
- * `laranail::confetti.install` — publishes the config and explains what is left
+ * `laranail::confetti.install` publishes the config and explains what is left
  * to do.
  *
  * The package works without running this: it auto-discovers, and the default
@@ -45,7 +45,7 @@ final class InstallCommand extends Command
         }
 
         $this->newLine();
-        $this->line('  <options=bold>One step left — get the runtime onto your pages.</>');
+        $this->line('  <options=bold>One step left: get the runtime onto your pages.</>');
         $this->newLine();
         $this->line('  Place the component in your layout, before </body>:');
         $this->line('      <fg=cyan><x-confetti::scripts /></>');

@@ -22,7 +22,7 @@ pass() {
 }
 
 echo
-echo "  laranail/confetti — lint greps"
+echo "  laranail/confetti lint greps"
 echo
 
 # 1. No executable inline script in a Blade view.
@@ -55,7 +55,7 @@ fi
 # 4. The README links no repository-relative image.
 #
 # /art is export-ignored from the Composer tarball, so a relative link renders
-# as a broken image on Packagist — which is exactly what happened to the package
+# as a broken image on Packagist, which is exactly what happened to the package
 # this one replaces.
 if grep -nE '\]\(\.?/?art/' README.md 2>/dev/null; then
     fail 'README.md links a repository-relative image from /art, which is export-ignored.'
@@ -71,7 +71,7 @@ if [ -f resources/dist/confetti.iife.js ]; then
         fail 'The built bundle has lost the canvas-confetti ISC notice.'
     fi
 else
-    fail 'The browser bundle is missing — run npm run build.'
+    fail 'The browser bundle is missing. Run npm run build.'
 fi
 
 echo

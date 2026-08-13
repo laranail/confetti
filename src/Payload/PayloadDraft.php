@@ -11,7 +11,7 @@ namespace Simtabi\Laranail\Confetti\Payload;
  * complication here.
  *
  * A burst committed by `then()` is **complete**: it captured the options in
- * force at that moment, and later calls must not reach back and change it —
+ * force at that moment, and later calls must not reach back and change it;
  * that is the whole point of committing.
  *
  * A burst produced by a preset is **partial**: it holds only what makes that
@@ -107,7 +107,7 @@ final class PayloadDraft
      * Whether a preset has already said what this effect is.
      *
      * When it has, the builder must not also commit the options still sitting
-     * on the stack — those are the preset's own shared settings, and turning
+     * on the stack. Those are the preset's own shared settings, and turning
      * them into an extra burst would fire the effect one and a half times.
      * Bursts committed by `then()` do not count: the caller is composing by
      * hand, and anything left over afterwards is a burst they intend.

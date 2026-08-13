@@ -29,7 +29,7 @@ This package incorporates and redistributes the following third-party work.
 ### canvas-confetti
 
 The browser bundle shipped in `resources/dist/` embeds `canvas-confetti`, which
-is licensed under the ISC License — not MIT. The notice below applies to that
+is licensed under the ISC License, not MIT. The notice below applies to that
 embedded portion and is also reproduced inside the bundle itself and in
 `resources/dist/LICENSE-canvas-confetti.txt`.
 
@@ -53,8 +53,8 @@ Upstream: https://github.com/catdad/canvas-confetti
 
 ### alexsyvolap/filament-confetti
 
-The fluent builder API this package exposes — the option setters, the named
-position shorthands and the preset vocabulary — originated in
+The fluent builder API this package exposes (the option setters, the named
+position shorthands and the preset vocabulary) originated in
 `alexsyvolap/filament-confetti` by Alex Syvolap, licensed under the MIT License.
 That package targets Filament exclusively; this one is an independent
 reimplementation for vanilla Laravel, but the design credit belongs upstream.

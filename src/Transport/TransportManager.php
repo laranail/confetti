@@ -25,7 +25,7 @@ use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
  *     Confetti::extend('broadcast', fn ($app) => new BroadcastTransport(...));
  *
  * Automatic resolution walks the drivers in order of specificity and stops at
- * the first available one. It **never throws** — an unresolvable context falls
+ * the first available one. It **never throws**; an unresolvable context falls
  * through to {@see NullTransport}, because confetti is decorative and should
  * not be able to break a console command or a queued job. A driver named
  * explicitly through `via()` does throw when unavailable, since asking for
@@ -163,7 +163,7 @@ final class TransportManager
 
     private function createSessionDriver(): Transport
     {
-        // No session bound at all — console, queue, or a route outside the web
+        // No session bound at all: console, queue, or a route outside the web
         // middleware group. Reaching for session() here is what made the
         // previous implementation throw inside queue workers.
         if (! $this->container->bound('session.store')) {

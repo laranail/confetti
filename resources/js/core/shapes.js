@@ -8,7 +8,7 @@ import { report, warnOnce } from './errors.js'
  *
  * The cache is not an optimisation so much as a correctness measure for memory.
  * `shapeFromText` rasterises an `ImageBitmap`, and a fifteen-second emoji
- * animation calls it on every frame — without caching that is hundreds of
+ * animation calls it on every frame; without caching that is hundreds of
  * bitmaps held until garbage collection catches up. `shapeFromPath` is worse in
  * a different way: given no matrix it works one out by sampling a 1000x1000
  * grid with `isPointInPath`, on the main thread.
@@ -60,7 +60,7 @@ function remember(key, shape) {
  * Resolve one shape entry.
  *
  * Built-ins arrive as plain strings and pass straight through. A descriptor
- * that cannot be built — no OffscreenCanvas, no Path2D — is reported and
+ * that cannot be built (no OffscreenCanvas, no Path2D) is reported and
  * dropped, so the burst falls back to the default shapes rather than failing
  * outright.
  */

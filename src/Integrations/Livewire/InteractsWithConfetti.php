@@ -21,7 +21,7 @@ use Simtabi\Laranail\Confetti\Confetti;
  *         }
  *     }
  *
- * Strictly a convenience — `Confetti::realistic()->shoot()` works identically
+ * Strictly a convenience: `Confetti::realistic()->shoot()` works identically
  * inside a component, because the transport detects the Livewire request on its
  * own. The trait exists to make the intent obvious at the call site and to give
  * a component a single place to override how its confetti is built.

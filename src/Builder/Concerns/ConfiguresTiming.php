@@ -7,7 +7,7 @@ namespace Simtabi\Laranail\Confetti\Builder\Concerns;
 /**
  * When bursts fire.
  *
- * `delay` is not a canvas-confetti option — it is stripped from the burst before
+ * `delay` is not a canvas-confetti option; it is stripped from the burst before
  * the library sees it and used by the runtime to schedule the call. Bursts
  * default to no delay, so a multi-burst preset fires as one composite effect
  * rather than a trickle.

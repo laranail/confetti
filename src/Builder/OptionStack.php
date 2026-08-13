@@ -7,8 +7,8 @@ namespace Simtabi\Laranail\Confetti\Builder;
 /**
  * Confetti options held in three ordered layers.
  *
- * Options arrive from three places — package defaults, a preset, and the
- * caller — and the only sane precedence is that order. Keeping them in separate
+ * Options arrive from three places (the package defaults, a preset, and the
+ * caller) and the only sane precedence is that order. Keeping them in separate
  * layers and merging at the end, rather than merging as they arrive, buys three
  * things:
  *
@@ -18,7 +18,7 @@ namespace Simtabi\Laranail\Confetti\Builder;
  *
  * **No accidental clobbering.** The bug this replaces was a single
  * `array_merge()` with its arguments the wrong way round, which let the generic
- * defaults overwrite the very values the preset existed to set — fireworks came
+ * defaults overwrite the very values the preset existed to set: fireworks came
  * out as a narrow 70-degree puff instead of a 360-degree burst. With layers
  * there is no argument order to get wrong.
  *
@@ -129,9 +129,9 @@ final class OptionStack
     /**
      * Only the options that differ from the defaults.
      *
-     * This is what goes on the wire. The browser applies the same precedence —
-     * canvas-confetti's own defaults, then the package defaults from the boot
-     * payload, then these — so the result is identical to {@see resolve()}
+     * This is what goes on the wire. The browser applies the same precedence
+     * (canvas-confetti's own defaults, then the package defaults from the boot
+     * payload, then these) so the result is identical to {@see resolve()}
      * without repeating the shared values in every burst.
      */
     public function delta(): array

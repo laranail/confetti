@@ -13,7 +13,7 @@ auto-detecting seam.
 
 ## Automatic resolution
 
-`auto` — the default — walks the drivers in order of specificity and stops at
+`auto`, the default, walks the drivers in order of specificity and stops at
 the first available one:
 
 1. a driver forced with `via()`
@@ -42,7 +42,7 @@ an error.
 
 The one that makes `redirect()->back()` followed by confetti work.
 
-It **never reads the session** — only writes. That is not an oversight, it is
+It **never reads the session**, only writes. That is not an oversight, it is
 the fix for a bug worth knowing about. The obvious way to let several `shoot()`
 calls accumulate is to merge with what is already flashed:
 
@@ -50,7 +50,7 @@ calls accumulate is to merge with what is already flashed:
 session()->flash($key, array_merge(session()->get($key, []), $new));
 ```
 
-On a flashed key, `get()` returns what the *previous* request flashed — the
+On a flashed key, `get()` returns what the *previous* request flashed: the
 payload currently being rendered. Re-flashing it extends its life by another
 request, so the same confetti fires again on the next page, and the one after
 that, indefinitely. It reads as "confetti is stuck on" and is hard to trace,
@@ -68,7 +68,7 @@ Confetti::count(20)->shoot();
 ## The Livewire transport
 
 Dispatches a browser event from the component handling the request. Livewire
-forwards those to `window`, which is where the runtime listens — so confetti
+forwards those to `window`, which is where the runtime listens, so confetti
 fires on a component action with no page load and no Alpine involved.
 
 Everything is duck-typed through string class names, so `livewire/livewire`
@@ -81,7 +81,7 @@ Shares the payload as a page prop. An Inertia visit returns JSON, so there is no
 `</body>` to inject into and no full page load to carry a flash. The client
 adapter fires it on `inertia:success`.
 
-Off by default — sharing a prop only helps if that adapter is loaded. See the
+Off by default, since sharing a prop only helps if that adapter is loaded. See the
 [Inertia recipe](../recipes/inertia.md).
 
 ## Custom transports

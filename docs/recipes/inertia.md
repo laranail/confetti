@@ -9,7 +9,7 @@ Enable it:
 CONFETTI_INERTIA=true
 ```
 
-Then fire as usual — the transport detects the visit:
+Then fire as usual; the transport detects the visit:
 
 ```php
 public function store(Request $request): RedirectResponse

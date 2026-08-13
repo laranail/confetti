@@ -13,7 +13,7 @@ use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
 /**
  * Where a continuous effect is turned into individual bursts.
  *
- * `Client` sends a descriptor and lets the browser run the loop — a couple of
+ * `Client` sends a descriptor and lets the browser run the loop: a couple of
  * hundred bytes, and every visitor gets their own randomness. `Server` walks
  * the same loop in PHP and ships the resulting bursts, which is far larger on
  * the wire but produces a payload you can assert against in a test.

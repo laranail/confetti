@@ -23,7 +23,7 @@ use Simtabi\Laranail\Confetti\Payload\Shapes\TextShape;
  * effect looking like clip-art. Fired three times, 100ms apart.
  *
  * The text shape is created without an explicit scalar so it inherits the
- * burst's — canvas-confetti rasterises the glyph once at `10 * scalar` pixels
+ * burst's, because canvas-confetti rasterises the glyph once at `10 * scalar` pixels
  * and then scales that bitmap when drawing, so the two values have to agree or
  * the emoji renders blurred and wrong-sized.
  */

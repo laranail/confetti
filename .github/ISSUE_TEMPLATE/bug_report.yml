@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Before opening an issue, run `php artisan laranail::confetti.doctor` — it
+        Before opening an issue, run `php artisan laranail::confetti.doctor`. It
         reports the setup that decides whether confetti actually appears, and
         catches most of what gets reported here.
 

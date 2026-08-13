@@ -1,5 +1,5 @@
 /**
- * Browser entry point — the bundle served by the route, publish and CDN modes.
+ * Browser entry point: the bundle served by the route, publish and CDN modes.
  *
  * Boots itself and exposes `window.LaranailConfetti`, so a page that only wants
  * to fire confetti from its own script has an API to call:

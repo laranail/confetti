@@ -11,7 +11,7 @@ use Throwable;
 /**
  * Everything the browser runtime needs, assembled once per page.
  *
- * Emitted as a `<script type="application/json">` block — data, which the
+ * Emitted as a `<script type="application/json">` block of data, which the
  * browser never executes, so no CSP allowance is needed and the runtime can be
  * a plain external module with no framework behind it. That is what replaced
  * the Alpine component the payload used to ride in on, and why this package no

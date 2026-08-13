@@ -12,7 +12,7 @@ import { clearShapeCache, configureShapeCache } from './shapes.js'
  * The runtime.
  *
  * Plain JavaScript with no framework behind it. It reads a JSON block, listens
- * on `window`, and calls canvas-confetti — which is all that is needed for
+ * on `window`, and calls canvas-confetti, which is all that is needed for
  * Blade, Livewire, Inertia and Filament alike, because Livewire dispatches its
  * events on `window` too.
  *

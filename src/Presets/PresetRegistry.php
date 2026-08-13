@@ -11,7 +11,7 @@ use Simtabi\Laranail\Confetti\Exceptions\InvalidPreset;
  * Maps preset names to the objects that implement them.
  *
  * Factories rather than instances, because three of the presets take arguments
- * — a duration, or the emoji to throw — and each call needs its own.
+ * (a duration, or the emoji to throw) and each call needs its own.
  *
  * Applications can add their own:
  *

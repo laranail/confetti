@@ -21,7 +21,7 @@ npm test               # Vitest, for the browser runtime
 npm run build          # rebuild resources/dist
 ```
 
-CI runs the PHP suite twice — once with `filament/filament`,
+CI runs the PHP suite twice: once with `filament/filament`,
 `livewire/livewire` and `inertiajs/inertia-laravel` installed, and once with all
 three removed. The second leg is what proves the package works on a plain
 Laravel app, so if you add an integration, guard its tests with
@@ -31,7 +31,7 @@ Laravel app, so if you add an integration, guard its tests with
 
 `resources/dist/` holds the browser bundle and **is** tracked in git, because
 consumers install through Composer and never run npm. If you change anything
-under `resources/js/`, run `npm run build` and commit the result — CI fails on
+under `resources/js/`, run `npm run build` and commit the result. CI fails on
 drift between source and bundle.
 
 ## Conventions
@@ -43,7 +43,7 @@ drift between source and bundle.
 - Artisan commands are named `laranail::confetti.<command>`.
 - Every option this package exposes must correspond to something
   `canvas-confetti` actually reads. When in doubt, check its source rather than
-  its README — several documented details there are incomplete, and a few
+  its README, because several documented details there are incomplete and a few
   DefinitelyTyped signatures are wrong.
 - Arch tests enforce the module boundaries (no `Filament\` outside
   `src/Integrations/Filament/`, no `session()` outside `SessionTransport`, no
@@ -58,4 +58,4 @@ imperative mood, and explain *why* in the body. Add a `CHANGELOG.md` entry under
 
 ## Security
 
-Do not open a public issue for a vulnerability — see [SECURITY.md](SECURITY.md).
+Do not open a public issue for a vulnerability. See [SECURITY.md](SECURITY.md).

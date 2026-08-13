@@ -28,7 +28,7 @@ use Simtabi\Laranail\Package\Tools\Providers\PackageServiceProvider;
 /**
  * Registers the package.
  *
- * The provider lives in `src/Providers/` deliberately — the base class resolves
+ * The provider lives in `src/Providers/` deliberately. The base class resolves
  * the package root by walking up from the provider's own file and stripping a
  * trailing `/Providers` and `/src`, which is how it finds `config/`,
  * `resources/` and `routes/`.
@@ -58,7 +58,7 @@ final class ConfettiServiceProvider extends PackageServiceProvider
      * The `php artisan about` summary.
      *
      * The three settings that decide whether confetti appears at all, and
-     * whether it is cheap — which is what someone reading `about` wants to
+     * whether it is cheap, which is what someone reading `about` wants to
      * know. `laranail::confetti.doctor` is the detailed version.
      *
      * @return array<string, string>
@@ -90,7 +90,7 @@ final class ConfettiServiceProvider extends PackageServiceProvider
         $this->app->singleton(PresetRegistry::class, static fn (): PresetRegistry => new PresetRegistry);
 
         // Scoped, not a singleton. Under Octane a singleton outlives the
-        // request, and this holds the payloads fired during one — sharing it
+        // request, and this holds the payloads fired during one, so sharing it
         // between visitors would replay one person's confetti at the next.
         $this->app->scoped(PendingBursts::class, static fn (): PendingBursts => new PendingBursts);
 
@@ -180,7 +180,7 @@ final class ConfettiServiceProvider extends PackageServiceProvider
             return;
         }
 
-        // No such group — fall back to the global stack so the setting still
+        // No such group, so fall back to the global stack and the setting still
         // does what it says.
         if ($this->app->bound(Kernel::class)) {
             $kernel = $this->app->make(Kernel::class);

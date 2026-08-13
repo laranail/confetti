@@ -11,7 +11,7 @@ no npm step for consumers:
 | `confetti.iife.js` | IIFE, exposes `window.LaranailConfetti` | `route`, `published`, `cdn` |
 | `confetti.esm.mjs` | ES module | applications importing it themselves |
 
-## route — the default
+## route, the default
 
 Served by the package from a URL carrying the bundle's content hash:
 
@@ -21,13 +21,13 @@ Cache-Control: public, max-age=31536000, immutable
 ETag: "a3f9c21e4d70"
 ```
 
-No publish step, and a stale bundle is impossible — upgrading the package
+No publish step, and a stale bundle is impossible: upgrading the package
 changes the hash, which changes the URL. Cached forever, revalidated with the
 ETag by clients that ignore that.
 
 The filename is matched against a fixed map of the two bundles rather than
 joined onto a path, so there is no traversal surface. A missing bundle answers
-404 with an explanatory JavaScript comment rather than a 500 — confetti should
+404 with an explanatory JavaScript comment rather than a 500. Confetti should
 never be the reason a page fails.
 
 Set `assets.route` to move it, `assets.middleware` to put it behind something.
@@ -41,7 +41,7 @@ php artisan vendor:publish --tag=laranail::confetti-assets
 Copies the bundles to `public/vendor/confetti/`. No route is registered.
 
 Appropriate when `public/` is fronted by a CDN. Remember to re-publish on
-upgrade — nothing detects a stale copy, which is the trade for not having a
+upgrade, because nothing detects a stale copy, which is the trade for not having a
 route.
 
 ## cdn
@@ -50,13 +50,13 @@ route.
 'assets' => [
     'mode' => 'cdn',
     'cdn_url' => 'https://cdn.example.com/confetti.iife.js',
-    'cdn_integrity' => 'sha384-…',
+    'cdn_integrity' => 'sha384-...',
 ],
 ```
 
 Emits a `<script>` with the integrity hash and `crossorigin="anonymous"` when
 one is set. With no `cdn_url` configured, nothing is emitted and a warning is
-logged — the doctor command reports it as a failure.
+logged. The doctor command reports it as a failure.
 
 ## vite
 
@@ -75,7 +75,7 @@ start()
 ```
 
 A missing manifest entry throws in Laravel, so it is caught and downgraded to
-the route mode with a logged warning — losing a build optimisation beats a 500
+the route mode with a logged warning; losing a build optimisation beats a 500
 on every page. The doctor command verifies the entry at deploy time.
 
 ## off
@@ -104,18 +104,18 @@ the request.
 ## Cache busting
 
 `assets.version` overrides the cache-busting string. Left null, the bundle's
-own xxh128 content hash is used — which is what makes the immutable cache header
+own xxh128 content hash is used, which is what makes the immutable cache header
 safe.
 
 ## What lands on the page
 
 ```html
-<script type="application/json" data-confetti-boot>{…}</script>
-<script type="module" src="…" defer></script>
+<script type="application/json" data-confetti-boot>{...}</script>
+<script type="module" src="..." defer></script>
 ```
 
-The first is inert data — a script element whose type is not a JavaScript MIME
-type is never executed — carrying the defaults and any flashed payload. The
+The first is inert data (a script element whose type is not a JavaScript MIME
+type is never executed) carrying the defaults and any flashed payload. The
 second is the runtime. No inline JavaScript in either, which is what lets the
 package work under a strict Content-Security-Policy with no `unsafe-inline`.
 

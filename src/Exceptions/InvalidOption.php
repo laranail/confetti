@@ -44,7 +44,7 @@ final class InvalidOption extends InvalidArgumentException implements ConfettiEx
         return new self(
             "Expanding this effect produced {$count} {$what}, over the configured limit of {$limit}. "
             .'Shorten the duration, raise laranail.confetti.limits.max_bursts, or drop expand() and let the '
-            .'browser run the animation loop instead — which is both the default and far smaller on the wire.'
+            .'browser run the animation loop instead, which is both the default and far smaller on the wire.'
         );
     }
 }

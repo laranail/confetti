@@ -15,7 +15,7 @@ use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
  *
  * This is the package's own gate, checked before every fire. It exists
  * separately from canvas-confetti's `disableForReducedMotion` option because
- * that option is evaluated once, when the library builds its cannon — so
+ * that option is evaluated once, when the library builds its cannon, so
  * toggling it per burst has no effect after the first one. We forward the
  * option for completeness but never depend on it.
  *

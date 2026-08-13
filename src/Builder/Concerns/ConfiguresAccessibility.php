@@ -17,8 +17,8 @@ use Simtabi\Laranail\Confetti\Enums\ReducedMotionPolicy;
  * effect. It is forwarded for completeness.
  *
  * {@see reducedMotion()} sets the package's policy, which the runtime re-checks
- * before every fire. That is the one to reach for, and it offers a middle
- * option — `Reduce` keeps a brief acknowledgement instead of choosing between a
+ * before every fire. That is the one to reach for, and it has a middle
+ * option: `Reduce` keeps a brief acknowledgement instead of choosing between a
  * full fifteen-second snowfall and nothing at all.
  */
 trait ConfiguresAccessibility

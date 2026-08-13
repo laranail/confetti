@@ -3,7 +3,7 @@
  *
  * The server writes a `<script type="application/json" data-confetti-boot>`
  * block. A script element whose type is not a JavaScript MIME type is never
- * executed, so this is inert data — no `unsafe-inline` in the CSP, and no need
+ * executed, so this is inert data: no `unsafe-inline` in the CSP, and no need
  * for Alpine or any other framework to carry the payload onto the page, which
  * is what an earlier version of this package relied on.
  */
@@ -29,8 +29,8 @@ export const DEFAULT_BOOT = {
 /**
  * Read and parse the boot block.
  *
- * Returns the defaults when the page has none, so a runtime loaded by hand —
- * imported into an application's own bundle, say — still works with no markup
+ * Returns the defaults when the page has none, so a runtime loaded by hand
+ * (imported into an application's own bundle, say) still works with no markup
  * from this package at all.
  */
 export function readBootConfig(root = typeof document !== 'undefined' ? document : null) {

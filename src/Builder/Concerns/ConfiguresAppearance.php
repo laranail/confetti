@@ -17,7 +17,7 @@ use Simtabi\Laranail\Confetti\Validation\ShapeValidator;
  *
  * Colours must be hex. canvas-confetti parses a colour by deleting every
  * non-hex character and reading the remainder, so `'red'` and `'rgb(255,0,0)'`
- * do not fail — they paint something arbitrary. Validating here turns a silent
+ * do not fail; they paint something arbitrary. Validating here turns a silent
  * wrong colour into an error.
  *
  * Shapes are picked per particle from the list, so repeating an entry weights
@@ -110,7 +110,7 @@ trait ConfiguresAppearance
     }
 
     /**
-     * Add a particle drawn from text — usually an emoji.
+     * Add a particle drawn from text, usually an emoji.
      *
      * Leaving `$scalar` null makes the glyph inherit the burst's own `scalar`,
      * which is almost always what you want: canvas-confetti rasterises the text

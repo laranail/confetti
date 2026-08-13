@@ -14,7 +14,7 @@ namespace Simtabi\Laranail\Confetti\Payload;
  *     session()->flash($key, array_merge(session()->get($key, []), $new));
  *
  * That is wrong, because `session()->get()` on a flashed key returns the data
- * flashed by the *previous* request — the payload currently being rendered.
+ * flashed by the *previous* request: the payload currently being rendered.
  * Re-flashing it extends its life by another request, so the same confetti fires
  * again on the next page, and again on the one after that, for as long as
  * anything keeps firing.
@@ -23,7 +23,7 @@ namespace Simtabi\Laranail\Confetti\Payload;
  * read back, so nothing inbound can survive into the next request.
  *
  * Bound with `scoped()` rather than `singleton()`. Under Octane a singleton
- * outlives the request, and payloads would leak between visitors — which is the
+ * outlives the request, and payloads would leak between visitors, which is the
  * same bug wearing a different hat.
  */
 final class PendingBursts

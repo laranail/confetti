@@ -13,7 +13,7 @@ use Simtabi\Laranail\Confetti\Support\Seed;
  *
  * Implemented by the animation presets so `->expand()` has something to call.
  * The expansion runs the same loop the browser would, drawing every random
- * value from the supplied {@see Seed} so the output is reproducible — which is
+ * value from the supplied {@see Seed} so the output is reproducible, which is
  * the only reason to expand at all, since the result is orders of magnitude
  * larger on the wire than the descriptor it replaces.
  */

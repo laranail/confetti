@@ -1,6 +1,6 @@
 # Animations
 
-The three continuous effects — `fireworks`, `snow` and `schoolPride` — run as a
+The three continuous effects (`fireworks`, `snow` and `schoolPride`) run as a
 loop in the browser rather than as a list of pre-computed bursts.
 
 ## Why
@@ -8,7 +8,7 @@ loop in the browser rather than as a list of pre-computed bursts.
 These are `requestAnimationFrame` loops in the upstream recipes. Expanding one
 server-side means serialising every iteration: snow at its default duration is
 roughly five hundred `confetti()` calls, about 150KB of JSON on the response,
-with every random value already decided — so every visitor watches the same
+with every random value already decided, so every visitor watches the same
 snowfall, flake for flake.
 
 As a descriptor it is about 250 bytes and each browser rolls its own:
@@ -33,7 +33,7 @@ faithful port of the recipe while remaining configurable from PHP.
 All three run on one shared driver, and it is built on `requestAnimationFrame`
 even for the interval-based fireworks recipe. Browsers throttle timers in a
 background tab and `setInterval` compensates by firing the backlog when the tab
-is focused again — coming back to a page and being met with sixty simultaneous
+is focused again: coming back to a page and being met with sixty simultaneous
 fireworks. An rAF clock with an accumulator simply does not advance while the
 tab is hidden.
 
@@ -54,7 +54,7 @@ Confetti::stop();
 Sends an abort instruction. Worth having, because fifteen seconds is a long time
 to be stuck with if the user has moved on.
 
-The adapters do this for you on a soft navigation — see the
+The adapters do this for you on a soft navigation. See the
 [SPA navigation recipe](../recipes/spa-navigation.md).
 
 ## Expanding in PHP
@@ -80,7 +80,7 @@ Expansion refuses past `limits.max_bursts` (default 200):
 Expanding this effect produced 500 bursts, over the configured limit of 200.
 ```
 
-That ceiling is deliberate — without it, `expand()` on a default-duration
+That ceiling is deliberate; without it, `expand()` on a default-duration
 snowfall quietly produces a payload in the hundreds of kilobytes.
 
 Set `presets.expansion` to `server` to make it the default everywhere. The

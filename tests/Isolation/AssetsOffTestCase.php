@@ -10,7 +10,7 @@ use Simtabi\Laranail\Confetti\Tests\TestCase;
  * An application that has switched asset delivery away from the route mode.
  *
  * The route is registered while the provider boots, so the setting has to be in
- * place before that — which a config call inside a test body is too late for.
+ * place before that, which a config call inside a test body is too late for.
  */
 abstract class AssetsOffTestCase extends TestCase
 {

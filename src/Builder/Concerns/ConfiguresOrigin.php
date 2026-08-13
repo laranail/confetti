@@ -10,7 +10,7 @@ use Simtabi\Laranail\Confetti\Enums\ConfettiPosition;
  * Where a burst launches from.
  *
  * Coordinates are viewport-relative: `0,0` is the top-left, `1,1` the
- * bottom-right. Values outside that range are allowed and useful — launching
+ * bottom-right. Values outside that range are allowed and useful: launching
  * from `y: -0.2` puts the origin just above the fold so particles fall into
  * view, which is how the fireworks and snow effects work.
  *

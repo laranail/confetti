@@ -14,14 +14,14 @@ return RectorConfig::configure()
         // Livewire, Filament and Inertia classes as *strings* precisely so this
         // package neither requires them nor fails to autoload without them.
         // Turning those into ::class constants would resolve the class at
-        // compile time and fatal on a plain Laravel application — the exact
+        // compile time and fatal on a plain Laravel application: the exact
         // failure tests/Arch/BoundaryTest.php exists to prevent.
         StringClassNameToClassConstantRector::class,
 
         // Same reason, and it fails louder. Rewriting
         // `[self::MANAGER, 'isLivewireRequest']` to `self::isLivewireRequest(...)`
         // rebinds the call to *this* class, which happens to have a private
-        // method of that name — turning a duck-typed probe into infinite
+        // method of that name, turning a duck-typed probe into infinite
         // recursion that the type checker cannot see.
         ArrayToFirstClassCallableRector::class,
 
@@ -38,7 +38,7 @@ return RectorConfig::configure()
         __DIR__.'/src',
         __DIR__.'/tests',
     ])
-    // The floor is ^8.4.1, so the 8.4 idioms are safe to apply — no downgrade
+    // The floor is ^8.4.1, so the 8.4 idioms are safe to apply. No downgrade
     // set is needed here, unlike packages that still support 8.3.
     ->withSets([LevelSetList::UP_TO_PHP_84])
     ->withPreparedSets(

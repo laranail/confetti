@@ -17,7 +17,7 @@ use Simtabi\Laranail\Confetti\Exceptions\InvalidOption;
  * Two rules are worth spelling out, because both look like oversights:
  *
  * - **`origin` is not clamped to 0..1.** Off-screen origins are load-bearing in
- *   the upstream recipes — fireworks and snow both launch from `y ≈ -0.2` so
+ *   the upstream recipes: fireworks and snow both launch from `y ≈ -0.2` so
  *   particles fall in from above the viewport. Clamping would quietly break
  *   them.
  * - **`gravity` and `drift` accept negatives.** Negative gravity floats
@@ -142,7 +142,7 @@ final readonly class OptionValidator
     }
 
     /**
-     * Origins are finite but unbounded — see the class docblock for why they are
+     * Origins are finite but unbounded. See the class docblock for why they are
      * deliberately not clamped to the viewport.
      */
     public function origin(float|int $x, float|int $y): array

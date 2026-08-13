@@ -11,7 +11,7 @@ use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
  * A named, ready-made confetti effect.
  *
  * A preset writes to the stack's `preset` layer and, if it produces more than a
- * single burst, appends to the draft. It must never write to the `user` layer —
+ * single burst, appends to the draft. It must never write to the `user` layer;
  * that layer belongs to the caller, and the whole point of the separation is
  * that `->spread(90)->fireworks()` and `->fireworks()->spread(90)` agree.
  *

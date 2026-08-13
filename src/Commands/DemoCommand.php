@@ -12,7 +12,7 @@ use Simtabi\Laranail\Console\Tools\Commands\Command;
 use Simtabi\Laranail\Console\Tools\Commands\Concerns\SupportsNamespacedNames;
 
 /**
- * `laranail::confetti.demo` — prints the payload a preset produces.
+ * `laranail::confetti.demo` prints the payload a preset produces.
  *
  * Mostly a way to see the cost of an effect before shipping it. The contrast is
  * the point: `snow` is a couple of hundred bytes as a descriptor and a couple
@@ -61,7 +61,7 @@ final class DemoCommand extends Command
             $payload = $builder->toPayload();
         } catch (ConfettiException $e) {
             // Expanding a full-length continuous effect exceeds the burst
-            // ceiling by design — the exception explains why, and a stack trace
+            // ceiling by design. The exception explains why, and a stack trace
             // adds nothing to it.
             $this->newLine();
             $this->line('  <fg=red>'.$e->getMessage().'</>');

@@ -10,7 +10,7 @@
  *                      own build.
  *
  * Both bundle canvas-confetti, so the package works with no npm step on the
- * consumer's side — which is the whole point, since it is installed through
+ * consumer's side, which is the whole point, since it is installed through
  * Composer.
  *
  * `legalComments: 'inline'` is load-bearing rather than stylistic. canvas-confetti
@@ -76,7 +76,7 @@ if (watch) {
 
   await Promise.all(contexts.map((context) => context.watch()))
 
-  console.log('Watching resources/js …')
+  console.log('Watching resources/js ...')
 } else {
   await Promise.all(targets.map((options) => esbuild.build(options)))
 

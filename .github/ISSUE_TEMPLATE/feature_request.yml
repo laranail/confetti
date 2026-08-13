@@ -24,4 +24,4 @@ body:
       label: What have you tried instead?
       description: >
         The builder exposes every canvas-confetti option, and `option()` passes
-        through anything it does not name — so it may already be possible.
+        through anything it does not name, so it may already be possible.

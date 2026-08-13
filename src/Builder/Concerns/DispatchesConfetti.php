@@ -70,7 +70,7 @@ trait DispatchesConfetti
      * Force a transport instead of letting one be detected.
      *
      * Kept as a string rather than coerced to the enum, because a custom driver
-     * registered with `Confetti::extend()` has no case — coercing would silently
+     * registered with `Confetti::extend()` has no case, and coercing would silently
      * downgrade it to automatic detection and the custom transport would never
      * be called.
      */
@@ -84,7 +84,7 @@ trait DispatchesConfetti
     /**
      * Fix the random sequence used when expanding a continuous effect in PHP.
      *
-     * Only has an effect together with {@see expand()} — without it the
+     * Only has an effect together with {@see expand()}. Without it the
      * randomness happens in the browser, where a server-side seed would be
      * meaningless.
      */
@@ -99,8 +99,8 @@ trait DispatchesConfetti
      * Walk continuous effects out into concrete bursts here rather than in the
      * browser.
      *
-     * The payload grows by orders of magnitude — snow at its default duration
-     * is around five hundred bursts — and every visitor sees the same sequence.
+     * The payload grows by orders of magnitude (snow at its default duration
+     * is around five hundred bursts) and every visitor sees the same sequence.
      * Worth it when a test needs to assert on the bursts themselves, or when
      * the application does not load this package's runtime; not otherwise.
      */
@@ -116,7 +116,7 @@ trait DispatchesConfetti
     {
         $draft = clone $this->draft;
 
-        // Commit whatever is still on the stack as a final burst — the options
+        // Commit whatever is still on the stack as a final burst: the options
         // set after the last then(), or the whole effect when there was none.
         //
         // Unless a preset produced the bursts: then those options are the
@@ -139,13 +139,13 @@ trait DispatchesConfetti
         return ConfettiPayload::make(
             bursts: $bursts,
             animations: $draft->animations($base),
-            // Only travel when this effect overrides the configured policy —
+            // Only travel when this effect overrides the configured policy;
             // otherwise the runtime already knows it from the boot payload.
             reducedMotion: $this->reducedMotion?->value,
         );
     }
 
-    /** The payload as it goes on the wire — deltas only. */
+    /** The payload as it goes on the wire: deltas only. */
     public function toArray(): array
     {
         return $this->toPayload()->toArray();
@@ -217,8 +217,8 @@ trait DispatchesConfetti
     /**
      * Serialise a burst, resolving its shapes against its own scalar.
      *
-     * A burst carries its own scalar when a preset overrode it — the stars
-     * recipe fires 1.2-scale stars alongside 0.75-scale circles — so the text
+     * A burst carries its own scalar when a preset overrode it: the stars
+     * recipe fires 1.2-scale stars alongside 0.75-scale circles, so the text
      * scalar has to be resolved per burst, not once from the builder.
      */
     private function serialiseBurst(Burst $burst): Burst
@@ -235,7 +235,7 @@ trait DispatchesConfetti
      * its own inherits the burst's, which is what keeps canvas-confetti from
      * rasterising a glyph at one size and then drawing it at another.
      *
-     * Idempotent — a shape already reduced to its wire form passes straight
+     * Idempotent: a shape already reduced to its wire form passes straight
      * through, so bursts can be serialised after being merged.
      *
      * @param array<string, mixed> $options

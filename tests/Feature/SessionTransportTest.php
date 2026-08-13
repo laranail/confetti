@@ -49,7 +49,7 @@ it('flashes the payload for the next request', function (): void {
 it('does not replay the payload on the request after next', function (): void {
     // The bug: the old implementation merged session()->get() into the new
     // flash. On a flashed key that read returns the *previous* request's data,
-    // so re-flashing extended its life by another request — and the confetti
+    // so re-flashing extended its life by another request, and the confetti
     // fired again on every subsequent page, indefinitely.
     $this->get('/fires')->assertRedirect('/landing');
 

@@ -10,7 +10,7 @@ use Simtabi\Laranail\Confetti\Support\Json;
 describe('wire size', function (): void {
     it('sends a continuous effect as a descriptor, not hundreds of bursts', function (): void {
         // Expanded server-side, snow at the default duration is roughly five
-        // hundred confetti() calls — about 150KB on every response, with the
+        // hundred confetti() calls, about 150KB on every response, with the
         // randomness already decided so every visitor sees identical snow.
         foreach (['snow', 'schoolPride', 'fireworks'] as $preset) {
             $json = Confetti::preset($preset)->toJson();
@@ -71,7 +71,7 @@ describe('JSON encoding', function (): void {
     it('escapes a script-closing sequence in user-supplied text', function (): void {
         // The boot payload is written into a <script type="application/json">
         // block. A literal </script> inside it would close the element early
-        // and turn everything after it into markup — and text reaching
+        // and turn everything after it into markup, and text reaching
         // shapeFromText is the realistic route for user input to get there.
         $encoded = Json::encode(['text' => '</script><img src=x onerror=alert(1)>']);
 

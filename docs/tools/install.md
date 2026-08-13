@@ -7,7 +7,7 @@ php artisan laranail::confetti.install
 php artisan laranail::confetti.install --force   # overwrite an existing config
 ```
 
-The package works without running this — it auto-discovers, and the default
+The package works without running this. It auto-discovers, and the default
 asset mode needs no publish step. The command exists to put the config file
 somewhere you can edit it, and to state plainly which of the three ways of
 getting the runtime onto a page you still have to pick.
@@ -17,12 +17,12 @@ getting the runtime onto a page you still have to pick.
 Publishes `config/laranail/confetti.php`.
 
 If `assets.mode` is `published`, it also publishes the browser bundle to
-`public/vendor/confetti/` — in every other mode that would be dead weight.
+`public/vendor/confetti/`; in every other mode that would be dead weight.
 
 Then it prints the remaining step, which is the one thing it cannot do for you:
 
 ```
-  One step left — get the runtime onto your pages.
+  One step left: get the runtime onto your pages.
 
   Place the component in your layout, before </body>:
       <x-confetti::scripts />

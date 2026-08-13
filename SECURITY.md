@@ -5,7 +5,7 @@
 Report security issues privately to **opensource@simtabi.com**. Do not open a
 public issue for a suspected vulnerability.
 
-Include the affected version, a description of the issue, and — where you can —
+Include the affected version, a description of the issue and, where you can,
 a minimal reproduction. You can expect an acknowledgement within three working
 days and a substantive reply within ten.
 
@@ -23,7 +23,7 @@ Two areas of this package have a security dimension worth stating explicitly.
 through `Simtabi\Laranail\Confetti\Support\Json`, which sets
 `JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT`. Angle brackets
 leave as `<` and `>`, so a `</script>` sequence in user-supplied text
-— most plausibly via `shapeFromText()` — cannot close the element early and
+(most plausibly via `shapeFromText()`) cannot close the element early and
 turn the rest of the payload into markup. `JSON.parse` decodes the escapes, so
 nothing is lost in transit. If you are patching that class, keep the flags.
 

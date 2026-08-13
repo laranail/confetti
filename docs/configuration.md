@@ -60,7 +60,7 @@ Named colour sets, reached with `palette('gold')`. Ships with `default`,
 `success`, `magic`, `gold`, `snow` and `pride`. A `null` palette means "use the
 default colours".
 
-Colours must be hex — see [Validation](tools/validation.md) for why that is
+Colours must be hex. See [Validation](tools/validation.md) for why that is
 enforced rather than assumed.
 
 ## Presets
@@ -72,7 +72,7 @@ enforced rather than assumed.
 | `presets.seed` | `null` (`CONFETTI_PRESET_SEED`) | Fixes server expansion |
 
 `client` sends a compact descriptor and the browser runs the loop. `server`
-walks it in PHP and ships every burst — hundreds of kilobytes, and identical
+walks it in PHP and ships every burst: hundreds of kilobytes, and identical
 randomness for every visitor. Worth it only to assert on bursts in a test, or if
 the application does not load this runtime. See [Animations](tools/animations.md).
 
@@ -86,7 +86,7 @@ the application does not load this runtime. See [Animations](tools/animations.md
 | `assets.cdn_url` | `null` |
 | `assets.cdn_integrity` | `null` |
 | `assets.vite_entry` | `resources/js/confetti.js` |
-| `assets.version` | `null` — the bundle's content hash |
+| `assets.version` | `null`, meaning the bundle's content hash |
 | `assets.defer` | `true` |
 
 Five modes: `route`, `published`, `cdn`, `vite`, `off`. See
@@ -112,7 +112,7 @@ be a decision rather than a surprise.
 | `security.csp_nonce` | `null` (`CONFETTI_CSP_NONCE`) |
 
 A nonce for the script tag under a strict Content-Security-Policy. The boot
-payload needs none — it is a JSON data block, which the browser never executes.
+payload needs none; it is a JSON data block, which the browser never executes.
 See the [CSP recipe](recipes/csp.md).
 
 ## Browser runtime
@@ -131,7 +131,7 @@ Two of these have sharp edges worth knowing.
 
 **`use_worker`** builds a worker from a blob URL. Under a strict CSP without
 `worker-src blob:`, canvas-confetti logs a warning and falls back to the main
-thread on its own — degraded, not broken.
+thread on its own: degraded, not broken.
 
 **`canvas`** points at your own element. canvas-confetti ignores `zIndex` on a
 canvas it did not create and applies no positioning to it, so the runtime styles
@@ -140,7 +140,7 @@ the element itself. The doctor command warns when both are set.
 ## Limits
 
 Ceilings on anything that could be threaded through from user input.
-canvas-confetti has none of its own — it will accept a million particles and
+canvas-confetti has none of its own; it will accept a million particles and
 then spend the frame budget on them.
 
 | Key | Default |
@@ -158,7 +158,7 @@ then spend the frame budget on them.
 | `validation.strict` | `true` | `CONFETTI_STRICT` |
 
 Strict raises on out-of-range input. With it off, values are clamped and logged
-— appropriate when confetti is driven by data you do not control, but it does
+This is appropriate when confetti is driven by data you do not control, but it does
 mean staging and production can differ silently.
 
 ## Integrations
@@ -167,7 +167,7 @@ mean staging and production can differ silently.
 |---|---|
 | `integrations.filament.enabled` | `true` (`CONFETTI_FILAMENT`) |
 | `integrations.filament.auto` | `false` |
-| `integrations.filament.hook` | `null` — `panels::body.end` |
+| `integrations.filament.hook` | `null`, meaning `panels::body.end` |
 | `integrations.filament.use_filament_assets` | `false` |
 | `integrations.livewire.enabled` | `true` |
 | `integrations.inertia.enabled` | `false` (`CONFETTI_INERTIA`) |

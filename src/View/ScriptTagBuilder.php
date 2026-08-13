@@ -16,7 +16,7 @@ use Throwable;
  * Builds the `<script>` tag for the configured delivery mode.
  *
  * Kept out of the Blade view so every mode can be asserted in a unit test
- * without rendering a template — the failure this guards against is a mode that
+ * without rendering a template. The failure this guards against is a mode that
  * throws only when someone switches to it in production.
  *
  * URLs are built from `config('app.url')`, never from the request. A `Host` or
@@ -94,7 +94,7 @@ final readonly class ScriptTagBuilder
      *
      * Hand-rolled because the package builder this sits on has no Vite support.
      * A missing manifest entry throws in Laravel, so it is caught and downgraded
-     * to the route mode — losing a build optimisation is a better outcome than a
+     * to the route mode; losing a build optimisation is a better outcome than a
      * 500 on every page.
      */
     private function viteTag(): string

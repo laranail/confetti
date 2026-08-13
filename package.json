@@ -1,7 +1,7 @@
 {
     "name": "@laranail/confetti",
     "version": "0.1.0",
-    "description": "Browser runtime for laranail/confetti — a canvas-confetti engine driven by a declarative JSON payload.",
+    "description": "Browser runtime for laranail/confetti: a canvas-confetti engine driven by a declarative JSON payload.",
     "license": "MIT",
     "private": true,
     "type": "module",

@@ -15,7 +15,7 @@ use Simtabi\Laranail\Confetti\View\ConfettiTags;
  * extend. The guard has to sit here, before the declaration, and cannot be
  * moved inside a method: `implements Plugin` is resolved when PHP compiles the
  * class, so merely autoloading this file without Filament installed is a fatal
- * error. Anything that touches the class map reaches it — a class_exists()
+ * error. Anything that touches the class map reaches it: a class_exists()
  * probe, `composer dump-autoload --optimize`, static analysis, an IDE helper
  * generator.
  *
@@ -44,7 +44,7 @@ if (! interface_exists(Plugin::class)) {
  * The plugin renders the same Blade component a plain Laravel application uses,
  * so a panel and the rest of the site share one runtime, one bundle and one
  * asset-delivery setting. Nothing is registered with Filament's own asset
- * pipeline by default — that pipeline only covers panel pages, and confetti
+ * pipeline by default, because that pipeline only covers panel pages and confetti
  * fired from a marketing page would have nothing to run it.
  */
 final class ConfettiPlugin implements Plugin
