@@ -40,8 +40,6 @@ engine, asset delivery, transports, validation, testing, the Artisan commands,
 and recipes for Blade, Livewire, Inertia, Filament, custom shapes, custom
 presets, Content-Security-Policy and reduced motion.
 
-Upgrading from `alexsyvolap/filament-confetti`? See [UPGRADING.md](UPGRADING.md).
-
 ## Community
 
 Questions and ideas belong in
@@ -55,11 +53,8 @@ vulnerabilities privately to `opensource@simtabi.com`.
 
 ## Credits
 
-The fluent builder API originated in
-[`alexsyvolap/filament-confetti`](https://github.com/alexsyvolap/filament-confetti)
-by Alex Syvolap (MIT). Particle rendering is
-[canvas-confetti](https://github.com/catdad/canvas-confetti) by Kiril Vatev
-(ISC), bundled with the package.
+Particle rendering is [canvas-confetti](https://github.com/catdad/canvas-confetti)
+by Kiril Vatev (ISC), bundled with the package.
 
 ## License
 
