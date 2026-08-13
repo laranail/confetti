@@ -14,6 +14,14 @@ concurrency:
 permissions:
   contents: read
 
+# The laranail siblings resolve through git rather than Packagist, so every job
+# hits the GitHub API to enumerate their refs. Unauthenticated that shares one
+# low rate limit across the whole matrix, and jobs start failing with 504s and
+# auth errors that look like dependency problems. The token is the built-in
+# one; no secret to configure.
+env:
+  COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ secrets.GITHUB_TOKEN }}"}}'
+
 jobs:
   pest:
     name: PHP ${{ matrix.php }} · ${{ matrix.deps }} · ${{ matrix.stability }}
