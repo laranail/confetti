@@ -21,7 +21,7 @@
         "canvas-confetti": "^1.9.4"
     },
     "devDependencies": {
-        "esbuild": "^0.25.5",
+        "esbuild": "^0.28.2",
         "happy-dom": "^15.0.0",
         "vitest": "^2.1.0"
     }
