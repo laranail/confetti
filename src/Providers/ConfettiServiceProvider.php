@@ -50,7 +50,33 @@ final class ConfettiServiceProvider extends PackageServiceProvider
                 InstallCommand::class,
                 DemoCommand::class,
                 DoctorCommand::class,
-            ]);
+            ])
+            ->hasAboutSection('Confetti', fn (): array => $this->aboutSection());
+    }
+
+    /**
+     * The `php artisan about` summary.
+     *
+     * The three settings that decide whether confetti appears at all, and
+     * whether it is cheap — which is what someone reading `about` wants to
+     * know. `laranail::confetti.doctor` is the detailed version.
+     *
+     * @return array<string, string>
+     */
+    private function aboutSection(): array
+    {
+        $config = $this->app->make(ConfettiConfig::class);
+        $assets = $this->app->make(Assets::class);
+
+        return [
+            'Enabled' => $config->enabled ? 'yes' : 'no',
+            'Transport' => $config->transport->value,
+            'Asset delivery' => $config->assetMode->value,
+            'Bundle' => $assets->exists() ? $assets->hash() : 'NOT BUILT',
+            'Preset expansion' => $config->expansion->value,
+            'Reduced motion' => $config->reducedMotion->value,
+            'Auto-inject' => $config->injectValue('auto', false) ? 'yes' : 'no',
+        ];
     }
 
     public function packageRegistered(): void
