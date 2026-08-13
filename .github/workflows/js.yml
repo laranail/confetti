@@ -26,8 +26,11 @@ jobs:
         with:
           node-version: '22'
 
+      # Not `npm ci`: it requires a lockfile, and laranail packages do not
+      # track one. Resolving fresh is the point of that convention, and the
+      # bundle-drift check below is what guards the result.
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Syntax-check every module
         run: find resources/js -name '*.js' -exec node --check {} \;

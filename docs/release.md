@@ -8,7 +8,7 @@ How a version of this package is cut.
 composer update            # sibling laranail packages resolve from a moving tag
 composer lint              # Pint, PHPStan, Rector, greps
 composer test              # the full Pest suite
-npm ci && npm test         # the browser runtime
+npm install && npm test         # the browser runtime
 npm run build              # rebuild the committed bundle
 git diff --exit-code resources/dist
 ```
