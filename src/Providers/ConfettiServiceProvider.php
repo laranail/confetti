@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Providers;
 
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Router;
@@ -83,7 +84,7 @@ final class ConfettiServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         $this->app->singleton(ConfettiConfig::class, fn (): ConfettiConfig => ConfettiConfig::fromArray(
-            (array) $this->app['config']->get('laranail.confetti', []),
+            (array) $this->app->make(Repository::class)->get('laranail.confetti', []),
         ));
 
         $this->app->singleton(Assets::class, static fn (): Assets => Assets::default());

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Enums;
 
+use Simtabi\Laranail\Confetti\Exceptions\InvalidPreset;
 use Simtabi\Laranail\Enumerator\Attributes\Description;
 use Simtabi\Laranail\Enumerator\Attributes\Label;
 use Simtabi\Laranail\Enumerator\Attributes\Meta;
@@ -36,11 +37,23 @@ enum ConfettiPreset: string implements Enumerator
     #[Label('School pride'), Meta(kind: 'animation', official: true)] case SchoolPride = 'schoolPride';
 
     /**
+     * How this preset reaches the browser, which decides what the payload holds.
+     *
+     * Matched rather than cast, so a typo in a `kind:` above throws here
+     * instead of travelling as a string nothing downstream handles.
+     *
      * @return 'animation'|'burst'|'options'
      */
     public function kind(): string
     {
-        return (string) $this->meta('kind');
+        $kind = $this->meta('kind');
+
+        return match ($kind) {
+            'animation' => 'animation',
+            'burst' => 'burst',
+            'options' => 'options',
+            default => throw InvalidPreset::unknownKind($this->value, $kind),
+        };
     }
 
     /** Whether this is a faithful port of an upstream canvas-confetti recipe. */

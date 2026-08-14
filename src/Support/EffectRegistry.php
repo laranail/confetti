@@ -31,10 +31,49 @@ use Simtabi\Laranail\Confetti\Exceptions\InvalidEffect;
  */
 final class EffectRegistry
 {
+    /**
+     * The builder methods an effect definition may call.
+     *
+     * An effect describes what confetti looks like, so it may only reach
+     * methods that configure one. `method_exists()` alone is not enough: the
+     * builder also exposes `shoot()`, `via()`, `expand()`, `seed()` and
+     * `reset()`, and a definition reaching those is not describing an effect,
+     * it is deciding when confetti fires and which transport carries it.
+     *
+     * That distinction costs nothing while definitions live in a config file
+     * written by a developer. It matters as soon as one does not, and
+     * {@see register()} exists precisely so definitions can come from
+     * elsewhere. An allowlist keeps the blast radius at "wrong-looking
+     * confetti" rather than "unexpected control flow".
+     */
+    private const array CONFIGURATION_METHODS = [
+        // Particles
+        'count', 'spread', 'angle', 'startVelocity', 'decay', 'gravity',
+        'drift', 'ticks', 'scalar', 'flat', 'zIndex', 'option',
+        // Position
+        'origin', 'originX', 'originY', 'position', 'center', 'top', 'bottom',
+        'left', 'right', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight',
+        // Appearance
+        'colors', 'palette', 'shapes', 'shapeFromPath', 'shapeFromText',
+        // Timing
+        'delay', 'duration', 'stagger',
+        // Accessibility
+        'disableForReducedMotion', 'reducedMotion', 'skipForReducedMotion',
+        // Presets
+        'preset', 'stars', 'success', 'magic', 'rain', 'realistic', 'emoji',
+        'fireworks', 'snow', 'schoolPride',
+    ];
+
     /** Keys that are not builder methods and would be silently ignored. */
     private const array ALIASES = [
         'colours' => 'colors',
     ];
+
+    /** @return list<string> */
+    public static function allowedMethods(): array
+    {
+        return self::CONFIGURATION_METHODS;
+    }
 
     /** @param array<string, array<string, mixed>> $effects */
     public function __construct(
@@ -84,8 +123,15 @@ final class EffectRegistry
         foreach ($this->definition($name) as $key => $value) {
             $method = self::ALIASES[$key] ?? $key;
 
-            if (! method_exists($builder, $method)) {
-                throw InvalidEffect::unknownOption($name, $key);
+            // Checked against the allowlist rather than method_exists(), so a
+            // definition cannot reach dispatch or control flow. The two cases
+            // get different messages because they are different mistakes: one
+            // is a typo, the other is asking an effect to do something an
+            // effect does not do.
+            if (! in_array($method, self::CONFIGURATION_METHODS, true)) {
+                throw method_exists($builder, $method)
+                    ? InvalidEffect::methodNotAllowed($name, $key)
+                    : InvalidEffect::unknownOption($name, $key);
             }
 
             // A list becomes separate arguments, so origin: [0.5, 0.7] reaches

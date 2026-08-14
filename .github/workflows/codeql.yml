@@ -1,0 +1,48 @@
+name: Code scanning
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Findings arrive from new rules as often as from new code, so this runs on
+    # a schedule as well as on a push.
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# CodeQL has no PHP analyser, so this covers the browser runtime only. The PHP
+# side is held by PHPStan, the arch boundaries, and the security tests in
+# tests/Feature/SecurityTest.php.
+jobs:
+  analyse:
+    name: CodeQL (JavaScript)
+    runs-on: ubuntu-latest
+
+    permissions:
+      security-events: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Initialise CodeQL
+        uses: github/codeql-action/init@ff2f1c621b7f889edc0d3c761ac2e6a3f8cdb0dd # v4.37.7
+        with:
+          languages: javascript-typescript
+          # The committed bundle is generated and contains all of
+          # canvas-confetti, so scanning it reports on someone else's code and
+          # buries anything real.
+          config: |
+            paths-ignore:
+              - resources/dist
+              - vendor
+              - node_modules
+
+      - name: Analyse
+        uses: github/codeql-action/analyze@ff2f1c621b7f889edc0d3c761ac2e6a3f8cdb0dd # v4.37.7
+        with:
+          category: '/language:javascript-typescript'

@@ -49,9 +49,14 @@ effect is used at once.
 ],
 ```
 
-Each key is a **builder method** and each value its arguments, so anything the
-builder can do an effect can declare. See [the builder](builder.md) for the
-full surface.
+Each key is a **builder method** and each value its arguments. Every method that
+configures how confetti looks is available: the particle options, the positions,
+colours and shapes, timing, the reduced-motion policy, and the presets. See
+[the builder](builder.md) for the full surface.
+
+What an effect may *not* do is decide when confetti fires or which transport
+carries it, so `shoot()`, `via()`, `expand()`, `seed()`, `then()` and `reset()`
+are rejected. See [Errors](#errors) for what that looks like.
 
 A list is spread as separate arguments, which is how a two-argument method
 works:
@@ -112,6 +117,22 @@ Confetti effect 'subtle' sets 'particleCount', which is not a builder method.
 Each key in an effect names a method on the builder, so use the method name:
 'count' rather than 'particleCount', 'palette' rather than 'colours'.
 ```
+
+A method that exists but does not belong in an effect gets its own message,
+because it is a different mistake:
+
+```
+Confetti effect 'party' sets 'shoot', which is not something an effect may do.
+An effect describes what confetti looks like; deciding when it fires, which
+transport carries it, or how it expands belongs at the call site. Call 'shoot()'
+on the builder instead: Confetti::effect('party')->shoot(...).
+```
+
+The dispatch methods are checked against an allowlist rather than
+`method_exists()`, so an effect cannot reach control flow. That distinction
+costs nothing while every definition is written by a developer in a config file.
+It matters as soon as one is not, and `registerEffect()` exists precisely so
+definitions can come from elsewhere.
 
 ## Applying something to everything
 

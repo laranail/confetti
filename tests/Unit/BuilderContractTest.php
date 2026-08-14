@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
+use Simtabi\Laranail\Confetti\Support\EffectRegistry;
 
 /**
  * Every public builder method must do something observable.
@@ -184,4 +185,41 @@ it('makes every non-exempt builder method change the payload', function (): void
 
         expect($after)->not->toBe($before, "{$method}() did not change the payload.");
     }
+});
+
+it('keeps the effect allowlist in step with the builder', function (): void {
+    // An effect definition names a builder method, so the allowlist is a second
+    // classification of the same surface and rots the same way. A new setter
+    // that should be usable from config is useless until it is listed here, and
+    // a method that disappears leaves a dangling entry.
+    $reflection = new ReflectionClass(ConfettiBuilder::class);
+
+    $public = array_map(
+        static fn (ReflectionMethod $m): string => $m->getName(),
+        $reflection->getMethods(ReflectionMethod::IS_PUBLIC),
+    );
+
+    $allowed = EffectRegistry::allowedMethods();
+
+    expect(array_values(array_diff($allowed, $public)))->toBe([], sprintf(
+        'The effect allowlist names method(s) the builder no longer has: %s.',
+        implode(', ', array_diff($allowed, $public)),
+    ));
+
+    // Everything the contract test treats as payload-changing is a setting, so
+    // it belongs in the allowlist unless it is deliberately excluded.
+    $configuring = array_keys(builderContract());
+
+    $missing = array_values(array_diff($configuring, $allowed, [
+        // Deliberately excluded: these decide when and how confetti is sent,
+        // not what it looks like. See EffectRegistry::CONFIGURATION_METHODS.
+        'then', 'reset', 'expand', 'seed',
+    ]));
+
+    expect($missing)->toBe([], sprintf(
+        'Builder method(s) that configure an effect but cannot be used from config: %s. '
+        .'Add them to EffectRegistry::CONFIGURATION_METHODS, or to the exclusion list here '
+        .'if they belong at the call site.',
+        implode(', ', $missing),
+    ));
 });

@@ -25,6 +25,23 @@ final class InvalidEffect extends InvalidArgumentException implements ConfettiEx
         );
     }
 
+    /**
+     * A real builder method, but one that dispatches rather than configures.
+     *
+     * An effect says what confetti looks like. Deciding when it fires, which
+     * transport carries it, or how it is expanded belongs at the call site,
+     * where it is visible.
+     */
+    public static function methodNotAllowed(string $effect, string $option): self
+    {
+        return new self(
+            "Confetti effect '{$effect}' sets '{$option}', which is not something an effect may do. "
+            .'An effect describes what confetti looks like; deciding when it fires, which transport '
+            ."carries it, or how it expands belongs at the call site. Call '{$option}()' on the "
+            ."builder instead: Confetti::effect('{$effect}')->{$option}(...)."
+        );
+    }
+
     public static function unknownOption(string $effect, string $option): self
     {
         return new self(
