@@ -57,6 +57,39 @@ PATTERNS: list[tuple[re.Pattern[str], str, bool]] = [
     (re.compile(r"[Aa]lpine\.data\(\s*'([^']+)'"), "alpine component", False),
 ]
 
+# Registers a whole map at once, so the names are the array's keys rather than
+# an argument. It needs its own pass: matching the call gives the array body,
+# and reading that as a name reports the class list as a namespace. db-console
+# registered a bare alias through this and the audit could not see it at all.
+ALIAS_MAP = re.compile(r"registerMiddlewareAliases\(\s*\[(?P<body>.*?)\]", re.S)
+ALIAS_KEY = re.compile(r"'([^']+)'\s*=>")
+
+# Laravel's own registrars, used directly rather than through package-tools.
+# Checking only the fluent wrappers passed enumerator, console and vigilance as
+# compliant while they registered bare namespaces through these instead, so the
+# audit has to read what Laravel is told, not what the builder was told.
+# The namespace is the last string argument.
+DIRECT = [
+    (re.compile(r"loadViewsFrom\(\s*(?P<args>[^;]*?)\)", re.S), "view namespace", False),
+    (
+        re.compile(r"loadTranslationsFrom\(\s*(?P<args>[^;]*?)\)", re.S),
+        "translation namespace",
+        False,
+    ),
+    (
+        re.compile(r"Blade::componentNamespace\(\s*(?P<args>[^;]*?)\)", re.S),
+        "component prefix",
+        False,
+    ),
+    (
+        re.compile(r"anonymousComponentNamespace\(\s*(?P<args>[^;]*?)\)", re.S),
+        "component prefix",
+        False,
+    ),
+]
+
+LAST_STRING = re.compile(r"'([^']*)'\s*,?\s*$")
+
 
 def without_comments(source: Path) -> str:
     """The file's code with comments removed, via PHP's own tokenizer.
@@ -81,12 +114,23 @@ def without_comments(source: Path) -> str:
 
 
 def slug_of(package: Path) -> str | None:
+    """The package slug, or None when this convention does not apply.
+
+    Only laranail's own packages are held to it. Several directories here are
+    forks of third-party packages that keep their upstream vendor —
+    anousss007/vigilance, devifyo/watchtower — and renaming their namespaces
+    would diverge from the upstream they track, to satisfy a convention that was
+    never theirs.
+    """
     composer = package / "composer.json"
     if not composer.exists():
         return None
 
     name = json.loads(composer.read_text()).get("name", "")
-    return name.split("/", 1)[1] if "/" in name else None
+    if not name.startswith("laranail/"):
+        return None
+
+    return name.split("/", 1)[1]
 
 
 def camel(slug: str) -> str:
@@ -97,13 +141,63 @@ def camel(slug: str) -> str:
 def audit(package: Path) -> list[str]:
     slug = slug_of(package)
     if slug is None:
-        return [f"  SKIPPED   {package.name}: no composer name to check against"]
+        return [f"  SKIPPED   {package.name}: not a laranail package"]
 
     findings: list[str] = []
     expected = f"laranail-{slug}"
 
     for source in sorted((package / "src").rglob("*.php")):
         text = without_comments(source)
+        where = f"{source.relative_to(package)}"
+
+        for pattern, kind, _ in DIRECT:
+            for call in pattern.finditer(text):
+                args = call.group("args").strip()
+
+                # A non-greedy match stops at the first `)`, which belongs to a
+                # nested call rather than this one. Unbalanced parens mean the
+                # arguments were cut short, and reading a "namespace" out of the
+                # fragment picks up the inner call's argument instead:
+                # Blade::componentNamespace(config('modules.namespace').…, $x)
+                # reported the config key as a bare component prefix.
+                if args.count("(") != args.count(")"):
+                    findings.append(
+                        f"  UNVERIFIED {kind} is computed, not a literal, in {where}"
+                    )
+                    continue
+
+                match = LAST_STRING.search(args)
+
+                if match is None:
+                    # A computed namespace cannot be checked here, and silently
+                    # passing it is how these were missed in the first place.
+                    findings.append(
+                        f"  UNVERIFIED {kind} is computed, not a literal, in {where}"
+                    )
+                    continue
+
+                name = match.group(1)
+
+                # loadViewsFrom($path) with no namespace registers no namespace.
+                if name == "" or "/" in name or name == expected:
+                    continue
+
+                stem = name.removeprefix("laranail-")
+                label = "BARE" if stem == slug else "MISMATCH"
+                findings.append(
+                    f"  {label:<9} {kind} '{name}' (expected '{expected}') in {where}"
+                )
+
+        for call in ALIAS_MAP.finditer(text):
+            for name in ALIAS_KEY.findall(call.group("body")):
+                if name == expected or name.startswith(f"{expected}."):
+                    continue
+                stem = name.split(".", 1)[0].removeprefix("laranail-")
+                label = "BARE" if stem == slug else "MISMATCH"
+                findings.append(
+                    f"  {label:<9} middleware alias '{name}' "
+                    f"(expected '{expected}[.suffix]') in {where}"
+                )
 
         for pattern, kind, allow_suffix in PATTERNS:
             for match in pattern.finditer(text):
