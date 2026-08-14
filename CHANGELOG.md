@@ -40,10 +40,10 @@ matrix runs the whole suite with all of them uninstalled.
   application-wide policy; the last says the runtime reached a page, which is
   what separates a payload that was never sent from a runtime that never
   arrived. Every delivery path announces itself, including
-  `<x-confetti::scripts />`, which assembled the view from the data accessor
-  rather than the renderer and so stayed silent. That made the most common
-  integration the one case where the absence of `ConfettiRendered` did not mean
-  what the documentation said it meant.
+  `<x-laranail-confetti::scripts />`, which assembled the view from the data
+  accessor rather than the renderer and so stayed silent. That made the most
+  common integration the one case where the absence of `ConfettiRendered` did
+  not mean what the documentation said it meant.
 - A browser event vocabulary, each a `CustomEvent` on `window`:
   `confetti:booted`, `confetti:burst`, `confetti:animation-start`,
   `confetti:animation-end`, `confetti:skipped`, `confetti:stopped` and
@@ -66,9 +66,9 @@ matrix runs the whole suite with all of them uninstalled.
   rather than fatal.
 - Five asset-delivery modes: `route` (the default, content-hashed and immutably
   cached), `published`, `cdn`, `vite` and `off`.
-- `<x-confetti::scripts />`, an optional auto-inject middleware, and a Filament
-  panel plugin, all rendering the same markup so a panel and a plain page cannot
-  drift apart.
+- `<x-laranail-confetti::scripts />`, an optional auto-inject middleware, and a
+  Filament panel plugin, all rendering the same markup so a panel and a plain
+  page cannot drift apart.
 - The boot payload is an inert JSON block rather than an inline script, so the
   package works under a strict Content-Security-Policy with no `unsafe-inline`
   and needs no JavaScript framework.

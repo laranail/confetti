@@ -217,7 +217,7 @@ return [
     | With "auto" enabled, a middleware appends the confetti tags before the
     | closing </body> of every HTML response, so no layout changes are needed.
     | It is off by default because silently rewriting responses should be a
-    | decision, not a surprise. Place <x-confetti::scripts /> yourself if you
+    | decision, not a surprise. Place <x-laranail-confetti::scripts /> yourself if you
     | would rather be explicit.
     |
     | The middleware skips redirects, streamed responses, non-HTML content

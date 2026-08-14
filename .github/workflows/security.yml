@@ -56,6 +56,13 @@ jobs:
       - name: Verify every registered name carries the vendor
         run: python3 scripts/verify-naming.py
 
+      # verify-naming.py checks what is registered; this checks what still
+      # points at the old name. They are different failures: a rename can leave
+      # the registration perfect and a Blade tag, a parameterised alias or a
+      # bare namespace argument stranded, and each of those was missed by hand.
+      - name: Verify nothing still references an unprefixed name
+        run: python3 scripts/verify-name-references.py
+
   pins:
     name: Action pins
     runs-on: ubuntu-latest
