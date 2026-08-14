@@ -50,6 +50,12 @@ jobs:
       - name: Run the gating greps
         run: bash scripts/lint-greps.sh
 
+      # NamingConventionTest asserts the live registries; this asserts the
+      # source, so a name is caught before it is ever registered. It also runs
+      # against sibling packages, which is how the family-wide audit was done.
+      - name: Verify every registered name carries the vendor
+        run: python3 scripts/verify-naming.py
+
   pins:
     name: Action pins
     runs-on: ubuntu-latest
