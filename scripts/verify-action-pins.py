@@ -83,17 +83,19 @@ def version_of(tag: str) -> tuple[int, ...] | None:
     return tuple(int(part) for part in match.group(1).split(".")) if match else None
 
 
-def staleness(owner: str, repo: str, tag: str) -> tuple[str, int] | None:
+def staleness(owner: str, repo: str, tag: str, sha: str) -> tuple[str, int] | None:
     """The newest release, and how many days it has been out, if it beats ours.
 
     Uses releases rather than tags: tags include release candidates and the
     per-major floating aliases (`v4`) that actions publish, and treating one of
     those as "latest" would report every correct pin as behind.
-    """
-    ours = version_of(tag)
-    if ours is None:
-        return None
 
+    The decisive comparison is the commit, not the version. A pin commented `# v2`
+    against a floating major alias is current whenever that SHA is what the newest
+    release points at, however far apart the two names read. Comparing names alone
+    reported laranail/package-tools as a year behind while it was pinned to the
+    exact commit of the newest release.
+    """
     latest = api(f"/repos/{owner}/{repo}/releases/latest")
     if latest is None or latest.get("draft") or latest.get("prerelease"):
         return None
@@ -103,8 +105,14 @@ def staleness(owner: str, repo: str, tag: str) -> tuple[str, int] | None:
     if not name or not published:
         return None
 
-    theirs = version_of(name)
-    if theirs is None or theirs <= ours:
+    # Already on the newest release's commit, whatever the comment calls it.
+    if commit_for_tag(owner, repo, name) == sha:
+        return None
+
+    # Different commit: only claim "behind" when the versions say so, since a
+    # repo can publish releases out of order or from parallel branches.
+    ours, theirs = version_of(tag), version_of(name)
+    if ours is None or theirs is None or theirs <= ours:
         return None
 
     age = datetime.now(timezone.utc) - datetime.fromisoformat(
@@ -170,7 +178,7 @@ def main() -> int:
         # The pin is honest. Ask separately whether it is current, so a stale
         # pin is never mistaken for a dishonest one.
         try:
-            behind = staleness(owner, repo, tag)
+            behind = staleness(owner, repo, tag, sha)
         except Unavailable:
             behind = None
 

@@ -25,6 +25,14 @@ ok()   { printf '\033[32m  ok %s\033[0m\n' "$1"; }
 echo "  Release currency for ${REPO}"
 echo
 
+# An empty repository answers 409 to every ref query. Nothing is published, so
+# nothing can be behind; treating that as a failure reports a defect where there
+# is not even code yet.
+if ! gh api "repos/${REPO}/git/refs/heads" >/dev/null 2>&1; then
+  ok "No commits yet, so there is nothing to be behind."
+  exit 0
+fi
+
 # The highest v0.* tag: the moving pre-1.0 tag this convention describes.
 tag=$(gh api "repos/${REPO}/git/matching-refs/tags/v0." \
         --jq '.[].ref | sub("refs/tags/"; "")' 2>/dev/null \
