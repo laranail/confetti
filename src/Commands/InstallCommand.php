@@ -26,9 +26,6 @@ final class InstallCommand extends Command
 
     protected $description = 'Publish the confetti config and print the remaining setup steps';
 
-    /** @var list<string> */
-    protected array $commandAliases = ['confetti:install'];
-
     public function handle(ConfettiConfig $config): int
     {
         $this->callSilently('vendor:publish', array_filter([
@@ -48,7 +45,7 @@ final class InstallCommand extends Command
         $this->line('  <options=bold>One step left: get the runtime onto your pages.</>');
         $this->newLine();
         $this->line('  Place the component in your layout, before </body>:');
-        $this->line('      <fg=cyan><x-confetti::scripts /></>');
+        $this->line('      <fg=cyan><x-laranail-confetti::scripts /></>');
         $this->newLine();
         $this->line('  Or let the middleware do it for every HTML response:');
         $this->line('      <fg=cyan>CONFETTI_AUTO_INJECT=true</>');

@@ -6,7 +6,7 @@ page you land on.
 Put the runtime in your layout, once:
 
 ```blade
-    <x-confetti::scripts />
+    <x-laranail-confetti::scripts />
 </body>
 ```
 

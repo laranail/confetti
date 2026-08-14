@@ -23,7 +23,7 @@ use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 it('announces a render from the Blade component', function (): void {
     Event::fake([ConfettiRendered::class]);
 
-    Blade::render('<x-confetti::scripts />');
+    Blade::render('<x-laranail-confetti::scripts />');
 
     Event::assertDispatched(
         ConfettiRendered::class,
@@ -34,7 +34,7 @@ it('announces a render from the Blade component', function (): void {
 it('announces a render from the auto-inject middleware', function (): void {
     Event::fake([ConfettiRendered::class]);
 
-    Route::middleware(['web', 'confetti'])
+    Route::middleware(['web', 'laranail-confetti'])
         ->get('/injected', fn (): string => '<html><body>ok</body></html>');
 
     $this->get('/injected');
@@ -54,7 +54,7 @@ it('reports whether a payload rode along', function (): void {
         return redirect('/lands');
     });
 
-    Route::middleware(['web', 'confetti'])
+    Route::middleware(['web', 'laranail-confetti'])
         ->get('/lands', fn (): string => '<html><body>ok</body></html>');
 
     $this->get('/fires');
@@ -73,7 +73,7 @@ it('stays silent when the package is disabled', function (): void {
 
     Event::fake([ConfettiRendered::class]);
 
-    Blade::render('<x-confetti::scripts />');
+    Blade::render('<x-laranail-confetti::scripts />');
 
     Event::assertNotDispatched(ConfettiRendered::class);
 });

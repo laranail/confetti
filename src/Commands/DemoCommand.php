@@ -30,9 +30,6 @@ final class DemoCommand extends Command
 
     protected $description = 'Print the payload a confetti preset produces, and what it costs on the wire';
 
-    /** @var list<string> */
-    protected array $commandAliases = ['confetti:demo'];
-
     public function handle(Confetti $confetti): int
     {
         $preset = $this->argument('preset');

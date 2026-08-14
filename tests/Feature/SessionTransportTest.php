@@ -75,7 +75,7 @@ it('carries the payload into the rendered boot block', function (): void {
         return redirect('/page');
     });
 
-    Route::middleware('web')->get('/page', fn (): Factory|View => view('confetti::components.scripts', [
+    Route::middleware('web')->get('/page', fn (): Factory|View => view('laranail-confetti::components.scripts', [
         'enabled' => true,
         'bootJson' => app(BootConfig::class)->toJson(),
         'scriptTag' => app(ScriptTagBuilder::class)->render(),

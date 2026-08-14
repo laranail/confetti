@@ -76,7 +76,7 @@ it('renders the same markup a plain Laravel page gets', function (): void {
 
     ConfettiPlugin::make()->register($panel);
 
-    $expected = view('confetti::components.scripts', [
+    $expected = view('laranail-confetti::components.scripts', [
         'enabled' => true,
         'bootJson' => app(BootConfig::class)->toJson(),
         'scriptTag' => app(ScriptTagBuilder::class)->render(),

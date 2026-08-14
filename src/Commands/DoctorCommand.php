@@ -23,9 +23,6 @@ final class DoctorCommand extends Command
 
     protected $description = 'Check the confetti setup: bundle, asset delivery, canvas, and detected stacks';
 
-    /** @var list<string> */
-    protected array $commandAliases = ['confetti:doctor'];
-
     public function handle(Checks $checks): int
     {
         $results = $checks->all();

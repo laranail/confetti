@@ -42,11 +42,11 @@ final class ConfettiServiceProvider extends PackageServiceProvider
         $package
             ->name('laranail/confetti')
             ->hasConfigFile()
-            ->hasViews('confetti')
+            ->hasViews('laranail-confetti')
             ->hasAssets()
             ->hasBladeComponentNamespace(
                 'Simtabi\\Laranail\\Confetti\\View\\Components',
-                'confetti',
+                'laranail-confetti',
             )
             ->hasCommands([
                 InstallCommand::class,
@@ -175,7 +175,7 @@ final class ConfettiServiceProvider extends PackageServiceProvider
         /** @var Router $router */
         $router = $this->app->make(Router::class);
 
-        $router->aliasMiddleware('confetti', InjectConfetti::class);
+        $router->aliasMiddleware('laranail-confetti', InjectConfetti::class);
 
         if (! $config->injectValue('auto', false)) {
             return;

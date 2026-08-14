@@ -73,6 +73,16 @@ matrix runs the whole suite with all of them uninstalled.
   package works under a strict Content-Security-Policy with no `unsafe-inline`
   and needs no JavaScript framework.
 
+### Naming
+
+- Every public name the package registers carries the vendor and the package
+  slug: the Blade component and view namespace and the route middleware alias
+  are all `laranail-confetti`, Artisan commands are `laranail::confetti.*`, and
+  the optional Alpine component is `laranailConfetti`. Laravel keeps each of
+  those registries as a flat map, so two packages claiming `confetti` would not
+  collide loudly, the second would silently replace the first. The short command
+  aliases (`confetti:doctor` and friends) are gone for the same reason.
+
 ### Safety
 
 - Effect definitions reach only the builder methods that configure an effect.

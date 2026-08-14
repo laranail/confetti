@@ -20,7 +20,7 @@ use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
  */
 final readonly class ConfettiTags
 {
-    public const string VIEW = 'confetti::components.scripts';
+    public const string VIEW = 'laranail-confetti::components.scripts';
 
     public function __construct(
         private ConfettiConfig $config,

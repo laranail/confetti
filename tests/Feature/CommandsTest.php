@@ -67,7 +67,7 @@ it('explains the burst ceiling rather than throwing at it', function (): void {
 
 it('prints the remaining setup steps on install', function (): void {
     $this->artisan('laranail::confetti.install')
-        ->expectsOutputToContain('x-confetti::scripts')
+        ->expectsOutputToContain('x-laranail-confetti::scripts')
         ->assertSuccessful();
 });
 

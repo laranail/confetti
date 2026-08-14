@@ -27,7 +27,7 @@ are three ways to put it there, and you only need one.
 The explicit option. Place it once in your layout, before `</body>`:
 
 ```blade
-    <x-confetti::scripts />
+    <x-laranail-confetti::scripts />
 </body>
 ```
 
@@ -43,6 +43,19 @@ CONFETTI_AUTO_INJECT=true
 It skips redirects, JSON, Inertia and Livewire responses, and anything matching
 `inject.except`. It also skips a page that already has the component, so the two
 can coexist while you migrate.
+
+To apply it to particular routes instead of all of them, the middleware is
+registered under the alias `laranail-confetti`:
+
+```php
+Route::middleware(['web', 'laranail-confetti'])->group(function () {
+    // ...
+});
+```
+
+Every public name this package registers is prefixed `laranail-confetti`, so it
+cannot collide with another package or with your own. See
+[architecture](architecture.md#naming).
 
 This is off by default because silently rewriting responses should be a decision
 rather than a surprise.

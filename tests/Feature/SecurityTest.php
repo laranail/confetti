@@ -89,7 +89,7 @@ describe('the boot payload cannot break out of its script block', function (): v
             return redirect('/landed');
         });
 
-        Route::middleware(['web', 'confetti'])->get('/landed', fn (): string => '<html><body>ok</body></html>');
+        Route::middleware(['web', 'laranail-confetti'])->get('/landed', fn (): string => '<html><body>ok</body></html>');
 
         $this->get('/xss');
         $html = $this->get('/landed')->getContent();

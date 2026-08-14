@@ -25,7 +25,7 @@ Then it prints the remaining step, which is the one thing it cannot do for you:
   One step left: get the runtime onto your pages.
 
   Place the component in your layout, before </body>:
-      <x-confetti::scripts />
+      <x-laranail-confetti::scripts />
 
   Or let the middleware do it for every HTML response:
       CONFETTI_AUTO_INJECT=true

@@ -11,19 +11,19 @@ use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Confetti\View\ConfettiTags;
 
 /**
- * `<x-confetti::scripts />` is the integration point the README tells people to
+ * `<x-laranail-confetti::scripts />` is the integration point the README tells people to
  * place, and it was the one path nothing rendered. The install command asserted
  * it prints the tag; no test proved the tag resolves.
  */
 it('resolves the component from its registered namespace', function (): void {
-    $html = Blade::render('<x-confetti::scripts />');
+    $html = Blade::render('<x-laranail-confetti::scripts />');
 
     expect($html)->toContain('data-confetti-boot');
     expect($html)->toContain('<script type="module"');
 });
 
 it('emits exactly two elements and no inline javascript', function (): void {
-    $html = Blade::render('<x-confetti::scripts />');
+    $html = Blade::render('<x-laranail-confetti::scripts />');
 
     expect(substr_count($html, '<script'))->toBe(2);
 
@@ -37,7 +37,7 @@ it('renders byte-identical markup to every other entry point', function (): void
     // Four things put confetti on a page: this component, the auto-inject
     // middleware, the Filament plugin and the panel provider. They share one
     // renderer so that "the panel and the rest of the site agree" is a fact.
-    $component = Blade::render('<x-confetti::scripts />');
+    $component = Blade::render('<x-laranail-confetti::scripts />');
     $renderer = app(ConfettiTags::class)->render();
 
     expect(trim($component))->toBe(trim($renderer));
@@ -49,7 +49,7 @@ it('carries a payload fired earlier in the same request', function (): void {
     Route::middleware('web')->get('/same-request', function (): string {
         Confetti::stars()->shoot();
 
-        return Blade::render('<x-confetti::scripts />');
+        return Blade::render('<x-laranail-confetti::scripts />');
     });
 
     $html = $this->get('/same-request')->getContent();
@@ -65,7 +65,7 @@ it('carries a payload flashed by the previous request', function (): void {
         return redirect('/lands');
     });
 
-    Route::middleware('web')->get('/lands', fn (): string => Blade::render('<x-confetti::scripts />'));
+    Route::middleware('web')->get('/lands', fn (): string => Blade::render('<x-laranail-confetti::scripts />'));
 
     $this->get('/fires');
 

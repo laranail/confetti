@@ -4,11 +4,16 @@
  * The runtime needs no framework; this only adds sugar for pages that already
  * have Alpine, so confetti can be fired from markup:
  *
- *     <button x-data="confetti" @click="realistic()">Celebrate</button>
+ *     <button x-data="laranailConfetti" @click="realistic()">Celebrate</button>
  *
  * Registered only when Alpine is already present. Alpine is never imported or
  * loaded here; shipping a second copy alongside the one Livewire bundles is a
  * well-known way to break a page.
+ *
+ * The name is camelCase rather than the `laranail-confetti` used everywhere
+ * else, because Alpine evaluates the `x-data` attribute as a JavaScript
+ * expression: `x-data="laranail-confetti"` is a subtraction of two undefined
+ * names, not a component.
  *
  * Only named methods are exposed, so the component works under the CSP build of
  * Alpine, which refuses arbitrary expressions in markup.
@@ -16,7 +21,7 @@
 export function registerAlpineAdapter(runtime, alpine = typeof window !== 'undefined' ? window.Alpine : null) {
   if (!alpine || typeof alpine.data !== 'function') return runtime
 
-  alpine.data('confetti', () => ({
+  alpine.data('laranailConfetti', () => ({
     fire(payload) {
       runtime.fire(payload)
     },

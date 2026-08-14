@@ -11,7 +11,7 @@ use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
 
 beforeEach(function (): void {
-    Route::middleware(['web', 'confetti'])->group(function (): void {
+    Route::middleware(['web', 'laranail-confetti'])->group(function (): void {
         Route::get('/page', fn (): string => '<html><body><p>hello</p></body></html>');
         Route::get('/json', fn () => response()->json(['ok' => true]));
         Route::get('/away', fn (): Redirector|RedirectResponse => redirect('/page'));
@@ -19,7 +19,7 @@ beforeEach(function (): void {
 
         // A page that already carries the component.
         Route::get('/explicit', fn (): string => '<html><body>'
-            .view('confetti::components.scripts', [
+            .view('laranail-confetti::components.scripts', [
                 'enabled' => true,
                 'bootJson' => app(BootConfig::class)->toJson(),
                 'scriptTag' => app(ScriptTagBuilder::class)->render(),
@@ -88,7 +88,7 @@ it('skips a path listed in the exception list', function (): void {
 });
 
 it('carries a flashed payload through to the injected block', function (): void {
-    Route::middleware(['web', 'confetti'])->get('/fire', function (): Redirector|RedirectResponse {
+    Route::middleware(['web', 'laranail-confetti'])->get('/fire', function (): Redirector|RedirectResponse {
         Confetti::count(99)->shoot();
 
         return redirect('/page');

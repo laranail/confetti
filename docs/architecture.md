@@ -16,7 +16,7 @@ ConfettiPayload          { v, id, action, bursts[], animations[] }
 TransportManager         session | livewire | inertia | null | array
    │
    ▼
-<x-confetti::scripts />  a JSON data block + an external module
+<x-laranail-confetti::scripts />  a JSON data block + an external module
    │
    ▼
 resources/dist/confetti.iife.js
@@ -187,6 +187,44 @@ Strict mode is the default. Clamping and logging is available, and appropriate
 when confetti is driven by data you do not control, but defaulting to it would
 mean staging and production differ silently, which is worse than an exception a
 test would have caught.
+
+## <a name="naming"></a>Why every public name carries the vendor
+
+Everything this package registers is prefixed, and none of it is called just
+`confetti`:
+
+| Surface | Name | Used as |
+|---|---|---|
+| Blade component | `laranail-confetti` | `<x-laranail-confetti::scripts />` |
+| View namespace | `laranail-confetti` | `view('laranail-confetti::components.scripts')` |
+| Route middleware | `laranail-confetti` | `->middleware('laranail-confetti')` |
+| Artisan commands | `laranail::confetti.` | `php artisan laranail::confetti.doctor` |
+| Alpine component | `laranailConfetti` | `<div x-data="laranailConfetti">` |
+
+Laravel keeps view namespaces, component prefixes and middleware aliases in flat
+maps keyed by that name. Two packages claiming the same key do not collide
+loudly; the second silently replaces the first, and it surfaces much later as a
+missing view or the wrong middleware running. "Confetti" is a generic enough
+word that another package, or the application itself, could reasonably want it.
+
+The separators differ because each registry parses its key differently, and each
+choice is forced rather than stylistic:
+
+- **Commands use `::`** because Symfony resolves an exact command name before it
+  splits on `:`, so `laranail::confetti.doctor` dispatches even though the empty
+  segment in `::` would fail its own name validator.
+- **Middleware cannot use `::`**, because Laravel splits an alias on `:` to take
+  parameters, the way `throttle:60,1` does. `laranail::confetti` would resolve as
+  the middleware `laranail` with the parameter `:confetti`.
+- **Blade components cannot use `::`** either, since `::` is already what
+  separates the prefix from the component inside the tag.
+- **The Alpine name is camelCase**, because `x-data` is evaluated as a JavaScript
+  expression: `x-data="laranail-confetti"` is a subtraction of two undefined
+  names.
+
+The commands carried short aliases (`confetti:doctor`) for a while. They are
+gone: an alias that reintroduces the generic name gives back exactly what the
+convention is for.
 
 ---
 

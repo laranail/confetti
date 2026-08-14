@@ -19,7 +19,7 @@ The service provider is auto-discovered. Add the runtime to your layout, once,
 before `</body>`:
 
 ```blade
-<x-confetti::scripts />
+<x-laranail-confetti::scripts />
 ```
 
 Then fire it from anywhere:
