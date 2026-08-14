@@ -23,6 +23,8 @@ final class Scripts extends Component
 
     public function render(): View
     {
-        return view(ConfettiTags::VIEW, $this->tags->data());
+        // viewData(), not data(): going through the renderer is what dispatches
+        // ConfettiRendered, and this is the path most applications use.
+        return view(ConfettiTags::VIEW, $this->tags->viewData('component'));
     }
 }

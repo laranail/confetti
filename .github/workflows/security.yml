@@ -60,7 +60,29 @@ jobs:
       # A SHA pin is the supply-chain control; the version comment beside it is
       # what a reviewer actually reads. Nothing keeps the two in step, and this
       # package shipped a CodeQL pin labelled v3.28.0 whose SHA was a v4 commit.
-      - name: Verify every pin matches its version comment
+      # The same run reports a pin left behind a release, which is how
+      # setup-php sat fourteen months stale while looking entirely correct.
+      - name: Verify every pin is honest and current
         run: python3 scripts/verify-action-pins.py
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  tag:
+    name: Release currency
+    runs-on: ubuntu-latest
+
+    # Not on push: the tag is expected to lag between pushing a commit and
+    # moving it, and a job that fails for the minute in between is one people
+    # learn to ignore. Weekly is soon enough to catch a tag left behind.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Pre-1.0 the tag moves and consumers resolve ^0.1 through it, so a tag
+      # left behind ships them code without the fixes rather than merely
+      # without the features. v0.1.0 here sat behind a security fix.
+      - name: Verify the moving tag is on main
+        run: bash scripts/verify-tag-currency.sh ${{ github.repository }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

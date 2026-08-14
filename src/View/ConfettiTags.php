@@ -35,17 +35,39 @@ final readonly class ConfettiTags
             return '';
         }
 
-        $data = $this->data();
-
-        $this->events?->dispatch(new ConfettiRendered(
-            source: $source,
-            hasPayload: str_contains((string) $data['bootJson'], '"payload":{'),
-        ));
-
-        return view(self::VIEW, $data)->render();
+        return view(self::VIEW, $this->viewData($source))->render();
     }
 
-    /** @return array<string, mixed> */
+    /**
+     * The view data, announcing the render as it goes.
+     *
+     * Every path that puts confetti on a page goes through here, which is what
+     * makes `ConfettiRendered` mean what the documentation says it means. The
+     * Blade component used to assemble the same view from {@see data()} and so
+     * announced nothing, leaving the most common integration the one case where
+     * "no ConfettiRendered means the runtime never reached the page" was false.
+     *
+     * @return array<string, mixed>
+     */
+    public function viewData(string $source): array
+    {
+        $data = $this->data();
+
+        if ($this->config->enabled) {
+            $this->events?->dispatch(new ConfettiRendered(
+                source: $source,
+                hasPayload: str_contains((string) $data['bootJson'], '"payload":{'),
+            ));
+        }
+
+        return $data;
+    }
+
+    /**
+     * The view data alone, announcing nothing.
+     *
+     * @return array<string, mixed>
+     */
     public function data(): array
     {
         return [

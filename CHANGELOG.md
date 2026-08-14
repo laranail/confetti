@@ -39,7 +39,11 @@ matrix runs the whole suite with all of them uninstalled.
   `ConfettiRendered`. The first carries the mutable builder for
   application-wide policy; the last says the runtime reached a page, which is
   what separates a payload that was never sent from a runtime that never
-  arrived.
+  arrived. Every delivery path announces itself, including
+  `<x-confetti::scripts />`, which assembled the view from the data accessor
+  rather than the renderer and so stayed silent. That made the most common
+  integration the one case where the absence of `ConfettiRendered` did not mean
+  what the documentation said it meant.
 - A browser event vocabulary, each a `CustomEvent` on `window`:
   `confetti:booted`, `confetti:burst`, `confetti:animation-start`,
   `confetti:animation-end`, `confetti:skipped`, `confetti:stopped` and
