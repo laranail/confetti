@@ -24,6 +24,14 @@ Two defects are reported, and the second is the worse one:
     MISMATCH  the name does not even match the package slug, so it is
               unguessable as well as collision-prone
 
+Severity is not uniform across the surfaces, and the difference matters when
+deciding what to fix. A view namespace, a component prefix and a middleware
+alias are each the *only* registration for that name, so a bare one leaves the
+package genuinely unnamespaced. A translation alias is *additional*:
+package-tools always registers `vendor/package::` and `hasTranslations($alias)`
+adds a second, shorter namespace beside it. A bare alias there can still be
+taken by someone else, but dropping it costs only brevity.
+
 Run from a package root, or pass one or more package directories.
 """
 
@@ -31,13 +39,14 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
 # (regex, what kind of name it registers, whether a suffix may follow the slug)
 PATTERNS: list[tuple[re.Pattern[str], str, bool]] = [
     (re.compile(r"hasViews\(\s*'([^']+)'"), "view namespace", False),
-    (re.compile(r"hasTranslations\(\s*'([^']+)'"), "translation namespace", False),
+    (re.compile(r"hasTranslations\(\s*'([^']+)'"), "translation alias", False),
     (
         re.compile(r"hasBladeComponentNamespace\(\s*'[^']+'\s*,\s*'([^']+)'", re.S),
         "component prefix",
@@ -47,6 +56,28 @@ PATTERNS: list[tuple[re.Pattern[str], str, bool]] = [
     (re.compile(r"registerRouteMiddleware\(\s*'([^']+)'"), "middleware alias", True),
     (re.compile(r"[Aa]lpine\.data\(\s*'([^']+)'"), "alpine component", False),
 ]
+
+
+def without_comments(source: Path) -> str:
+    """The file's code with comments removed, via PHP's own tokenizer.
+
+    Necessary, not fastidious: package-tools documents `hasTranslations('widget')`
+    in an @example docblock, and a plain regex read that as a registration and
+    reported the package as violating a convention it does not violate.
+    """
+    php = (
+        "$t = token_get_all(file_get_contents($argv[1]));"
+        "foreach ($t as $x) {"
+        "  if (is_array($x)) {"
+        "    if ($x[0] === T_COMMENT || $x[0] === T_DOC_COMMENT) { continue; }"
+        "    echo $x[1];"
+        "  } else { echo $x; }"
+        "}"
+    )
+    result = subprocess.run(
+        ["php", "-r", php, str(source)], capture_output=True, text=True
+    )
+    return result.stdout if result.returncode == 0 else source.read_text(errors="replace")
 
 
 def slug_of(package: Path) -> str | None:
@@ -72,7 +103,7 @@ def audit(package: Path) -> list[str]:
     expected = f"laranail-{slug}"
 
     for source in sorted((package / "src").rglob("*.php")):
-        text = source.read_text(errors="replace")
+        text = without_comments(source)
 
         for pattern, kind, allow_suffix in PATTERNS:
             for match in pattern.finditer(text):
