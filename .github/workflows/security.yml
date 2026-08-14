@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up PHP
-        uses: shivammathur/setup-php@0f7f1d08e3e32076e51cae65eb0b0c871405b16e # v2.34.1
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
         with:
           php-version: '8.5'
           coverage: none
@@ -49,3 +49,18 @@ jobs:
 
       - name: Run the gating greps
         run: bash scripts/lint-greps.sh
+
+  pins:
+    name: Action pins
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # A SHA pin is the supply-chain control; the version comment beside it is
+      # what a reviewer actually reads. Nothing keeps the two in step, and this
+      # package shipped a CodeQL pin labelled v3.28.0 whose SHA was a v4 commit.
+      - name: Verify every pin matches its version comment
+        run: python3 scripts/verify-action-pins.py
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

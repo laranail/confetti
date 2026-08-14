@@ -69,6 +69,19 @@ matrix runs the whole suite with all of them uninstalled.
   package works under a strict Content-Security-Policy with no `unsafe-inline`
   and needs no JavaScript framework.
 
+### Safety
+
+- Effect definitions reach only the builder methods that configure an effect.
+  They are checked against an allowlist rather than `method_exists()`, so a
+  definition cannot call `shoot()`, `via()`, `expand()`, `seed()`, `then()` or
+  `reset()`. An effect describes what confetti looks like; deciding when it
+  fires and which transport carries it stays at the call site, where it is
+  visible. The distinction costs nothing while every definition is written by a
+  developer in a config file, and `registerEffect()` exists so that they need
+  not be.
+- The boot payload is encoded with the four `JSON_HEX_*` flags, so a `</script>`
+  in text handed to `shapeFromText` renders inert rather than closing the block.
+
 ### Tooling
 
 - `Confetti::fake()` with `assertFired`, `assertFiredTimes`,
@@ -77,6 +90,9 @@ matrix runs the whole suite with all of them uninstalled.
   `about` section.
 - Typed enums built on `laranail/enumerator`, and a `ConfettiException` family
   that keeps each concrete exception on the SPL type describing it.
+- PHPStan runs at level 8 with no baseline, CodeQL scans the browser runtime,
+  and a CI check verifies that every SHA-pinned action matches the version in
+  its comment.
 
 [Unreleased]: https://github.com/laranail/confetti/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/laranail/confetti/releases/tag/v0.1.0

@@ -40,5 +40,8 @@ updates:
       day: monday
       time: '06:00'
       timezone: America/New_York
+    # Five is the default, and five is exactly how many action PRs were open
+    # the first time this ran, which crowded setup-php out for months.
+    open-pull-requests-limit: 10
     commit-message:
       prefix: 'chore(actions)'
