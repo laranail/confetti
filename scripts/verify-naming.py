@@ -117,10 +117,10 @@ def slug_of(package: Path) -> str | None:
     """The package slug, or None when this convention does not apply.
 
     Only laranail's own packages are held to it. Several directories here are
-    forks of third-party packages that keep their upstream vendor —
-    anousss007/vigilance, devifyo/watchtower — and renaming their namespaces
-    would diverge from the upstream they track, to satisfy a convention that was
-    never theirs.
+    forks of third-party packages that keep their upstream vendor, such as
+    anousss007/vigilance and devifyo/watchtower. Renaming their namespaces
+    would diverge from the upstream they track, to satisfy a convention that
+    was never theirs.
     """
     composer = package / "composer.json"
     if not composer.exists():
@@ -158,7 +158,7 @@ def audit(package: Path) -> list[str]:
                 # nested call rather than this one. Unbalanced parens mean the
                 # arguments were cut short, and reading a "namespace" out of the
                 # fragment picks up the inner call's argument instead:
-                # Blade::componentNamespace(config('modules.namespace').…, $x)
+                # Blade::componentNamespace(config('modules.namespace')..., $x)
                 # reported the config key as a bare component prefix.
                 if args.count("(") != args.count(")"):
                     findings.append(
