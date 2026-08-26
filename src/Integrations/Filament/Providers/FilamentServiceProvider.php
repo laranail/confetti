@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Simtabi\Laranail\Confetti\Integrations\Filament;
+namespace Simtabi\Laranail\Confetti\Integrations\Filament\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
