@@ -8,33 +8,33 @@
 #
 # Three checks, because this package has now shipped every one of these failures.
 #
-#   1. CURRENCY — the tag constrained consumers resolve must be on main.
+#   1. CURRENCY -- the tag constrained consumers resolve must be on main.
 #
 #      Anchored on `extra.branch-alias`, NOT on the highest tag. That
 #      distinction is the whole point of this rewrite. laranail/enumerator
 #      carried v0.1.0 through v0.4.0; v0.4.0 pointed at main HEAD, so a check
-#      that took the highest tag reported everything healthy — while all nine
+#      that took the highest tag reported everything healthy -- while all nine
 #      consumers, every one of them on `^0.1`, resolved v0.1.0 two commits
 #      behind and silently missed a preset and an ordering bugfix. `^0.1` on a
 #      0.x package means `>=0.1.0 <0.2.0`; a v0.4.0 they cannot reach says
 #      nothing about what they get.
 #
-#      The package's own `branch-alias` declares which line is live —
-#      `0.1.x-dev` here, `0.7.x-dev` in db-tools — so the check reads it rather
+#      The package's own `branch-alias` declares which line is live --
+#      `0.1.x-dev` here, `0.7.x-dev` in db-tools -- so the check reads it rather
 #      than guessing.
 #
-#   2. REACHABILITY — every tag must be an ancestor of the default branch.
+#   2. REACHABILITY -- every tag must be an ancestor of the default branch.
 #
 #      Composer's VCS driver reads tags, not reachability. This package
 #      advertised v0.2.0, v0.2.1 and v0.3.0 pointing at abandoned history, so
 #      anyone writing `^0.2` got code that had been discarded months earlier,
 #      with nothing anywhere saying so.
 #
-#   3. THE HIGHEST TAG — what an unconstrained `composer require` resolves.
+#   3. THE HIGHEST TAG -- what an unconstrained `composer require` resolves.
 #
 #      Anchoring on branch-alias alone traded one blind spot for another. This
 #      package kept v0.4.0 three commits behind main while v0.1.0 was current,
-#      and a check that only knew about the live line called that healthy — yet
+#      and a check that only knew about the live line called that healthy -- yet
 #      v0.4.0 is exactly what a new consumer who names no constraint installs.
 #      Both are checked. The third only reports when it names a different tag,
 #      so an ordinary single-tag package does not hear it twice.
@@ -109,7 +109,7 @@ for tag in ${tags}; do
 
   case "${status}" in
     identical|ahead) printf '    %-10s %s  on %s\n' "${tag}" "${commit:0:12}" "${BRANCH}" ;;
-    *)               fail "${tag} (${commit:0:12}) is not an ancestor of ${BRANCH} — it points at abandoned history, and Composer will still offer it." ;;
+    *)               fail "${tag} (${commit:0:12}) is not an ancestor of ${BRANCH} -- it points at abandoned history, and Composer will still offer it." ;;
   esac
 done
 echo
