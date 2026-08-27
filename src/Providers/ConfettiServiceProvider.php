@@ -14,7 +14,7 @@ use Simtabi\Laranail\Confetti\Commands\InstallCommand;
 use Simtabi\Laranail\Confetti\Confetti;
 use Simtabi\Laranail\Confetti\Enums\AssetMode;
 use Simtabi\Laranail\Confetti\Http\Middleware\InjectConfetti;
-use Simtabi\Laranail\Confetti\Integrations\Filament\FilamentServiceProvider;
+use Simtabi\Laranail\Confetti\Integrations\Filament\Providers\FilamentServiceProvider;
 use Simtabi\Laranail\Confetti\Payload\PendingBursts;
 use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
 use Simtabi\Laranail\Confetti\Support\Assets;
