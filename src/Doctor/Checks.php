@@ -10,6 +10,9 @@ use Illuminate\Contracts\Container\Container;
 use Simtabi\Laranail\Confetti\Support\Assets;
 use Simtabi\Laranail\Confetti\Enums\AssetMode;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Package\Tools\Services\Doctor\DoctorCheck;
+use Simtabi\Laranail\Package\Tools\Services\Doctor\DoctorResult;
+use Simtabi\Laranail\Package\Tools\Services\Doctor\Checks\CallbackCheck;
 
 /**
  * Diagnostics for the things that fail quietly.
@@ -34,9 +37,35 @@ final readonly class Checks
     ) {}
 
     /**
-     * @return list<array{name: string, status: string, message: string}>
+     * The checks, as the shared doctor subsystem consumes them.
+     *
+     * Each private method still answers the array it always did; this wraps them
+     * so `DoctorReporter` renders confetti the same way it renders every other
+     * package, and so `--json` and the exit code come for free rather than being
+     * re-implemented in the command.
+     *
+     * @return list<DoctorCheck>
      */
     public function all(): array
+    {
+        return array_map(
+            static fn (array $raw): DoctorCheck => new CallbackCheck(
+                $raw['name'],
+                $raw['name'],
+                static fn (): DoctorResult => match ($raw['status']) {
+                    self::FAIL => DoctorResult::fail($raw['message']),
+                    self::WARN => DoctorResult::warn($raw['message']),
+                    default    => DoctorResult::pass($raw['message']),
+                },
+            ),
+            $this->raw(),
+        );
+    }
+
+    /**
+     * @return list<array{name: string, status: string, message: string}>
+     */
+    public function raw(): array
     {
         return [
             $this->bundle(),
