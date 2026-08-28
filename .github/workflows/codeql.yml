@@ -6,7 +6,7 @@ on:
   schedule:
     # Findings arrive from new rules as often as from new code, so this runs on
     # a schedule as well as on a push.
-    - cron: '0 7 * * 1'
+    - cron: '44 7 * * 1'
   workflow_dispatch:
 
 concurrency:
