@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Simtabi\Laranail\Confetti\Commands;
 
 use Simtabi\Laranail\Confetti\Doctor\Checks;
-use Simtabi\Laranail\Package\Tools\Services\Doctor\DoctorReporter;
 use Simtabi\Laranail\Console\Tools\Commands\Command;
+use Simtabi\Laranail\Package\Tools\Services\Doctor\DoctorReporter;
 use Simtabi\Laranail\Console\Tools\Commands\Concerns\SupportsNamespacedNames;
 
 /**
