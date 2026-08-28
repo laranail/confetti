@@ -1,8 +1,6 @@
 name: Tests
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -26,6 +24,7 @@ jobs:
   pest:
     name: PHP ${{ matrix.php }} · ${{ matrix.deps }} · ${{ matrix.stability }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     strategy:
       fail-fast: false
