@@ -69,16 +69,16 @@ final class EffectRegistry
         'colours' => 'colors',
     ];
 
+    /** @param array<string, array<string, mixed>> $effects */
+    public function __construct(
+        private array $effects = [],
+    ) {}
+
     /** @return list<string> */
     public static function allowedMethods(): array
     {
         return self::CONFIGURATION_METHODS;
     }
-
-    /** @param array<string, array<string, mixed>> $effects */
-    public function __construct(
-        private array $effects = [],
-    ) {}
 
     /**
      * Add an effect at runtime, for a package or a provider that ships its own.

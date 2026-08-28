@@ -36,13 +36,13 @@ final class DoctorCommand extends Command
             [$icon, $style] = match ($result['status']) {
                 Checks::FAIL => ['✗', 'fg=red'],
                 Checks::WARN => ['!', 'fg=yellow'],
-                default => ['✓', 'fg=green'],
+                default      => ['✓', 'fg=green'],
             };
 
             $failed = $failed || $result['status'] === Checks::FAIL;
 
             $this->line(sprintf('  <%s>%s</> <options=bold>%s</>', $style, $icon, $result['name']));
-            $this->line('    '.$result['message']);
+            $this->line('    ' . $result['message']);
             $this->newLine();
         }
 

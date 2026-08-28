@@ -53,6 +53,19 @@ final readonly class Animation implements JsonSerializable
         );
     }
 
+    /** @param array{animation: string, duration?: int, options?: array<string, mixed>, params?: array<string, mixed>} $data */
+    public static function fromArray(array $data): self
+    {
+        $animation = ConfettiAnimation::from($data['animation']);
+
+        return new self(
+            animation: $animation,
+            duration: (int) ($data['duration'] ?? $animation->defaultDuration()),
+            options: $data['options'] ?? [],
+            params: $data['params'] ?? [],
+        );
+    }
+
     /** @param array<string, mixed> $options */
     public function withOptions(array $options): self
     {
@@ -69,23 +82,10 @@ final readonly class Animation implements JsonSerializable
     {
         return [
             'animation' => $this->animation->value,
-            'duration' => $this->duration,
-            'options' => $this->options,
-            'params' => $this->params,
+            'duration'  => $this->duration,
+            'options'   => $this->options,
+            'params'    => $this->params,
         ];
-    }
-
-    /** @param array{animation: string, duration?: int, options?: array<string, mixed>, params?: array<string, mixed>} $data */
-    public static function fromArray(array $data): self
-    {
-        $animation = ConfettiAnimation::from($data['animation']);
-
-        return new self(
-            animation: $animation,
-            duration: (int) ($data['duration'] ?? $animation->defaultDuration()),
-            options: $data['options'] ?? [],
-            params: $data['params'] ?? [],
-        );
     }
 
     public function jsonSerialize(): array

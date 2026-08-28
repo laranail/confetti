@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Integrations\Livewire;
 
-use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
 use Simtabi\Laranail\Confetti\Confetti;
+use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
 
 /**
  * Fires confetti from a Livewire component.

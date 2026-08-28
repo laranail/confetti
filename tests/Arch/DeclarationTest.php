@@ -39,7 +39,7 @@ function isDataSection(string $path, array $sections): bool
  */
 $configKeys = static function () use ($root): array {
     /** @var array<string, mixed> $config */
-    $config = require $root.'/config/confetti.php';
+    $config = require $root . '/config/confetti.php';
 
     $walk = static function (array $node, string $prefix) use (&$walk): array {
         $keys = [];
@@ -73,7 +73,7 @@ $readers = static function () use ($root): string {
     $text = '';
 
     foreach (['src', 'resources/js', 'routes'] as $dir) {
-        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root.'/'.$dir));
+        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root . '/' . $dir));
 
         foreach ($iterator as $file) {
             if ($file->isFile() && in_array($file->getExtension(), ['php', 'js'], true)) {
@@ -142,14 +142,14 @@ it('has a reader for every setting in the config file', function () use ($config
 
     expect($orphans)->toBe([], sprintf(
         'Config key(s) nothing reads: %s. Either wire them up or take them out; '
-        .'a setting that does nothing is worse than one that is missing, because it '
-        .'looks like it works.',
+        . 'a setting that does nothing is worse than one that is missing, because it '
+        . 'looks like it works.',
         implode(', ', $orphans),
     ));
 });
 
 it('documents only settings that exist', function () use ($root, $configKeys): void {
-    $docs = file_get_contents($root.'/docs/configuration.md');
+    $docs = file_get_contents($root . '/docs/configuration.md');
     $known = $configKeys();
 
     // Every `key.path` in a documentation table cell.
@@ -163,7 +163,7 @@ it('documents only settings that exist', function () use ($root, $configKeys): v
         }
 
         // A parent group is a fair thing to name in prose.
-        if (array_filter($known, static fn (string $k): bool => str_starts_with($k, $documented.'.'))) {
+        if (array_filter($known, static fn (string $k): bool => str_starts_with($k, $documented . '.'))) {
             continue;
         }
 
@@ -177,7 +177,7 @@ it('documents only settings that exist', function () use ($root, $configKeys): v
 });
 
 it('documents every setting that exists', function () use ($root, $configKeys, $dataKeys, $dataSections): void {
-    $docs = (string) file_get_contents($root.'/docs/configuration.md');
+    $docs = (string) file_get_contents($root . '/docs/configuration.md');
     $undocumented = [];
 
     foreach ($configKeys() as $path) {

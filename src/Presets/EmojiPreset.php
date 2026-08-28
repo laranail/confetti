@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Presets;
 
-use Simtabi\Laranail\Confetti\Builder\OptionStack;
 use Simtabi\Laranail\Confetti\Contracts\Preset;
+use Simtabi\Laranail\Confetti\Builder\OptionStack;
 use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
 use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
-use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
 use Simtabi\Laranail\Confetti\Payload\Shapes\TextShape;
+use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
 
 /**
  * Emoji hanging in the air and fading, rather than falling.
@@ -45,13 +45,13 @@ final readonly class EmojiPreset implements Preset
     public function apply(OptionStack $stack, PayloadDraft $draft): void
     {
         $stack->setPresetMany([
-            'spread' => 360.0,
-            'ticks' => 60,
-            'gravity' => 0.0,
-            'decay' => 0.96,
+            'spread'        => 360.0,
+            'ticks'         => 60,
+            'gravity'       => 0.0,
+            'decay'         => 0.96,
             'startVelocity' => 20.0,
-            'scalar' => self::SCALAR,
-            'shapes' => [new TextShape($this->text)],
+            'scalar'        => self::SCALAR,
+            'shapes'        => [new TextShape($this->text)],
         ]);
 
         $scalar = (float) ($stack->get('scalar') ?? self::SCALAR);
@@ -61,8 +61,8 @@ final readonly class EmojiPreset implements Preset
             $draft->addPresetBurst(['particleCount' => 5, 'flat' => true], $delay);
             $draft->addPresetBurst([
                 'particleCount' => 15,
-                'scalar' => $scalar / 2,
-                'shapes' => [BuiltInShape::of(ConfettiShape::Circle)],
+                'scalar'        => $scalar / 2,
+                'shapes'        => [BuiltInShape::of(ConfettiShape::Circle)],
             ], $delay);
         }
     }

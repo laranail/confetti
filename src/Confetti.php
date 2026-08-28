@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Simtabi\Laranail\Confetti;
 
 use Closure;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
-use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
+use Illuminate\Contracts\Container\Container;
 use Simtabi\Laranail\Confetti\Contracts\Preset;
 use Simtabi\Laranail\Confetti\Contracts\Transport;
-use Simtabi\Laranail\Confetti\Events\ConfettiPreparing;
-use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
+use Simtabi\Laranail\Confetti\Testing\ConfettiFake;
 use Simtabi\Laranail\Confetti\Payload\PendingBursts;
 use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Confetti\Support\EffectRegistry;
-use Simtabi\Laranail\Confetti\Testing\ConfettiFake;
+use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
+use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
+use Simtabi\Laranail\Confetti\Events\ConfettiPreparing;
 use Simtabi\Laranail\Confetti\Transport\ArrayTransport;
 use Simtabi\Laranail\Confetti\Transport\TransportManager;
 use Simtabi\Laranail\Confetti\Validation\OptionValidator;
@@ -48,6 +48,12 @@ class Confetti
         private readonly EffectRegistry $effects = new EffectRegistry,
         private readonly ?Dispatcher $events = null,
     ) {}
+
+    /** Forward builder calls, so Confetti::snow() reads as well as make()->snow(). */
+    public function __call(string $method, array $arguments): mixed
+    {
+        return $this->make()->{$method}(...$arguments);
+    }
 
     /** Start a new effect. */
     public function make(): ConfettiBuilder
@@ -226,11 +232,5 @@ class Confetti
     public function transports(): TransportManager
     {
         return $this->transports;
-    }
-
-    /** Forward builder calls, so Confetti::snow() reads as well as make()->snow(). */
-    public function __call(string $method, array $arguments): mixed
-    {
-        return $this->make()->{$method}(...$arguments);
     }
 }

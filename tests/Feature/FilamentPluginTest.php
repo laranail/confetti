@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Contracts\Plugin;
 use Filament\View\PanelsRenderHook;
-use Simtabi\Laranail\Confetti\Integrations\Filament\ConfettiPlugin;
 use Simtabi\Laranail\Confetti\Support\BootConfig;
 use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
+use Simtabi\Laranail\Confetti\Integrations\Filament\ConfettiPlugin;
 
 /**
  * Filament is a development dependency, so every test here skips when it is
@@ -77,8 +77,8 @@ it('renders the same markup a plain Laravel page gets', function (): void {
     ConfettiPlugin::make()->register($panel);
 
     $expected = view('laranail-confetti::components.scripts', [
-        'enabled' => true,
-        'bootJson' => app(BootConfig::class)->toJson(),
+        'enabled'   => true,
+        'bootJson'  => app(BootConfig::class)->toJson(),
         'scriptTag' => app(ScriptTagBuilder::class)->render(),
     ])->render();
 

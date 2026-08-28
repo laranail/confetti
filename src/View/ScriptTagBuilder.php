@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\View;
 
-use Illuminate\Contracts\Container\Container;
+use Throwable;
 use Illuminate\Foundation\Vite;
 use Illuminate\Support\Facades\Log;
-use Simtabi\Laranail\Confetti\Enums\AssetMode;
+use Illuminate\Contracts\Container\Container;
 use Simtabi\Laranail\Confetti\Support\Assets;
+use Simtabi\Laranail\Confetti\Enums\AssetMode;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
-use Throwable;
 
 /**
  * Builds the `<script>` tag for the configured delivery mode.
@@ -35,11 +35,11 @@ final readonly class ScriptTagBuilder
     public function render(): string
     {
         return match ($this->config->assetMode) {
-            AssetMode::Route => $this->tag($this->routeUrl()),
+            AssetMode::Route     => $this->tag($this->routeUrl()),
             AssetMode::Published => $this->tag($this->publishedUrl()),
-            AssetMode::Cdn => $this->cdnTag(),
-            AssetMode::Vite => $this->viteTag(),
-            AssetMode::Off => '',
+            AssetMode::Cdn       => $this->cdnTag(),
+            AssetMode::Vite      => $this->viteTag(),
+            AssetMode::Off       => '',
         };
     }
 
@@ -49,14 +49,14 @@ final readonly class ScriptTagBuilder
         $base = rtrim((string) config('app.url', ''), '/');
         $prefix = trim((string) $this->config->assetValue('route', '/vendor/confetti'), '/');
 
-        return $base.'/'.$prefix.'/'.$file.'?id='.$this->version($file);
+        return $base . '/' . $prefix . '/' . $file . '?id=' . $this->version($file);
     }
 
     public function publishedUrl(string $file = 'confetti.iife.js'): string
     {
         $base = rtrim((string) config('app.url', ''), '/');
 
-        return $base.'/vendor/confetti/'.$file.'?id='.$this->version();
+        return $base . '/vendor/confetti/' . $file . '?id=' . $this->version();
     }
 
     /** The cache-busting string: an explicit version, else the content hash. */
@@ -107,7 +107,7 @@ final readonly class ScriptTagBuilder
             return (string) $vite($entry);
         } catch (Throwable $e) {
             Log::warning('laranail/confetti: falling back to the route asset mode.', [
-                'entry' => $entry,
+                'entry'  => $entry,
                 'reason' => $e->getMessage(),
             ]);
 
@@ -120,7 +120,7 @@ final readonly class ScriptTagBuilder
     {
         $attributes = [
             'type' => 'module',
-            'src' => $src,
+            'src'  => $src,
             ...$extra,
         ];
 
@@ -138,6 +138,6 @@ final readonly class ScriptTagBuilder
             $rendered .= ' defer';
         }
 
-        return '<script'.$rendered.'></script>';
+        return '<script' . $rendered . '></script>';
     }
 }

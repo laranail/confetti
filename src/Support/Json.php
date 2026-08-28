@@ -54,7 +54,7 @@ final class Json
     {
         return json_encode(
             $value,
-            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR | $extraFlags
+            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR | $extraFlags,
         );
     }
 }

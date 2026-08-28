@@ -40,10 +40,10 @@ final readonly class TextShape implements Shape
     public function toWire(): array
     {
         return array_filter([
-            'type' => 'text',
-            'text' => $this->text,
-            'scalar' => $this->scalar,
-            'color' => $this->color,
+            'type'       => 'text',
+            'text'       => $this->text,
+            'scalar'     => $this->scalar,
+            'color'      => $this->color,
             'fontFamily' => $this->fontFamily,
         ], static fn (mixed $value): bool => $value !== null);
     }

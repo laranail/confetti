@@ -6,11 +6,11 @@ namespace Simtabi\Laranail\Confetti\Builder\Concerns;
 
 use Simtabi\Laranail\Confetti\Contracts\Shape;
 use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
-use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
 use Simtabi\Laranail\Confetti\Payload\Shapes\PathShape;
 use Simtabi\Laranail\Confetti\Payload\Shapes\TextShape;
 use Simtabi\Laranail\Confetti\Validation\ColorValidator;
 use Simtabi\Laranail\Confetti\Validation\ShapeValidator;
+use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
 
 /**
  * What the particles look like.

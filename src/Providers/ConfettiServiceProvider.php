@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Providers;
 
+use Illuminate\Routing\Router;
+use Illuminate\Contracts\Http\Kernel;
+use Simtabi\Laranail\Confetti\Confetti;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Routing\Router;
-use Simtabi\Laranail\Confetti\Commands\DemoCommand;
-use Simtabi\Laranail\Confetti\Commands\DoctorCommand;
-use Simtabi\Laranail\Confetti\Commands\InstallCommand;
-use Simtabi\Laranail\Confetti\Confetti;
-use Simtabi\Laranail\Confetti\Enums\AssetMode;
-use Simtabi\Laranail\Confetti\Http\Middleware\InjectConfetti;
-use Simtabi\Laranail\Confetti\Integrations\Filament\Providers\FilamentServiceProvider;
-use Simtabi\Laranail\Confetti\Payload\PendingBursts;
-use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
+use Simtabi\Laranail\Package\Tools\Package;
 use Simtabi\Laranail\Confetti\Support\Assets;
+use Simtabi\Laranail\Confetti\Enums\AssetMode;
+use Simtabi\Laranail\Confetti\View\ConfettiTags;
 use Simtabi\Laranail\Confetti\Support\BootConfig;
+use Simtabi\Laranail\Confetti\Commands\DemoCommand;
+use Simtabi\Laranail\Confetti\Payload\PendingBursts;
+use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
+use Simtabi\Laranail\Confetti\Commands\DoctorCommand;
+use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Confetti\Support\EffectRegistry;
+use Simtabi\Laranail\Confetti\Commands\InstallCommand;
 use Simtabi\Laranail\Confetti\Transport\TransportManager;
-use Simtabi\Laranail\Confetti\View\ConfettiTags;
-use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
-use Simtabi\Laranail\Package\Tools\Package;
+use Simtabi\Laranail\Confetti\Http\Middleware\InjectConfetti;
 use Simtabi\Laranail\Package\Tools\Providers\PackageServiceProvider;
+use Simtabi\Laranail\Confetti\Integrations\Filament\Providers\FilamentServiceProvider;
 
 /**
  * Registers the package.
@@ -54,31 +54,6 @@ final class ConfettiServiceProvider extends PackageServiceProvider
                 DoctorCommand::class,
             ])
             ->hasAboutSection('Confetti', fn (): array => $this->aboutSection());
-    }
-
-    /**
-     * The `php artisan about` summary.
-     *
-     * The three settings that decide whether confetti appears at all, and
-     * whether it is cheap, which is what someone reading `about` wants to
-     * know. `laranail::confetti.doctor` is the detailed version.
-     *
-     * @return array<string, string>
-     */
-    private function aboutSection(): array
-    {
-        $config = $this->app->make(ConfettiConfig::class);
-        $assets = $this->app->make(Assets::class);
-
-        return [
-            'Enabled' => $config->enabled ? 'yes' : 'no',
-            'Transport' => $config->transport->value,
-            'Asset delivery' => $config->assetMode->value,
-            'Bundle' => $assets->exists() ? $assets->hash() : 'NOT BUILT',
-            'Preset expansion' => $config->expansion->value,
-            'Reduced motion' => $config->reducedMotion->value,
-            'Auto-inject' => $config->injectValue('auto', false) ? 'yes' : 'no',
-        ];
     }
 
     public function packageRegistered(): void
@@ -148,6 +123,31 @@ final class ConfettiServiceProvider extends PackageServiceProvider
 
         $this->registerAssetRoute($config);
         $this->registerMiddleware($config);
+    }
+
+    /**
+     * The `php artisan about` summary.
+     *
+     * The three settings that decide whether confetti appears at all, and
+     * whether it is cheap, which is what someone reading `about` wants to
+     * know. `laranail::confetti.doctor` is the detailed version.
+     *
+     * @return array<string, string>
+     */
+    private function aboutSection(): array
+    {
+        $config = $this->app->make(ConfettiConfig::class);
+        $assets = $this->app->make(Assets::class);
+
+        return [
+            'Enabled'          => $config->enabled ? 'yes' : 'no',
+            'Transport'        => $config->transport->value,
+            'Asset delivery'   => $config->assetMode->value,
+            'Bundle'           => $assets->exists() ? $assets->hash() : 'NOT BUILT',
+            'Preset expansion' => $config->expansion->value,
+            'Reduced motion'   => $config->reducedMotion->value,
+            'Auto-inject'      => $config->injectValue('auto', false) ? 'yes' : 'no',
+        ];
     }
 
     /**

@@ -26,15 +26,6 @@ final readonly class Burst implements JsonSerializable
         public int $delay = 0,
     ) {}
 
-    /** @return array{delay: int, options: array<string, mixed>} */
-    public function toArray(): array
-    {
-        return [
-            'delay' => $this->delay,
-            'options' => $this->options,
-        ];
-    }
-
     /** @param array{delay?: int, options?: array<string, mixed>} $data */
     public static function fromArray(array $data): self
     {
@@ -42,6 +33,15 @@ final readonly class Burst implements JsonSerializable
             options: $data['options'] ?? [],
             delay: (int) ($data['delay'] ?? 0),
         );
+    }
+
+    /** @return array{delay: int, options: array<string, mixed>} */
+    public function toArray(): array
+    {
+        return [
+            'delay'   => $this->delay,
+            'options' => $this->options,
+        ];
     }
 
     public function jsonSerialize(): array

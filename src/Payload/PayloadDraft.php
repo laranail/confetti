@@ -57,6 +57,7 @@ final class PayloadDraft
      * Resolve every burst, merging the shared options into the partial ones.
      *
      * @param array<string, mixed> $base
+     *
      * @return list<Burst>
      */
     public function bursts(array $base = []): array
@@ -77,6 +78,7 @@ final class PayloadDraft
      * whichever side of the preset call it lands on.
      *
      * @param array<string, mixed> $base
+     *
      * @return list<Animation>
      */
     public function animations(array $base = []): array

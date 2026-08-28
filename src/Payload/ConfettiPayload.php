@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Payload;
 
-use Illuminate\Support\Str;
 use JsonSerializable;
+use Illuminate\Support\Str;
 use Simtabi\Laranail\Confetti\Support\Json;
 
 /**
@@ -75,6 +75,24 @@ final readonly class ConfettiPayload implements JsonSerializable
         return new self([], [], self::ACTION_RESET, $id ?? (string) Str::ulid());
     }
 
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
+    {
+        /** @var list<array{delay?: int, options?: array<string, mixed>}> $bursts */
+        $bursts = is_array($data['bursts'] ?? null) ? $data['bursts'] : [];
+
+        /** @var list<array{animation: string}> $animations */
+        $animations = is_array($data['animations'] ?? null) ? $data['animations'] : [];
+
+        return new self(
+            bursts: array_map(Burst::fromArray(...), array_values($bursts)),
+            animations: array_map(Animation::fromArray(...), array_values($animations)),
+            action: is_string($data['action'] ?? null) ? $data['action'] : self::ACTION_FIRE,
+            id: is_string($data['id'] ?? null) ? $data['id'] : null,
+            reducedMotion: is_string($data['reducedMotion'] ?? null) ? $data['reducedMotion'] : null,
+        );
+    }
+
     /**
      * Fold another payload into this one.
      *
@@ -115,10 +133,10 @@ final readonly class ConfettiPayload implements JsonSerializable
     public function toArray(): array
     {
         $payload = [
-            'v' => self::VERSION,
-            'id' => $this->id,
-            'action' => $this->action,
-            'bursts' => array_map(static fn (Burst $b): array => $b->toArray(), $this->bursts),
+            'v'          => self::VERSION,
+            'id'         => $this->id,
+            'action'     => $this->action,
+            'bursts'     => array_map(static fn (Burst $b): array => $b->toArray(), $this->bursts),
             'animations' => array_map(static fn (Animation $a): array => $a->toArray(), $this->animations),
         ];
 
@@ -127,24 +145,6 @@ final readonly class ConfettiPayload implements JsonSerializable
         }
 
         return $payload;
-    }
-
-    /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
-    {
-        /** @var list<array{delay?: int, options?: array<string, mixed>}> $bursts */
-        $bursts = is_array($data['bursts'] ?? null) ? $data['bursts'] : [];
-
-        /** @var list<array{animation: string}> $animations */
-        $animations = is_array($data['animations'] ?? null) ? $data['animations'] : [];
-
-        return new self(
-            bursts: array_map(Burst::fromArray(...), array_values($bursts)),
-            animations: array_map(Animation::fromArray(...), array_values($animations)),
-            action: is_string($data['action'] ?? null) ? $data['action'] : self::ACTION_FIRE,
-            id: is_string($data['id'] ?? null) ? $data['id'] : null,
-            reducedMotion: is_string($data['reducedMotion'] ?? null) ? $data['reducedMotion'] : null,
-        );
     }
 
     public function toJson(): string

@@ -42,6 +42,7 @@ final class ShapeValidator
      * ignored and the shape draws untransformed.
      *
      * @param list<mixed>|null $matrix
+     *
      * @return list<float>|null
      *
      * @throws InvalidShape

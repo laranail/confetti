@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Enums;
 
-use Simtabi\Laranail\Enumerator\Attributes\Description;
 use Simtabi\Laranail\Enumerator\Attributes\Help;
 use Simtabi\Laranail\Enumerator\Attributes\Label;
-use Simtabi\Laranail\Enumerator\Concerns\HasEnumeratorBehavior;
 use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
+use Simtabi\Laranail\Enumerator\Attributes\Description;
+use Simtabi\Laranail\Enumerator\Concerns\HasEnumeratorBehavior;
 
 /**
  * How the browser bundle reaches the page.

@@ -142,7 +142,7 @@ final readonly class ConfettiFake
                 return sprintf(
                     '%d burst(s)%s',
                     $payload->burstCount(),
-                    $animations === [] ? '' : ' + '.implode('/', $animations),
+                    $animations === [] ? '' : ' + ' . implode('/', $animations),
                 );
             },
             $payloads,
