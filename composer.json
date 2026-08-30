@@ -93,7 +93,7 @@
             "@rector",
             "@greps"
         ],
-        "audit": "@composer audit",
+        "composer-audit": "@composer audit",
         "format": "@pint-fix"
     },
     "repositories": [
