@@ -2,12 +2,17 @@
 
 ## Reporting a vulnerability
 
-Report security issues privately to **opensource@simtabi.com**. Do not open a
+Report security issues privately to **security@simtabi.com**. Do not open a
 public issue for a suspected vulnerability.
 
 Include the affected version, a description of the issue and, where you can,
 a minimal reproduction. You can expect an acknowledgement within three working
 days and a substantive reply within ten.
+
+> **Prefer GitHub private vulnerability reporting** when you can: open it from this
+> repository's Security tab. The report arrives attached to the repo with a draft advisory
+> and a CVE request path already in place. Email is the fallback for anyone who would
+> rather not use GitHub.
 
 ## Supported versions
 
