@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Illuminate\Routing\Redirector;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
 use Simtabi\Laranail\Confetti\Support\BootConfig;
-use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
 
 beforeEach(function (): void {
     Route::middleware(['web', 'laranail-confetti'])->group(function (): void {
@@ -19,16 +19,16 @@ beforeEach(function (): void {
 
         // A page that already carries the component.
         Route::get('/explicit', fn (): string => '<html><body>'
-            . view('laranail-confetti::components.scripts', [
-                'enabled'   => true,
-                'bootJson'  => app(BootConfig::class)->toJson(),
+            .view('laranail-confetti::components.scripts', [
+                'enabled' => true,
+                'bootJson' => app(BootConfig::class)->toJson(),
                 'scriptTag' => app(ScriptTagBuilder::class)->render(),
             ])->render()
-            . '</body></html>');
+            .'</body></html>');
 
         // A page whose own content mentions the closing tag.
         Route::get('/mentions-body', fn (): string => '<html><body><code>&lt;/body&gt;</code>'
-            . "<script>var s = '</body>'</script></body></html>");
+            ."<script>var s = '</body>'</script></body></html>");
     });
 });
 

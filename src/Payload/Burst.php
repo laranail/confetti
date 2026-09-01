@@ -39,7 +39,7 @@ final readonly class Burst implements JsonSerializable
     public function toArray(): array
     {
         return [
-            'delay'   => $this->delay,
+            'delay' => $this->delay,
             'options' => $this->options,
         ];
     }

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Builder\Concerns;
 
-use Simtabi\Laranail\Confetti\Support\Json;
-use Simtabi\Laranail\Confetti\Support\Seed;
-use Simtabi\Laranail\Confetti\Payload\Burst;
+use Simtabi\Laranail\Confetti\Contracts\ExpandableAnimation;
 use Simtabi\Laranail\Confetti\Contracts\Shape;
-use Simtabi\Laranail\Confetti\Payload\Animation;
 use Simtabi\Laranail\Confetti\Enums\PresetExpansion;
 use Simtabi\Laranail\Confetti\Enums\TransportDriver;
+use Simtabi\Laranail\Confetti\Payload\Animation;
+use Simtabi\Laranail\Confetti\Payload\Burst;
 use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 use Simtabi\Laranail\Confetti\Payload\Shapes\TextShape;
-use Simtabi\Laranail\Confetti\Contracts\ExpandableAnimation;
+use Simtabi\Laranail\Confetti\Support\Json;
+use Simtabi\Laranail\Confetti\Support\Seed;
 
 /**
  * Committing bursts and sending the result.
@@ -176,7 +176,7 @@ trait DispatchesConfetti
             ...$payload->toArray(),
             'bursts' => array_map(
                 static fn (Burst $burst): array => [
-                    'delay'   => $burst->delay,
+                    'delay' => $burst->delay,
                     'options' => [...$defaults, ...$burst->options],
                 ],
                 $payload->bursts,
@@ -247,8 +247,7 @@ trait DispatchesConfetti
      * Idempotent: a shape already reduced to its wire form passes straight
      * through, so bursts can be serialised after being merged.
      *
-     * @param array<string, mixed> $options
-     *
+     * @param  array<string, mixed>  $options
      * @return array<string, mixed>
      */
     private function serialiseOptions(array $options, ?float $scalar = null): array
@@ -284,8 +283,7 @@ trait DispatchesConfetti
     }
 
     /**
-     * @param list<Animation> $animations
-     *
+     * @param  list<Animation>  $animations
      * @return list<Burst>
      */
     private function expandAnimations(array $animations): array

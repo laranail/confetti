@@ -33,7 +33,7 @@ final class Assets
      * @var array<string, array{file: string, type: string}>
      */
     private const array FILES = [
-        self::IIFE   => ['file' => 'confetti.iife.js', 'type' => 'application/javascript'],
+        self::IIFE => ['file' => 'confetti.iife.js', 'type' => 'application/javascript'],
         self::MODULE => ['file' => 'confetti.esm.mjs', 'type' => 'text/javascript'],
     ];
 
@@ -46,7 +46,7 @@ final class Assets
 
     public static function default(): self
     {
-        return new self(dirname(__DIR__, 2) . '/resources/dist');
+        return new self(dirname(__DIR__, 2).'/resources/dist');
     }
 
     /** @return list<string> */
@@ -66,7 +66,7 @@ final class Assets
             return null;
         }
 
-        return $this->directory . '/' . self::FILES[$filename]['file'];
+        return $this->directory.'/'.self::FILES[$filename]['file'];
     }
 
     public function contentType(string $filename = self::IIFE): string
@@ -109,7 +109,7 @@ final class Assets
         $path = $this->path($filename);
 
         if ($path === null || ! is_file($path)) {
-            throw AssetNotBuilt::at($path ?? $this->directory . '/' . $filename);
+            throw AssetNotBuilt::at($path ?? $this->directory.'/'.$filename);
         }
 
         $contents = file_get_contents($path);

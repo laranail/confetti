@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Integrations\Filament\Providers;
 
-use Throwable;
 use Illuminate\Support\ServiceProvider;
-use Simtabi\Laranail\Confetti\View\ConfettiTags;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\View\ConfettiTags;
+use Throwable;
 
 /**
  * Powers the opt-in `integrations.filament.auto` mode.

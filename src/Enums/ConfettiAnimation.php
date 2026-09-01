@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Enums;
 
-use Simtabi\Laranail\Enumerator\Attributes\Meta;
-use Simtabi\Laranail\Enumerator\Attributes\Label;
-use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
 use Simtabi\Laranail\Enumerator\Attributes\Description;
+use Simtabi\Laranail\Enumerator\Attributes\Label;
+use Simtabi\Laranail\Enumerator\Attributes\Meta;
 use Simtabi\Laranail\Enumerator\Concerns\HasEnumeratorBehavior;
+use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
 
 /**
  * The continuous effects that run as a client-side animation loop rather than a

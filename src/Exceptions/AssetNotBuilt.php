@@ -20,8 +20,8 @@ final class AssetNotBuilt extends RuntimeException implements ConfettiException
     {
         return new self(
             "The confetti browser bundle is missing at {$path}. "
-            . 'It ships with the package, so this normally means an incomplete checkout. '
-            . 'run `npm install && npm run build` in the package directory to rebuild it.',
+            .'It ships with the package, so this normally means an incomplete checkout. '
+            .'run `npm install && npm run build` in the package directory to rebuild it.',
         );
     }
 }

@@ -49,8 +49,8 @@ it('rejects an unknown preset', function (): void {
 
 it('expands a continuous effect at a workable duration', function (): void {
     $this->artisan('laranail::confetti.demo', [
-        'preset'     => 'snow',
-        '--expand'   => true,
+        'preset' => 'snow',
+        '--expand' => true,
         '--duration' => 3000,
     ])->expectsOutputToContain('Bursts')->assertSuccessful();
 });

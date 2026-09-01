@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 use Simtabi\Laranail\Confetti\Support\Assets;
-use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
 
 /**
  * Every delivery mode is exercised, because the failure this guards against is

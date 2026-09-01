@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Simtabi\Laranail\Confetti\Commands;
 
 use Simtabi\Laranail\Confetti\Confetti;
-use Simtabi\Laranail\Confetti\Support\Json;
 use Simtabi\Laranail\Confetti\Enums\ConfettiPreset;
-use Simtabi\Laranail\Console\Tools\Commands\Command;
 use Simtabi\Laranail\Confetti\Exceptions\ConfettiException;
+use Simtabi\Laranail\Confetti\Support\Json;
+use Simtabi\Laranail\Console\Tools\Commands\Command;
 use Simtabi\Laranail\Console\Tools\Commands\Concerns\SupportsNamespacedNames;
 
 /**
@@ -40,7 +40,7 @@ final class DemoCommand extends Command
 
         if (! $confetti->presets()->has($preset)) {
             $this->error("Unknown preset '{$preset}'.");
-            $this->line('  Available: ' . implode(', ', $confetti->presets()->names()));
+            $this->line('  Available: '.implode(', ', $confetti->presets()->names()));
 
             return self::FAILURE;
         }
@@ -61,7 +61,7 @@ final class DemoCommand extends Command
             // ceiling by design. The exception explains why, and a stack trace
             // adds nothing to it.
             $this->newLine();
-            $this->line('  <fg=red>' . $e->getMessage() . '</>');
+            $this->line('  <fg=red>'.$e->getMessage().'</>');
             $this->newLine();
             $this->line('  Try a shorter duration, for example:');
             $this->line("      <fg=cyan>laranail::confetti.demo {$preset} --expand --duration=3000</>");
@@ -121,6 +121,6 @@ final class DemoCommand extends Command
 
     private function humanBytes(int $bytes): string
     {
-        return $bytes < 1024 ? $bytes . ' B' : round($bytes / 1024, 1) . ' KB';
+        return $bytes < 1024 ? $bytes.' B' : round($bytes / 1024, 1).' KB';
     }
 }

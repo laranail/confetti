@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Presets;
 
-use Simtabi\Laranail\Confetti\Contracts\Preset;
 use Simtabi\Laranail\Confetti\Builder\OptionStack;
+use Simtabi\Laranail\Confetti\Contracts\Preset;
 use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
 use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
 use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
@@ -34,25 +34,25 @@ final readonly class StarsPreset implements Preset
     public function apply(OptionStack $stack, PayloadDraft $draft): void
     {
         $stack->setPresetMany([
-            'spread'        => 360.0,
-            'ticks'         => 50,
-            'gravity'       => 0.0,
-            'decay'         => 0.94,
+            'spread' => 360.0,
+            'ticks' => 50,
+            'gravity' => 0.0,
+            'decay' => 0.94,
             'startVelocity' => 30.0,
-            'colors'        => ['#ffe400', '#ffbd00', '#e89400', '#ffca6c', '#fdffb8'],
+            'colors' => ['#ffe400', '#ffbd00', '#e89400', '#ffca6c', '#fdffb8'],
         ]);
 
         foreach (self::VOLLEYS as $delay) {
             $draft->addPresetBurst([
                 'particleCount' => 40,
-                'scalar'        => 1.2,
-                'shapes'        => [BuiltInShape::of(ConfettiShape::Star)],
+                'scalar' => 1.2,
+                'shapes' => [BuiltInShape::of(ConfettiShape::Star)],
             ], $delay);
 
             $draft->addPresetBurst([
                 'particleCount' => 10,
-                'scalar'        => 0.75,
-                'shapes'        => [BuiltInShape::of(ConfettiShape::Circle)],
+                'scalar' => 0.75,
+                'shapes' => [BuiltInShape::of(ConfettiShape::Circle)],
             ], $delay);
         }
     }

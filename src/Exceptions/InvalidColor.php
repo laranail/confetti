@@ -23,8 +23,8 @@ final class InvalidColor extends InvalidArgumentException implements ConfettiExc
 
         return new self(
             "Confetti colours must be hex strings such as '#26ccff' or '#fff', got {$shown}. "
-            . 'canvas-confetti strips non-hex characters rather than failing, so a CSS colour name '
-            . 'or an rgb() value would render as an arbitrary colour instead of raising an error.',
+            .'canvas-confetti strips non-hex characters rather than failing, so a CSS colour name '
+            .'or an rgb() value would render as an arbitrary colour instead of raising an error.',
         );
     }
 
@@ -32,13 +32,13 @@ final class InvalidColor extends InvalidArgumentException implements ConfettiExc
     {
         return new self(
             'A confetti palette needs at least one colour. '
-            . 'Pass hex strings to colors(), or omit the call to use the configured default palette.',
+            .'Pass hex strings to colors(), or omit the call to use the configured default palette.',
         );
     }
 
     public static function unknownPalette(string $name, array $available): self
     {
-        $list = $available === [] ? 'none are configured' : "'" . implode("', '", $available) . "'";
+        $list = $available === [] ? 'none are configured' : "'".implode("', '", $available)."'";
 
         return new self("Unknown confetti palette '{$name}'. Available palettes: {$list}.");
     }

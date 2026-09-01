@@ -41,7 +41,7 @@ final class PayloadDraft
     /**
      * Add a burst holding only its own overrides.
      *
-     * @param array<string, mixed> $overrides
+     * @param  array<string, mixed>  $overrides
      */
     public function addPresetBurst(array $overrides, int $delay = 0): void
     {
@@ -56,8 +56,7 @@ final class PayloadDraft
     /**
      * Resolve every burst, merging the shared options into the partial ones.
      *
-     * @param array<string, mixed> $base
-     *
+     * @param  array<string, mixed>  $base
      * @return list<Burst>
      */
     public function bursts(array $base = []): array
@@ -77,8 +76,7 @@ final class PayloadDraft
      * than into the descriptor, so a caller's `colors()` reaches the loop
      * whichever side of the preset call it lands on.
      *
-     * @param array<string, mixed> $base
-     *
+     * @param  array<string, mixed>  $base
      * @return list<Animation>
      */
     public function animations(array $base = []): array
@@ -141,7 +139,7 @@ final class PayloadDraft
     /**
      * Swap the animation descriptors for the bursts they expand to.
      *
-     * @param list<Burst> $bursts
+     * @param  list<Burst>  $bursts
      */
     public function replaceAnimationsWithBursts(array $bursts): void
     {

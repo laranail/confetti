@@ -16,10 +16,10 @@ final readonly class Limits
 {
     private const array DEFAULTS = [
         'max_particles' => 1000,
-        'max_ticks'     => 2000,
-        'max_delay'     => 60000,
-        'max_duration'  => 60000,
-        'max_bursts'    => 200,
+        'max_ticks' => 2000,
+        'max_delay' => 60000,
+        'max_duration' => 60000,
+        'max_bursts' => 200,
     ];
 
     public function __construct(
@@ -54,10 +54,10 @@ final readonly class Limits
     {
         return [
             'max_particles' => $this->maxParticles,
-            'max_ticks'     => $this->maxTicks,
-            'max_delay'     => $this->maxDelay,
-            'max_duration'  => $this->maxDuration,
-            'max_bursts'    => $this->maxBursts,
+            'max_ticks' => $this->maxTicks,
+            'max_delay' => $this->maxDelay,
+            'max_duration' => $this->maxDuration,
+            'max_bursts' => $this->maxBursts,
         ];
     }
 }

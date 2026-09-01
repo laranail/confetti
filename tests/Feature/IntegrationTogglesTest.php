@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use Simtabi\Laranail\Confetti\Confetti;
-use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
-use Simtabi\Laranail\Confetti\Transport\TransportManager;
 use Simtabi\Laranail\Confetti\Exceptions\TransportUnavailable;
 use Simtabi\Laranail\Confetti\Facades\Confetti as ConfettiFacade;
 use Simtabi\Laranail\Confetti\Integrations\Filament\Providers\FilamentServiceProvider;
+use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\Transport\TransportManager;
 
 /**
  * Every integration toggle must change something.

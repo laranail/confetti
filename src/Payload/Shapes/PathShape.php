@@ -31,8 +31,8 @@ final readonly class PathShape implements Shape
     public function toWire(): array
     {
         return [
-            'type'   => 'path',
-            'path'   => $this->path,
+            'type' => 'path',
+            'path' => $this->path,
             'matrix' => $this->matrix,
         ];
     }

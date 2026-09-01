@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Transport;
 
-use Throwable;
 use Illuminate\Contracts\Container\Container;
 use Simtabi\Laranail\Confetti\Contracts\Transport;
 use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
+use Throwable;
 
 /**
  * Dispatches a browser event from the Livewire component handling the request.

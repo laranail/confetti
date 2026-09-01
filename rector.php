@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Set\ValueObject\LevelSetList;
 use Rector\DeadCode\Rector\Cast\RecastingRemovalRector;
-use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
+use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
+use Rector\Set\ValueObject\LevelSetList;
 
 return RectorConfig::configure()
     ->withSkip([
@@ -30,13 +30,13 @@ return RectorConfig::configure()
         // calling it dynamically is that we do not assume that version is the
         // one running.
         RecastingRemovalRector::class => [
-            __DIR__ . '/src/Transport/LivewireTransport.php',
+            __DIR__.'/src/Transport/LivewireTransport.php',
         ],
     ])
     ->withPaths([
-        __DIR__ . '/config',
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
+        __DIR__.'/config',
+        __DIR__.'/src',
+        __DIR__.'/tests',
     ])
     // The floor is ^8.4.1, so the 8.4 idioms are safe to apply. No downgrade
     // set is needed here, unlike packages that still support 8.3.
