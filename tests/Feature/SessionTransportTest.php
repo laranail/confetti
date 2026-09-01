@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Illuminate\Routing\Redirector;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Contracts\View\Factory;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
 use Simtabi\Laranail\Confetti\Support\BootConfig;
 use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
@@ -76,8 +76,8 @@ it('carries the payload into the rendered boot block', function (): void {
     });
 
     Route::middleware('web')->get('/page', fn (): Factory|View => view('laranail-confetti::components.scripts', [
-        'enabled'   => true,
-        'bootJson'  => app(BootConfig::class)->toJson(),
+        'enabled' => true,
+        'bootJson' => app(BootConfig::class)->toJson(),
         'scriptTag' => app(ScriptTagBuilder::class)->render(),
     ]));
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
 use Simtabi\Laranail\Confetti\Support\EffectRegistry;
-use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
 
 /**
  * Every public builder method must do something observable.
@@ -38,40 +38,40 @@ function builderContract(): array
 
     return [
         // Particles
-        'count'         => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->count(37)],
-        'spread'        => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->spread(123)],
-        'angle'         => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->angle(37)],
+        'count' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->count(37)],
+        'spread' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->spread(123)],
+        'angle' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->angle(37)],
         'startVelocity' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->startVelocity(37)],
-        'decay'         => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->decay(0.37)],
-        'gravity'       => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->gravity(0.37)],
-        'drift'         => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->drift(0.37)],
-        'ticks'         => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->ticks(37)],
-        'scalar'        => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->scalar(1.37)],
-        'flat'          => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->flat()],
+        'decay' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->decay(0.37)],
+        'gravity' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->gravity(0.37)],
+        'drift' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->drift(0.37)],
+        'ticks' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->ticks(37)],
+        'scalar' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->scalar(1.37)],
+        'flat' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->flat()],
         // Not 100: that is the configured default, so it would be a legitimate
         // no-op on the wire and would test nothing.
         'zIndex' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->zIndex(37)],
         'option' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->option('customKey', 'v')],
 
         // Position
-        'origin'      => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->origin(0.37, 0.37)],
-        'originX'     => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->originX(0.37)],
-        'originY'     => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->originY(0.37)],
-        'position'    => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->position('top-left')],
-        'center'      => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->center()],
-        'top'         => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->top()],
-        'bottom'      => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->bottom()],
-        'left'        => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->left()],
-        'right'       => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->right()],
-        'topLeft'     => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->topLeft()],
-        'topRight'    => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->topRight()],
-        'bottomLeft'  => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->bottomLeft()],
+        'origin' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->origin(0.37, 0.37)],
+        'originX' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->originX(0.37)],
+        'originY' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->originY(0.37)],
+        'position' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->position('top-left')],
+        'center' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->center()],
+        'top' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->top()],
+        'bottom' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->bottom()],
+        'left' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->left()],
+        'right' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->right()],
+        'topLeft' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->topLeft()],
+        'topRight' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->topRight()],
+        'bottomLeft' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->bottomLeft()],
         'bottomRight' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->bottomRight()],
 
         // Appearance
-        'colors'        => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->colors('#123456')],
-        'palette'       => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->palette('gold')],
-        'shapes'        => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->shapes('star')],
+        'colors' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->colors('#123456')],
+        'palette' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->palette('gold')],
+        'shapes' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->shapes('star')],
         'shapeFromPath' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->shapeFromPath('M0 0 L1 1z')],
         'shapeFromText' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->shapeFromText('!')],
 
@@ -91,19 +91,19 @@ function builderContract(): array
 
         // Accessibility
         'disableForReducedMotion' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->disableForReducedMotion()],
-        'reducedMotion'           => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->reducedMotion('skip')],
-        'skipForReducedMotion'    => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->skipForReducedMotion()],
+        'reducedMotion' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->reducedMotion('skip')],
+        'skipForReducedMotion' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->skipForReducedMotion()],
 
         // Presets
-        'preset'      => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->preset('success')],
-        'stars'       => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->stars()],
-        'success'     => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->success()],
-        'magic'       => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->magic()],
-        'rain'        => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->rain()],
-        'realistic'   => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->realistic()],
-        'emoji'       => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->emoji('!')],
-        'fireworks'   => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->fireworks()],
-        'snow'        => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->snow()],
+        'preset' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->preset('success')],
+        'stars' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->stars()],
+        'success' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->success()],
+        'magic' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->magic()],
+        'rain' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->rain()],
+        'realistic' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->realistic()],
+        'emoji' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->emoji('!')],
+        'fireworks' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->fireworks()],
+        'snow' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->snow()],
         'schoolPride' => [$same, fn (ConfettiBuilder $b): ConfettiBuilder => $b->schoolPride()],
 
         // Composition
@@ -137,14 +137,14 @@ function builderContract(): array
 function builderExemptions(): array
 {
     return [
-        'shoot'               => 'Sends the payload; it does not describe it.',
-        'via'                 => 'Chooses a transport. Covered by TransportResolutionTest.',
-        'toPayload'           => 'Inspection.',
-        'toArray'             => 'Inspection.',
-        'toResolvedArray'     => 'Inspection.',
-        'toJson'              => 'Inspection.',
-        'resolvedOptions'     => 'Inspection.',
-        'config'              => 'Accessor.',
+        'shoot' => 'Sends the payload; it does not describe it.',
+        'via' => 'Chooses a transport. Covered by TransportResolutionTest.',
+        'toPayload' => 'Inspection.',
+        'toArray' => 'Inspection.',
+        'toResolvedArray' => 'Inspection.',
+        'toJson' => 'Inspection.',
+        'resolvedOptions' => 'Inspection.',
+        'config' => 'Accessor.',
         'reducedMotionPolicy' => 'Accessor.',
     ];
 }
@@ -167,7 +167,7 @@ it('covers every public builder method', function (): void {
 
     expect($unclassified)->toBe([], sprintf(
         'Unclassified builder method(s): %s. Add each to builderContract() with a case '
-        . 'proving it changes the payload, or to builderExemptions() with a reason.',
+        .'proving it changes the payload, or to builderExemptions() with a reason.',
         implode(', ', $unclassified),
     ));
 
@@ -218,8 +218,8 @@ it('keeps the effect allowlist in step with the builder', function (): void {
 
     expect($missing)->toBe([], sprintf(
         'Builder method(s) that configure an effect but cannot be used from config: %s. '
-        . 'Add them to EffectRegistry::CONFIGURATION_METHODS, or to the exclusion list here '
-        . 'if they belong at the call site.',
+        .'Add them to EffectRegistry::CONFIGURATION_METHODS, or to the exclusion list here '
+        .'if they belong at the call site.',
         implode(', ', $missing),
     ));
 });

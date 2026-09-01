@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Support;
 
-use Throwable;
 use Illuminate\Contracts\Container\Container;
 use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
+use Throwable;
 
 /**
  * Everything the browser runtime needs, assembled once per page.
@@ -31,17 +31,17 @@ final readonly class BootConfig
     public function toArray(): array
     {
         return [
-            'event'       => $this->config->event,
+            'event' => $this->config->event,
             'legacyEvent' => $this->config->legacyEvent,
-            'defaults'    => $this->serialisableDefaults(),
-            'runtime'     => [
-                'useWorker'               => (bool) $this->config->runtimeValue('use_worker', true),
-                'canvas'                  => $this->config->runtimeValue('canvas'),
-                'reducedMotion'           => $this->config->reducedMotion->value,
-                'pauseWhenHidden'         => (bool) $this->config->runtimeValue('pause_when_hidden', true),
+            'defaults' => $this->serialisableDefaults(),
+            'runtime' => [
+                'useWorker' => (bool) $this->config->runtimeValue('use_worker', true),
+                'canvas' => $this->config->runtimeValue('canvas'),
+                'reducedMotion' => $this->config->reducedMotion->value,
+                'pauseWhenHidden' => (bool) $this->config->runtimeValue('pause_when_hidden', true),
                 'maxConcurrentAnimations' => (int) $this->config->runtimeValue('max_concurrent_animations', 3),
-                'shapeCacheSize'          => (int) $this->config->runtimeValue('shape_cache_size', 32),
-                'debug'                   => (bool) $this->config->runtimeValue('debug', false),
+                'shapeCacheSize' => (int) $this->config->runtimeValue('shape_cache_size', 32),
+                'debug' => (bool) $this->config->runtimeValue('debug', false),
             ],
             'payload' => $this->pendingPayload(),
         ];

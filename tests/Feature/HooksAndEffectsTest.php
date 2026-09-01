@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Event;
-use Simtabi\Laranail\Confetti\Facades\Confetti;
-use Simtabi\Laranail\Confetti\View\ConfettiTags;
+use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
+use Simtabi\Laranail\Confetti\Confetti as ConfettiService;
 use Simtabi\Laranail\Confetti\Events\ConfettiFired;
+use Simtabi\Laranail\Confetti\Events\ConfettiPreparing;
+use Simtabi\Laranail\Confetti\Events\ConfettiRendered;
+use Simtabi\Laranail\Confetti\Exceptions\InvalidEffect;
+use Simtabi\Laranail\Confetti\Facades\Confetti;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Confetti\Support\EffectRegistry;
-use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
-use Simtabi\Laranail\Confetti\Events\ConfettiRendered;
-use Simtabi\Laranail\Confetti\Events\ConfettiPreparing;
-use Simtabi\Laranail\Confetti\Exceptions\InvalidEffect;
-use Simtabi\Laranail\Confetti\Confetti as ConfettiService;
+use Simtabi\Laranail\Confetti\View\ConfettiTags;
 
 afterEach(fn () => app(ConfettiService::class)->forgetHooks());
 

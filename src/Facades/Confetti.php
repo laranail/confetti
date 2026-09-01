@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Facades;
 
-use RuntimeException;
 use Illuminate\Support\Facades\Facade;
+use RuntimeException;
+use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
+use Simtabi\Laranail\Confetti\Confetti as ConfettiService;
 use Simtabi\Laranail\Confetti\Contracts\Shape;
-use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
-use Simtabi\Laranail\Confetti\Enums\ConfettiPreset;
-use Simtabi\Laranail\Confetti\Testing\ConfettiFake;
-use Simtabi\Laranail\Confetti\Enums\TransportDriver;
+use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
 use Simtabi\Laranail\Confetti\Enums\ConfettiPosition;
+use Simtabi\Laranail\Confetti\Enums\ConfettiPreset;
+use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
+use Simtabi\Laranail\Confetti\Enums\ReducedMotionPolicy;
+use Simtabi\Laranail\Confetti\Enums\TransportDriver;
+use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Confetti\Support\EffectRegistry;
-use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
-use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
-use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
-use Simtabi\Laranail\Confetti\Enums\ReducedMotionPolicy;
+use Simtabi\Laranail\Confetti\Testing\ConfettiFake;
 use Simtabi\Laranail\Confetti\Transport\TransportManager;
-use Simtabi\Laranail\Confetti\Confetti as ConfettiService;
 
 /**
  * @method static ConfettiBuilder make()

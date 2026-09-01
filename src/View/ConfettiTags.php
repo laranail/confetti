@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Simtabi\Laranail\Confetti\View;
 
 use Illuminate\Contracts\Events\Dispatcher;
+use Simtabi\Laranail\Confetti\Events\ConfettiRendered;
 use Simtabi\Laranail\Confetti\Support\BootConfig;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
-use Simtabi\Laranail\Confetti\Events\ConfettiRendered;
 
 /**
  * Renders the confetti markup.
@@ -71,8 +71,8 @@ final readonly class ConfettiTags
     public function data(): array
     {
         return [
-            'enabled'   => $this->config->enabled,
-            'bootJson'  => $this->boot->toJson(),
+            'enabled' => $this->config->enabled,
+            'bootJson' => $this->boot->toJson(),
             'scriptTag' => $this->tag->render(),
         ];
     }

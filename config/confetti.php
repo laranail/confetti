@@ -46,8 +46,8 @@ return [
     */
 
     'transport' => [
-        'driver'       => env('CONFETTI_TRANSPORT', 'auto'),
-        'session_key'  => env('CONFETTI_SESSION_KEY', 'laranail.confetti'),
+        'driver' => env('CONFETTI_TRANSPORT', 'auto'),
+        'session_key' => env('CONFETTI_SESSION_KEY', 'laranail.confetti'),
         'inertia_prop' => env('CONFETTI_INERTIA_PROP', 'confetti'),
     ],
 
@@ -68,13 +68,13 @@ return [
 
     'defaults' => [
         'particleCount' => env('CONFETTI_PARTICLE_COUNT', 150),
-        'spread'        => 70,
-        'ticks'         => 200,
-        'shapes'        => ['square', 'circle'],
-        'colors'        => [
+        'spread' => 70,
+        'ticks' => 200,
+        'shapes' => ['square', 'circle'],
+        'colors' => [
             '#26ccff', '#a25afd', '#ff5e7e', '#88ff5a', '#fcff42', '#ffa62d', '#ff36ff',
         ],
-        'zIndex'                  => 100,
+        'zIndex' => 100,
         'disableForReducedMotion' => false,
     ],
 
@@ -94,10 +94,10 @@ return [
     'palettes' => [
         'default' => null,
         'success' => ['#00ff00', '#32cd32', '#00ef10', '#adff2f', '#7cfc00'],
-        'magic'   => ['#a25afd', '#ff36ff', '#26ccff', '#ffffff'],
-        'gold'    => ['#ffe400', '#ffbd00', '#e89400', '#ffca6c', '#fdffb8'],
-        'snow'    => ['#ffffff'],
-        'pride'   => ['#bb0000', '#ffffff'],
+        'magic' => ['#a25afd', '#ff36ff', '#26ccff', '#ffffff'],
+        'gold' => ['#ffe400', '#ffbd00', '#e89400', '#ffca6c', '#fdffb8'],
+        'snow' => ['#ffffff'],
+        'pride' => ['#bb0000', '#ffffff'],
     ],
 
     /*
@@ -123,8 +123,8 @@ return [
 
     'presets' => [
         'expansion' => env('CONFETTI_PRESET_EXPANSION', 'client'),
-        'duration'  => env('CONFETTI_PRESET_DURATION', 15000),
-        'seed'      => env('CONFETTI_PRESET_SEED'),
+        'duration' => env('CONFETTI_PRESET_DURATION', 15000),
+        'seed' => env('CONFETTI_PRESET_SEED'),
     ],
 
     /*
@@ -153,19 +153,19 @@ return [
         ],
 
         'subtle' => [
-            'count'    => 40,
-            'spread'   => 45,
+            'count' => 40,
+            'spread' => 45,
             'position' => 'top',
-            'ticks'    => 120,
+            'ticks' => 120,
         ],
 
         'award' => [
-            'preset'  => 'stars',
+            'preset' => 'stars',
             'palette' => 'gold',
         ],
 
         'party' => [
-            'preset'   => 'schoolPride',
+            'preset' => 'schoolPride',
             'duration' => 6000,
         ],
 
@@ -199,14 +199,14 @@ return [
     */
 
     'assets' => [
-        'mode'          => env('CONFETTI_ASSETS', 'route'),
-        'route'         => env('CONFETTI_ASSETS_ROUTE', '/vendor/confetti'),
-        'middleware'    => [],
-        'cdn_url'       => env('CONFETTI_CDN_URL'),
+        'mode' => env('CONFETTI_ASSETS', 'route'),
+        'route' => env('CONFETTI_ASSETS_ROUTE', '/vendor/confetti'),
+        'middleware' => [],
+        'cdn_url' => env('CONFETTI_CDN_URL'),
         'cdn_integrity' => env('CONFETTI_CDN_INTEGRITY'),
-        'vite_entry'    => env('CONFETTI_VITE_ENTRY', 'resources/js/confetti.js'),
-        'version'       => env('CONFETTI_ASSETS_VERSION'),
-        'defer'         => true,
+        'vite_entry' => env('CONFETTI_VITE_ENTRY', 'resources/js/confetti.js'),
+        'version' => env('CONFETTI_ASSETS_VERSION'),
+        'defer' => true,
     ],
 
     /*
@@ -228,9 +228,9 @@ return [
     */
 
     'inject' => [
-        'auto'   => env('CONFETTI_AUTO_INJECT', false),
-        'group'  => env('CONFETTI_INJECT_GROUP', 'web'),
-        'only'   => [],
+        'auto' => env('CONFETTI_AUTO_INJECT', false),
+        'group' => env('CONFETTI_INJECT_GROUP', 'web'),
+        'only' => [],
         'except' => [
             'telescope*',
             'horizon*',
@@ -276,13 +276,13 @@ return [
     */
 
     'runtime' => [
-        'use_worker'                => env('CONFETTI_USE_WORKER', true),
-        'canvas'                    => env('CONFETTI_CANVAS'),
-        'reduced_motion'            => env('CONFETTI_REDUCED_MOTION', 'reduce'),
-        'pause_when_hidden'         => true,
+        'use_worker' => env('CONFETTI_USE_WORKER', true),
+        'canvas' => env('CONFETTI_CANVAS'),
+        'reduced_motion' => env('CONFETTI_REDUCED_MOTION', 'reduce'),
+        'pause_when_hidden' => true,
         'max_concurrent_animations' => 3,
-        'shape_cache_size'          => 32,
-        'debug'                     => env('CONFETTI_DEBUG', false),
+        'shape_cache_size' => 32,
+        'debug' => env('CONFETTI_DEBUG', false),
     ],
 
     /*
@@ -298,10 +298,10 @@ return [
 
     'limits' => [
         'max_particles' => 1000,
-        'max_ticks'     => 2000,
-        'max_delay'     => 60000,
-        'max_duration'  => 60000,
-        'max_bursts'    => 200,
+        'max_ticks' => 2000,
+        'max_delay' => 60000,
+        'max_duration' => 60000,
+        'max_bursts' => 200,
     ],
 
     /*
@@ -340,8 +340,8 @@ return [
 
         'filament' => [
             'enabled' => env('CONFETTI_FILAMENT', true),
-            'auto'    => false,
-            'hook'    => null,
+            'auto' => false,
+            'hook' => null,
         ],
 
         'livewire' => [

@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Builder;
 
-use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
-use Simtabi\Laranail\Confetti\Enums\PresetExpansion;
-use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
-use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
-use Simtabi\Laranail\Confetti\Enums\ReducedMotionPolicy;
-use Simtabi\Laranail\Confetti\Transport\TransportManager;
-use Simtabi\Laranail\Confetti\Validation\OptionValidator;
 use Simtabi\Laranail\Confetti\Builder\Concerns\AppliesPresets;
+use Simtabi\Laranail\Confetti\Builder\Concerns\ConfiguresAccessibility;
+use Simtabi\Laranail\Confetti\Builder\Concerns\ConfiguresAppearance;
 use Simtabi\Laranail\Confetti\Builder\Concerns\ConfiguresOrigin;
+use Simtabi\Laranail\Confetti\Builder\Concerns\ConfiguresParticles;
 use Simtabi\Laranail\Confetti\Builder\Concerns\ConfiguresTiming;
 use Simtabi\Laranail\Confetti\Builder\Concerns\DispatchesConfetti;
-use Simtabi\Laranail\Confetti\Builder\Concerns\ConfiguresParticles;
-use Simtabi\Laranail\Confetti\Builder\Concerns\ConfiguresAppearance;
-use Simtabi\Laranail\Confetti\Builder\Concerns\ConfiguresAccessibility;
+use Simtabi\Laranail\Confetti\Enums\PresetExpansion;
+use Simtabi\Laranail\Confetti\Enums\ReducedMotionPolicy;
+use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
+use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
+use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\Transport\TransportManager;
+use Simtabi\Laranail\Confetti\Validation\OptionValidator;
 
 /**
  * Describes a confetti effect and sends it.

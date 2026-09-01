@@ -7,8 +7,8 @@ namespace Simtabi\Laranail\Confetti\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Simtabi\Laranail\Confetti\View\ConfettiTags;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\View\ConfettiTags;
 use Symfony\Component\HttpFoundation\Response as BaseResponse;
 
 /**
@@ -69,7 +69,7 @@ final readonly class InjectConfetti
         $position = strripos($content, '</body>');
 
         if ($position === false) {
-            return $content . $markup;
+            return $content.$markup;
         }
 
         return substr_replace($content, $markup, $position, 0);

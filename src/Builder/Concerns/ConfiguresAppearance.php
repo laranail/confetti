@@ -6,11 +6,11 @@ namespace Simtabi\Laranail\Confetti\Builder\Concerns;
 
 use Simtabi\Laranail\Confetti\Contracts\Shape;
 use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
+use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
 use Simtabi\Laranail\Confetti\Payload\Shapes\PathShape;
 use Simtabi\Laranail\Confetti\Payload\Shapes\TextShape;
 use Simtabi\Laranail\Confetti\Validation\ColorValidator;
 use Simtabi\Laranail\Confetti\Validation\ShapeValidator;
-use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
 
 /**
  * What the particles look like.
@@ -28,7 +28,7 @@ trait ConfiguresAppearance
     /**
      * Set the palette. Accepts hex strings variadically or as a single array.
      *
-     * @param string|list<string> ...$colors
+     * @param  string|list<string>  ...$colors
      */
     public function colors(string|array ...$colors): static
     {
@@ -56,7 +56,7 @@ trait ConfiguresAppearance
     /**
      * Set the particle shapes.
      *
-     * @param ConfettiShape|Shape|string|list<ConfettiShape|Shape|string> ...$shapes
+     * @param  ConfettiShape|Shape|string|list<ConfettiShape|Shape|string>  ...$shapes
      */
     public function shapes(ConfettiShape|Shape|string|array ...$shapes): static
     {
@@ -99,7 +99,7 @@ trait ConfiguresAppearance
      * 1000x1000 grid in the browser, on the main thread, the first time the
      * shape is used. Compute it once and hard-code it.
      *
-     * @param list<float>|null $matrix Six numbers in DOMMatrix order.
+     * @param  list<float>|null  $matrix  Six numbers in DOMMatrix order.
      */
     public function shapeFromPath(string $path, ?array $matrix = null): static
     {

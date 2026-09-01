@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Transport;
 
-use Throwable;
 use Illuminate\Http\Request;
 use Simtabi\Laranail\Confetti\Contracts\Transport;
 use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
+use Throwable;
 
 /**
  * Shares the payload as a prop on the current Inertia response.

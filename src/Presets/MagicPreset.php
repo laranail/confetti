@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Presets;
 
-use Simtabi\Laranail\Confetti\Contracts\Preset;
 use Simtabi\Laranail\Confetti\Builder\OptionStack;
+use Simtabi\Laranail\Confetti\Contracts\Preset;
 use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
 use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
 use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;

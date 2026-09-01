@@ -6,8 +6,8 @@ namespace Simtabi\Laranail\Confetti\Transport;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Simtabi\Laranail\Confetti\Contracts\Transport;
-use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 use Simtabi\Laranail\Confetti\Events\ConfettiDiscarded;
+use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 
 /**
  * Drops the payload.

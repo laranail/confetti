@@ -213,9 +213,9 @@ final readonly class OptionValidator
     {
         Log::warning('laranail/confetti: clamped an out-of-range option.', [
             'option' => $option,
-            'given'  => $from,
-            'used'   => $to,
-            'hint'   => 'Set laranail.confetti.validation.strict to true to raise instead of clamping.',
+            'given' => $from,
+            'used' => $to,
+            'hint' => 'Set laranail.confetti.validation.strict to true to raise instead of clamping.',
         ]);
     }
 }

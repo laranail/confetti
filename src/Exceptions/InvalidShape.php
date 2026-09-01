@@ -24,8 +24,8 @@ final class InvalidShape extends InvalidArgumentException implements ConfettiExc
 
         return new self(
             "Unknown confetti shape {$shown}. canvas-confetti draws only '{$allowed}' natively "
-            . '; any other name renders as a square without warning. '
-            . 'For anything else use shapeFromPath() or shapeFromText().',
+            .'; any other name renders as a square without warning. '
+            .'For anything else use shapeFromPath() or shapeFromText().',
         );
     }
 
@@ -38,8 +38,8 @@ final class InvalidShape extends InvalidArgumentException implements ConfettiExc
     {
         return new self(
             "A shape matrix must be exactly 6 finite numbers in DOMMatrix order [a, b, c, d, e, f], got {$count}. "
-            . 'Pass null to let canvas-confetti compute one, but note it does so by sampling a 1000x1000 grid, '
-            . 'so it is worth computing once and hard-coding the result.',
+            .'Pass null to let canvas-confetti compute one, but note it does so by sampling a 1000x1000 grid, '
+            .'so it is worth computing once and hard-coding the result.',
         );
     }
 

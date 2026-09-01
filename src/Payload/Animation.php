@@ -25,8 +25,8 @@ use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
 final readonly class Animation implements JsonSerializable
 {
     /**
-     * @param array<string, mixed> $options
-     * @param array<string, mixed> $params
+     * @param  array<string, mixed>  $options
+     * @param  array<string, mixed>  $params
      */
     public function __construct(
         public ConfettiAnimation $animation,
@@ -36,8 +36,8 @@ final readonly class Animation implements JsonSerializable
     ) {}
 
     /**
-     * @param array<string, mixed> $options
-     * @param array<string, mixed> $params
+     * @param  array<string, mixed>  $options
+     * @param  array<string, mixed>  $params
      */
     public static function make(
         ConfettiAnimation $animation,
@@ -82,9 +82,9 @@ final readonly class Animation implements JsonSerializable
     {
         return [
             'animation' => $this->animation->value,
-            'duration'  => $this->duration,
-            'options'   => $this->options,
-            'params'    => $this->params,
+            'duration' => $this->duration,
+            'options' => $this->options,
+            'params' => $this->params,
         ];
     }
 

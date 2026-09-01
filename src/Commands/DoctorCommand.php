@@ -6,8 +6,8 @@ namespace Simtabi\Laranail\Confetti\Commands;
 
 use Simtabi\Laranail\Confetti\Doctor\Checks;
 use Simtabi\Laranail\Console\Tools\Commands\Command;
-use Simtabi\Laranail\Package\Tools\Services\Doctor\DoctorReporter;
 use Simtabi\Laranail\Console\Tools\Commands\Concerns\SupportsNamespacedNames;
+use Simtabi\Laranail\Package\Tools\Services\Doctor\DoctorReporter;
 
 /**
  * `laranail::confetti.doctor` reports the configuration that decides whether

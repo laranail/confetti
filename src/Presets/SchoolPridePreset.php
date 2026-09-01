@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Presets;
 
-use Simtabi\Laranail\Confetti\Support\Seed;
-use Simtabi\Laranail\Confetti\Payload\Burst;
-use Simtabi\Laranail\Confetti\Contracts\Preset;
-use Simtabi\Laranail\Confetti\Payload\Animation;
 use Simtabi\Laranail\Confetti\Builder\OptionStack;
-use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
-use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
 use Simtabi\Laranail\Confetti\Contracts\ExpandableAnimation;
+use Simtabi\Laranail\Confetti\Contracts\Preset;
+use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
+use Simtabi\Laranail\Confetti\Payload\Animation;
+use Simtabi\Laranail\Confetti\Payload\Burst;
+use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
+use Simtabi\Laranail\Confetti\Support\Seed;
 
 /**
  * Two jets firing inward from the left and right edges.
@@ -45,8 +45,8 @@ final readonly class SchoolPridePreset implements ExpandableAnimation, Preset
     {
         $stack->setPresetMany([
             'particleCount' => 2,
-            'spread'        => 55.0,
-            'colors'        => ['#bb0000', '#ffffff'],
+            'spread' => 55.0,
+            'colors' => ['#bb0000', '#ffffff'],
         ]);
 
         $draft->addAnimation(Animation::make(
@@ -71,7 +71,7 @@ final readonly class SchoolPridePreset implements ExpandableAnimation, Preset
         for ($elapsed = 0; $elapsed < $animation->duration; $elapsed += self::FRAME_MS) {
             foreach ($sides as $side) {
                 $bursts[] = new Burst([
-                    'angle'  => (float) $side['angle'],
+                    'angle' => (float) $side['angle'],
                     'origin' => $side['origin'],
                 ], $elapsed);
             }

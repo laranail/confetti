@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Simtabi\Laranail\Confetti;
 
 use Closure;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Events\Dispatcher;
+use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
 use Simtabi\Laranail\Confetti\Contracts\Preset;
 use Simtabi\Laranail\Confetti\Contracts\Transport;
-use Simtabi\Laranail\Confetti\Testing\ConfettiFake;
+use Simtabi\Laranail\Confetti\Events\ConfettiPreparing;
+use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 use Simtabi\Laranail\Confetti\Payload\PendingBursts;
 use Simtabi\Laranail\Confetti\Presets\PresetRegistry;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Confetti\Support\EffectRegistry;
-use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
-use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
-use Simtabi\Laranail\Confetti\Events\ConfettiPreparing;
+use Simtabi\Laranail\Confetti\Testing\ConfettiFake;
 use Simtabi\Laranail\Confetti\Transport\ArrayTransport;
 use Simtabi\Laranail\Confetti\Transport\TransportManager;
 use Simtabi\Laranail\Confetti\Validation\OptionValidator;
@@ -86,7 +86,7 @@ class Confetti
      * still wins. That is the useful order: a hook sets the house style and
      * individual calls override it.
      *
-     * @param callable(ConfettiBuilder): void $hook
+     * @param  callable(ConfettiBuilder): void  $hook
      */
     public function before(callable $hook): self
     {
@@ -183,7 +183,7 @@ class Confetti
     /**
      * Register a custom preset.
      *
-     * @param callable(mixed...): Preset $factory
+     * @param  callable(mixed...): Preset  $factory
      */
     public function registerPreset(string $name, callable $factory): self
     {
@@ -198,7 +198,7 @@ class Confetti
      * The config file is the usual home for these. This is for a package or a
      * provider shipping its own.
      *
-     * @param array<string, mixed> $definition
+     * @param  array<string, mixed>  $definition
      */
     public function registerEffect(string $name, array $definition): self
     {
@@ -210,7 +210,7 @@ class Confetti
     /**
      * Register a custom transport.
      *
-     * @param Closure(Container): Transport $factory
+     * @param  Closure(Container): Transport  $factory
      */
     public function extend(string $driver, Closure $factory): self
     {

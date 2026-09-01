@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Simtabi\Laranail\Confetti\Integrations\Filament;
 
 use Closure;
-use Filament\Panel;
 use Filament\Contracts\Plugin;
+use Filament\Panel;
 use Filament\View\PanelsRenderHook;
 use Simtabi\Laranail\Confetti\View\ConfettiTags;
 
