@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
-use Simtabi\Laranail\Confetti\Events\ConfettiRendered;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\Events\ConfettiRendered;
 
 /**
  * Every way confetti reaches a page, and the promise each one has to keep.
@@ -88,7 +88,7 @@ it('gives every renderer a source, and routes them all through viewData', functi
     $callers = [];
 
     foreach ((new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator(__DIR__.'/../../src'),
+        new RecursiveDirectoryIterator(__DIR__ . '/../../src'),
     )) as $file) {
         if ($file->getExtension() !== 'php') {
             continue;

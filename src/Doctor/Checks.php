@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Doctor;
 
-use Illuminate\Contracts\Container\Container;
+use Throwable;
 use Illuminate\Foundation\Vite;
-use Simtabi\Laranail\Confetti\Enums\AssetMode;
+use Illuminate\Contracts\Container\Container;
 use Simtabi\Laranail\Confetti\Support\Assets;
+use Simtabi\Laranail\Confetti\Enums\AssetMode;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
-use Simtabi\Laranail\Package\Tools\Services\Doctor\Checks\CallbackCheck;
 use Simtabi\Laranail\Package\Tools\Services\Doctor\DoctorCheck;
 use Simtabi\Laranail\Package\Tools\Services\Doctor\DoctorResult;
-use Throwable;
+use Simtabi\Laranail\Package\Tools\Services\Doctor\Checks\CallbackCheck;
 
 /**
  * Diagnostics for the things that fail quietly.
@@ -55,7 +55,7 @@ final readonly class Checks
                 static fn (): DoctorResult => match ($raw['status']) {
                     self::FAIL => DoctorResult::fail($raw['message']),
                     self::WARN => DoctorResult::warn($raw['message']),
-                    default => DoctorResult::pass($raw['message']),
+                    default    => DoctorResult::pass($raw['message']),
                 },
             ),
             $this->raw(),
@@ -83,7 +83,7 @@ final readonly class Checks
         if (! $this->assets->exists()) {
             return $this->result('Browser bundle', self::FAIL, sprintf(
                 'Missing at %s. It ships with the package, so this usually means an incomplete '
-                .'checkout. Run `npm install && npm run build` in the package directory.',
+                . 'checkout. Run `npm install && npm run build` in the package directory.',
                 $this->assets->directory(),
             ));
         }
@@ -114,12 +114,12 @@ final readonly class Checks
                     'Asset delivery',
                     self::FAIL,
                     'Mode is "published" but public/vendor/confetti/confetti.iife.js is missing. '
-                    .'Run `php artisan vendor:publish --tag=laranail::confetti-assets`.',
+                    . 'Run `php artisan vendor:publish --tag=laranail::confetti-assets`.',
                 ),
 
             AssetMode::Cdn => is_string($this->config->assetValue('cdn_url'))
                 && $this->config->assetValue('cdn_url') !== ''
-                    ? $this->result('Asset delivery', self::OK, 'Loading from '.$this->config->assetValue('cdn_url').'.')
+                    ? $this->result('Asset delivery', self::OK, 'Loading from ' . $this->config->assetValue('cdn_url') . '.')
                     : $this->result(
                         'Asset delivery',
                         self::FAIL,
@@ -132,7 +132,7 @@ final readonly class Checks
                 'Asset delivery',
                 self::WARN,
                 'Mode is "off": no script tag is emitted. The application must load the runtime itself, '
-                .'or nothing will fire.',
+                . 'or nothing will fire.',
             ),
         };
     }
@@ -170,8 +170,8 @@ final readonly class Checks
         if ((int) $zIndex !== 100) {
             return $this->result('Canvas', self::WARN, sprintf(
                 'runtime.canvas is set to "%s" and defaults.zIndex to %d. canvas-confetti ignores zIndex on a '
-                .'canvas it did not create, so the runtime applies the positioning and stacking itself. Check '
-                .'the element is not clipped by an ancestor.',
+                . 'canvas it did not create, so the runtime applies the positioning and stacking itself. Check '
+                . 'the element is not clipped by an ancestor.',
                 $canvas,
                 (int) $zIndex,
             ));
@@ -191,7 +191,7 @@ final readonly class Checks
             'Web worker',
             self::OK,
             'Enabled. The worker is built from a blob URL, so a strict Content-Security-Policy needs '
-            .'`worker-src blob:`. Without it canvas-confetti logs a warning and falls back to the main thread.',
+            . '`worker-src blob:`. Without it canvas-confetti logs a warning and falls back to the main thread.',
         );
     }
 
@@ -203,8 +203,8 @@ final readonly class Checks
                 'Preset expansion',
                 self::WARN,
                 'Set to "server": snow, fireworks and schoolPride are expanded into hundreds of bursts in PHP '
-                .'and shipped in full. Expect payloads in the hundreds of kilobytes, and identical randomness '
-                .'for every visitor. "client" is the default for a reason.',
+                . 'and shipped in full. Expect payloads in the hundreds of kilobytes, and identical randomness '
+                . 'for every visitor. "client" is the default for a reason.',
             );
         }
 
@@ -223,7 +223,7 @@ final readonly class Checks
         foreach ([
             'Livewire' => 'Livewire\\Livewire',
             'Filament' => 'Filament\\Facades\\Filament',
-            'Inertia' => 'Inertia\\Inertia',
+            'Inertia'  => 'Inertia\\Inertia',
         ] as $label => $class) {
             if (class_exists($class)) {
                 $detected[] = $label;
@@ -232,7 +232,7 @@ final readonly class Checks
 
         return $this->result('Detected stacks', self::OK, $detected === []
             ? 'None. The session transport will carry payloads across redirects.'
-            : implode(', ', $detected).'.');
+            : implode(', ', $detected) . '.');
     }
 
     /** @return array{name: string, status: string, message: string} */
@@ -244,7 +244,7 @@ final readonly class Checks
     private function humanBytes(int $bytes): string
     {
         return $bytes < 1024
-            ? $bytes.' B'
-            : round($bytes / 1024, 1).' KB';
+            ? $bytes . ' B'
+            : round($bytes / 1024, 1) . ' KB';
     }
 }

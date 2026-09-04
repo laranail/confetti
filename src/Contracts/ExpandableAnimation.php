@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Contracts;
 
-use Simtabi\Laranail\Confetti\Payload\Animation;
-use Simtabi\Laranail\Confetti\Payload\Burst;
 use Simtabi\Laranail\Confetti\Support\Seed;
+use Simtabi\Laranail\Confetti\Payload\Burst;
+use Simtabi\Laranail\Confetti\Payload\Animation;
 
 /**
  * A continuous effect that can also be walked out in PHP.

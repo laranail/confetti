@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Blade;
 
 /**
  * Every public name this package claims is prefixed with the org and the slug.
@@ -75,9 +75,9 @@ it('leaves no bare-prefixed names in the source', function (): void {
         "/aliasMiddleware\('(?!laranail-)/",
         "/hasBladeComponentNamespace\([^)]*'(?!laranail-)[\w-]+'\s*,?\s*\)/s",
     ] as $pattern) {
-        foreach (glob(__DIR__.'/../../src/Providers/*.php') ?: [] as $file) {
+        foreach (glob(__DIR__ . '/../../src/Providers/*.php') ?: [] as $file) {
             if (preg_match($pattern, (string) file_get_contents($file))) {
-                $offenders[] = basename($file).' matched '.$pattern;
+                $offenders[] = basename($file) . ' matched ' . $pattern;
             }
         }
     }

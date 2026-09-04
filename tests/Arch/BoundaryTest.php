@@ -26,7 +26,7 @@ $root = dirname(__DIR__, 2);
 $sources = static function () use ($root): array {
     $files = [];
 
-    $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root.'/src'));
+    $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root . '/src'));
 
     foreach ($iterator as $file) {
         if ($file->isFile() && $file->getExtension() === 'php') {
@@ -89,7 +89,7 @@ $referencing = static function (string $vendor, string ...$allowed) use ($root, 
             // Only the first segment matters: our own
             // Confetti\Integrations\Filament\... is not a Filament class.
             if (explode('\\', ltrim($token[1], '\\'))[0] === $vendor) {
-                $found[] = str_replace($root.'/', '', $path);
+                $found[] = str_replace($root . '/', '', $path);
 
                 break;
             }
@@ -113,7 +113,7 @@ $calling = static function (string $pattern, string ...$allowed) use ($root, $so
         }
 
         if (preg_match($pattern, $code($contents)) === 1) {
-            $found[] = str_replace($root.'/', '', $path);
+            $found[] = str_replace($root . '/', '', $path);
         }
     }
 
@@ -138,7 +138,7 @@ $missing = static function (string $pattern, string $within, string ...$exempt) 
         }
 
         if (preg_match($pattern, $contents) !== 1) {
-            $found[] = str_replace($root.'/', '', $path);
+            $found[] = str_replace($root . '/', '', $path);
         }
     }
 

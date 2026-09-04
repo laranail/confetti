@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Presets;
 
-use Simtabi\Laranail\Confetti\Builder\OptionStack;
-use Simtabi\Laranail\Confetti\Contracts\ExpandableAnimation;
-use Simtabi\Laranail\Confetti\Contracts\Preset;
-use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
-use Simtabi\Laranail\Confetti\Payload\Animation;
-use Simtabi\Laranail\Confetti\Payload\Burst;
-use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
 use Simtabi\Laranail\Confetti\Support\Seed;
+use Simtabi\Laranail\Confetti\Payload\Burst;
+use Simtabi\Laranail\Confetti\Contracts\Preset;
+use Simtabi\Laranail\Confetti\Payload\Animation;
+use Simtabi\Laranail\Confetti\Builder\OptionStack;
+use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
+use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
+use Simtabi\Laranail\Confetti\Contracts\ExpandableAnimation;
 
 /**
  * Bursts climbing the screen at intervals, thinning out as time runs down.
@@ -52,19 +52,19 @@ final readonly class FireworksPreset implements ExpandableAnimation, Preset
     {
         $stack->setPresetMany([
             'startVelocity' => 30.0,
-            'spread' => 360.0,
-            'ticks' => 60,
-            'zIndex' => 0,
+            'spread'        => 360.0,
+            'ticks'         => 60,
+            'zIndex'        => 0,
         ]);
 
         $draft->addAnimation(Animation::make(
             animation: ConfettiAnimation::Fireworks,
             duration: $this->duration,
             params: [
-                'interval' => self::INTERVAL,
+                'interval'      => self::INTERVAL,
                 'particleCount' => self::PARTICLE_COUNT,
-                'xRanges' => [[0.1, 0.3], [0.7, 0.9]],
-                'yRange' => [-0.2, 0.8],
+                'xRanges'       => [[0.1, 0.3], [0.7, 0.9]],
+                'yRange'        => [-0.2, 0.8],
             ],
         ));
     }
@@ -93,7 +93,7 @@ final readonly class FireworksPreset implements ExpandableAnimation, Preset
             foreach ($xRanges as [$min, $max]) {
                 $bursts[] = new Burst([
                     'particleCount' => $particleCount,
-                    'origin' => [
+                    'origin'        => [
                         'x' => $seed->betweenRounded($min, $max),
                         'y' => $seed->betweenRounded($yRange[0], $yRange[1]),
                     ],

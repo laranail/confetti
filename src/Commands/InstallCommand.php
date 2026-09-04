@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Simtabi\Laranail\Confetti\Commands;
 
 use Simtabi\Laranail\Confetti\Enums\AssetMode;
-use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Console\Tools\Commands\Command;
+use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Console\Tools\Commands\Concerns\SupportsNamespacedNames;
 
 /**
@@ -29,7 +29,7 @@ final class InstallCommand extends Command
     public function handle(ConfettiConfig $config): int
     {
         $this->callSilently('vendor:publish', array_filter([
-            '--tag' => 'laranail::confetti-config',
+            '--tag'   => 'laranail::confetti-config',
             '--force' => $this->option('force') ? true : null,
         ]));
 

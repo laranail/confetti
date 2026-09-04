@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
-use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Confetti\View\ConfettiTags;
+use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 
 /**
  * `<x-laranail-confetti::scripts />` is the integration point the README tells people to

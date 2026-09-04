@@ -18,7 +18,7 @@ final class InvalidPreset extends InvalidArgumentException implements ConfettiEx
 
         return new self(
             "Unknown confetti preset '{$name}'. Registered presets: '{$list}'. "
-            .'Register your own with Confetti::registerPreset().',
+            . 'Register your own with Confetti::registerPreset().',
         );
     }
 
@@ -34,8 +34,8 @@ final class InvalidPreset extends InvalidArgumentException implements ConfettiEx
 
         return new self(
             "Confetti preset '{$preset}' declares kind {$shown}, which is not one of "
-            ."'options', 'burst' or 'animation'. Fix the Meta attribute on that case "
-            .'in Enums\ConfettiPreset.',
+            . "'options', 'burst' or 'animation'. Fix the Meta attribute on that case "
+            . 'in Enums\ConfettiPreset.',
         );
     }
 }
