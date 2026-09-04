@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\AssertionFailedError;
-use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
+use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
 use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 
 beforeEach(fn () => Confetti::fake());

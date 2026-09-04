@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Simtabi\Laranail\Confetti\Exceptions\TransportUnavailable;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
-use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 use Simtabi\Laranail\Confetti\Support\BootConfig;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
-use Simtabi\Laranail\Confetti\Transport\LivewireTransport;
+use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 use Simtabi\Laranail\Confetti\Transport\TransportManager;
+use Simtabi\Laranail\Confetti\Transport\LivewireTransport;
+use Simtabi\Laranail\Confetti\Exceptions\TransportUnavailable;
 
 /**
  * Defects found by auditing the package against its own documentation, each of

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Payload;
 
-use Illuminate\Support\Str;
 use JsonSerializable;
+use Illuminate\Support\Str;
 use Simtabi\Laranail\Confetti\Support\Json;
 
 /**
@@ -40,9 +40,9 @@ final readonly class ConfettiPayload implements JsonSerializable
     public const string ACTION_RESET = 'reset';
 
     /**
-     * @param  list<Burst>  $bursts
-     * @param  list<Animation>  $animations
-     * @param  ?string  $reducedMotion  Per-effect override of the configured policy.
+     * @param list<Burst> $bursts
+     * @param list<Animation> $animations
+     * @param ?string $reducedMotion Per-effect override of the configured policy.
      */
     public function __construct(
         public array $bursts = [],
@@ -53,8 +53,8 @@ final readonly class ConfettiPayload implements JsonSerializable
     ) {}
 
     /**
-     * @param  list<Burst>  $bursts
-     * @param  list<Animation>  $animations
+     * @param list<Burst> $bursts
+     * @param list<Animation> $animations
      */
     public static function make(
         array $bursts = [],
@@ -133,10 +133,10 @@ final readonly class ConfettiPayload implements JsonSerializable
     public function toArray(): array
     {
         $payload = [
-            'v' => self::VERSION,
-            'id' => $this->id,
-            'action' => $this->action,
-            'bursts' => array_map(static fn (Burst $b): array => $b->toArray(), $this->bursts),
+            'v'          => self::VERSION,
+            'id'         => $this->id,
+            'action'     => $this->action,
+            'bursts'     => array_map(static fn (Burst $b): array => $b->toArray(), $this->bursts),
             'animations' => array_map(static fn (Animation $a): array => $a->toArray(), $this->animations),
         ];
 

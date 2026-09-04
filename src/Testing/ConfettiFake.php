@@ -38,7 +38,7 @@ final readonly class ConfettiFake
     /**
      * Assert confetti fired, optionally matching a predicate.
      *
-     * @param  null|callable(ConfettiPayload): bool  $callback
+     * @param null|callable(ConfettiPayload): bool $callback
      */
     public function assertFired(?callable $callback = null): void
     {
@@ -142,7 +142,7 @@ final readonly class ConfettiFake
                 return sprintf(
                     '%d burst(s)%s',
                     $payload->burstCount(),
-                    $animations === [] ? '' : ' + '.implode('/', $animations),
+                    $animations === [] ? '' : ' + ' . implode('/', $animations),
                 );
             },
             $payloads,

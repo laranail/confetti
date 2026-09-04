@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Event;
-use Simtabi\Laranail\Confetti\Contracts\Transport;
-use Simtabi\Laranail\Confetti\Events\ConfettiDiscarded;
-use Simtabi\Laranail\Confetti\Exceptions\TransportUnavailable;
+use Illuminate\Support\Facades\Artisan;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
+use Simtabi\Laranail\Confetti\Contracts\Transport;
 use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
-use Simtabi\Laranail\Confetti\Transport\LivewireTransport;
 use Simtabi\Laranail\Confetti\Transport\NullTransport;
+use Simtabi\Laranail\Confetti\Events\ConfettiDiscarded;
 use Simtabi\Laranail\Confetti\Transport\SessionTransport;
 use Simtabi\Laranail\Confetti\Transport\TransportManager;
+use Simtabi\Laranail\Confetti\Transport\LivewireTransport;
+use Simtabi\Laranail\Confetti\Exceptions\TransportUnavailable;
 
 it('discards the payload outside HTTP instead of throwing', function (): void {
     // The old implementation reached for session() unconditionally, so firing
