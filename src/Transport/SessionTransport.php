@@ -6,8 +6,8 @@ namespace Simtabi\Laranail\Confetti\Transport;
 
 use Illuminate\Contracts\Session\Session;
 use Simtabi\Laranail\Confetti\Contracts\Transport;
-use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 use Simtabi\Laranail\Confetti\Payload\PendingBursts;
+use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
 
 /**
  * Flashes the payload so it renders on the next response.

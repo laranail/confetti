@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-use Simtabi\Laranail\Confetti\Http\Controllers\AssetController;
 use Simtabi\Laranail\Confetti\Support\Assets;
+use Simtabi\Laranail\Confetti\Http\Controllers\AssetController;
 
 /**
  * The asset route, registered only when `assets.mode` is `route`.
@@ -20,7 +20,7 @@ $pattern = implode('|', array_map(
     Assets::filenames(),
 ));
 
-Route::get($prefix.'/{file}', AssetController::class)
+Route::get($prefix . '/{file}', AssetController::class)
     ->where('file', $pattern)
     ->middleware($middleware)
     ->name('laranail.confetti.asset');

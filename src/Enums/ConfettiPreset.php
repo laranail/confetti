@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Enums;
 
+use Simtabi\Laranail\Enumerator\Attributes\Meta;
+use Simtabi\Laranail\Enumerator\Attributes\Label;
+use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
 use Simtabi\Laranail\Confetti\Exceptions\InvalidPreset;
 use Simtabi\Laranail\Enumerator\Attributes\Description;
-use Simtabi\Laranail\Enumerator\Attributes\Label;
-use Simtabi\Laranail\Enumerator\Attributes\Meta;
 use Simtabi\Laranail\Enumerator\Concerns\HasEnumeratorBehavior;
-use Simtabi\Laranail\Enumerator\Contracts\Enumerator;
 
 /**
  * The ready-made effects the builder can apply.
@@ -50,9 +50,9 @@ enum ConfettiPreset: string implements Enumerator
 
         return match ($kind) {
             'animation' => 'animation',
-            'burst' => 'burst',
-            'options' => 'options',
-            default => throw InvalidPreset::unknownKind($this->value, $kind),
+            'burst'     => 'burst',
+            'options'   => 'options',
+            default     => throw InvalidPreset::unknownKind($this->value, $kind),
         };
     }
 

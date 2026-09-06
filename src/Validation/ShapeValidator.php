@@ -41,7 +41,8 @@ final class ShapeValidator
      * guards on `Array.isArray`, so anything but a plain array of six numbers is
      * ignored and the shape draws untransformed.
      *
-     * @param  list<mixed>|null  $matrix
+     * @param list<mixed>|null $matrix
+     *
      * @return list<float>|null
      *
      * @throws InvalidShape

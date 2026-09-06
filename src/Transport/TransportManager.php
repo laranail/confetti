@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Simtabi\Laranail\Confetti\Transport;
 
 use Closure;
-use Illuminate\Contracts\Container\Container;
-use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Contracts\Container\Container;
 use Simtabi\Laranail\Confetti\Contracts\Transport;
-use Simtabi\Laranail\Confetti\Enums\TransportDriver;
 use Simtabi\Laranail\Confetti\Events\ConfettiFired;
-use Simtabi\Laranail\Confetti\Exceptions\TransportUnavailable;
-use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
+use Simtabi\Laranail\Confetti\Enums\TransportDriver;
 use Simtabi\Laranail\Confetti\Payload\PendingBursts;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
+use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
+use Simtabi\Laranail\Confetti\Exceptions\TransportUnavailable;
 
 /**
  * Resolves which transport should carry a payload.
@@ -136,12 +136,12 @@ final class TransportManager
         }
 
         return match ($driver) {
-            TransportDriver::Session->value => $this->createSessionDriver(),
+            TransportDriver::Session->value  => $this->createSessionDriver(),
             TransportDriver::Livewire->value => $this->createLivewireDriver(),
-            TransportDriver::Inertia->value => $this->createInertiaDriver(),
-            TransportDriver::Array->value => new ArrayTransport,
-            TransportDriver::Null->value => new NullTransport($this->events),
-            default => throw TransportUnavailable::unknown(
+            TransportDriver::Inertia->value  => $this->createInertiaDriver(),
+            TransportDriver::Array->value    => new ArrayTransport,
+            TransportDriver::Null->value     => new NullTransport($this->events),
+            default                          => throw TransportUnavailable::unknown(
                 $driver,
                 [...array_map(static fn (TransportDriver $d): string => $d->value, TransportDriver::cases()),
                     ...array_keys($this->custom)],
@@ -192,10 +192,10 @@ final class TransportManager
     private function unavailableReason(string $driver): string
     {
         return match ($driver) {
-            TransportDriver::Session->value => 'no session has been started for this request',
+            TransportDriver::Session->value  => 'no session has been started for this request',
             TransportDriver::Livewire->value => 'this is not a Livewire request, or no component is handling it',
-            TransportDriver::Inertia->value => 'this is not an Inertia request, or the integration is disabled',
-            default => 'the driver reported itself unavailable',
+            TransportDriver::Inertia->value  => 'this is not an Inertia request, or the integration is disabled',
+            default                          => 'the driver reported itself unavailable',
         };
     }
 }

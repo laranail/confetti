@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Events;
 
-use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
 use Simtabi\Laranail\Confetti\Confetti;
+use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
 
 /**
  * Dispatched when a builder is created, before anything has been set on it.
