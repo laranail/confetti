@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Simtabi\Laranail\Confetti\Exceptions\InvalidOption;
+use Simtabi\Laranail\Confetti\Support\Json;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
 use Simtabi\Laranail\Confetti\Payload\ConfettiPayload;
-use Simtabi\Laranail\Confetti\Support\Json;
+use Simtabi\Laranail\Confetti\Exceptions\InvalidOption;
 
 describe('wire size', function (): void {
     it('sends a continuous effect as a descriptor, not hundreds of bursts', function (): void {

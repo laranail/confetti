@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Simtabi\Laranail\Confetti\Enums\ConfettiPosition;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
+use Simtabi\Laranail\Confetti\Enums\ConfettiPosition;
 
 it('sends only the options that differ from the defaults', function (): void {
     // The defaults travel once, in the boot payload. Repeating them in every
@@ -20,8 +20,8 @@ it('resolves the defaults for inspection', function (): void {
 
     expect($resolved['bursts'][0]['options'])->toMatchArray([
         'particleCount' => 50,
-        'spread' => 70,
-        'ticks' => 200,
+        'spread'        => 70,
+        'ticks'         => 200,
     ]);
 });
 
@@ -69,12 +69,12 @@ describe('then()', function (): void {
 describe('positions', function (): void {
     it('pairs each named position with an angle firing away from its edge', function (): void {
         $cases = [
-            'topLeft' => [['x' => 0.0, 'y' => 0.0], 315.0],
-            'topRight' => [['x' => 1.0, 'y' => 0.0], 225.0],
-            'bottomLeft' => [['x' => 0.0, 'y' => 1.0], 60.0],
+            'topLeft'     => [['x' => 0.0, 'y' => 0.0], 315.0],
+            'topRight'    => [['x' => 1.0, 'y' => 0.0], 225.0],
+            'bottomLeft'  => [['x' => 0.0, 'y' => 1.0], 60.0],
             'bottomRight' => [['x' => 1.0, 'y' => 1.0], 120.0],
-            'top' => [['x' => 0.5, 'y' => 0.0], 270.0],
-            'bottom' => [['x' => 0.5, 'y' => 1.0], 90.0],
+            'top'         => [['x' => 0.5, 'y' => 0.0], 270.0],
+            'bottom'      => [['x' => 0.5, 'y' => 1.0], 90.0],
         ];
 
         foreach ($cases as $method => [$origin, $angle]) {

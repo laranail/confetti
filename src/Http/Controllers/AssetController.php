@@ -32,13 +32,13 @@ final class AssetController
         if (! $assets->exists($file)) {
             return $this->missing(
                 'laranail/confetti: the browser bundle has not been built. '
-                .'Run `npm install && npm run build` in the package directory.',
+                . 'Run `npm install && npm run build` in the package directory.',
             );
         }
 
         $response = new Response($assets->contents($file), 200, [
-            'Content-Type' => $assets->contentType($file),
-            'Cache-Control' => 'public, max-age=31536000, immutable',
+            'Content-Type'           => $assets->contentType($file),
+            'Cache-Control'          => 'public, max-age=31536000, immutable',
             'X-Content-Type-Options' => 'nosniff',
         ]);
 
@@ -53,7 +53,7 @@ final class AssetController
         // A JavaScript comment, so a browser that loads this as a script sees
         // the explanation in the network panel rather than a parse error.
         return new Response("// {$message}\n", 404, [
-            'Content-Type' => 'application/javascript',
+            'Content-Type'  => 'application/javascript',
             'Cache-Control' => 'no-store',
         ]);
     }

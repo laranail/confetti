@@ -20,10 +20,10 @@ uses(TestCase::class)->in('Feature', 'Unit');
  * template compiled while it still was. CI never sees this, since its cache
  * starts empty, which is exactly what makes it a local-only trap.
  */
-$compiled = __DIR__.'/../vendor/orchestra/testbench-core/laravel/storage/framework/views';
+$compiled = __DIR__ . '/../vendor/orchestra/testbench-core/laravel/storage/framework/views';
 
 if (is_dir($compiled)) {
-    foreach (glob($compiled.'/*.php') ?: [] as $template) {
+    foreach (glob($compiled . '/*.php') ?: [] as $template) {
         @unlink($template);
     }
 }

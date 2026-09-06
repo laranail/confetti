@@ -23,7 +23,8 @@ final class ColorValidator
     private const string HEX = '/^#?(?:[0-9a-f]{3}|[0-9a-f]{6})$/i';
 
     /**
-     * @param  list<mixed>  $colors
+     * @param list<mixed> $colors
+     *
      * @return list<string>
      *
      * @throws InvalidColor
@@ -83,9 +84,9 @@ final class ColorValidator
         $digits = strtolower(ltrim($trimmed, '#'));
 
         if (strlen($digits) === 3) {
-            $digits = $digits[0].$digits[0].$digits[1].$digits[1].$digits[2].$digits[2];
+            $digits = $digits[0] . $digits[0] . $digits[1] . $digits[1] . $digits[2] . $digits[2];
         }
 
-        return '#'.$digits;
+        return '#' . $digits;
     }
 }

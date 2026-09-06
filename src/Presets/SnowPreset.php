@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Presets;
 
-use Simtabi\Laranail\Confetti\Builder\OptionStack;
-use Simtabi\Laranail\Confetti\Contracts\ExpandableAnimation;
-use Simtabi\Laranail\Confetti\Contracts\Preset;
-use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
-use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
-use Simtabi\Laranail\Confetti\Payload\Animation;
-use Simtabi\Laranail\Confetti\Payload\Burst;
-use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
-use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
 use Simtabi\Laranail\Confetti\Support\Seed;
+use Simtabi\Laranail\Confetti\Payload\Burst;
+use Simtabi\Laranail\Confetti\Contracts\Preset;
+use Simtabi\Laranail\Confetti\Payload\Animation;
+use Simtabi\Laranail\Confetti\Builder\OptionStack;
+use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
+use Simtabi\Laranail\Confetti\Payload\PayloadDraft;
+use Simtabi\Laranail\Confetti\Enums\ConfettiAnimation;
+use Simtabi\Laranail\Confetti\Payload\Shapes\BuiltInShape;
+use Simtabi\Laranail\Confetti\Contracts\ExpandableAnimation;
 
 /**
  * Single flakes drifting down, one per frame.
@@ -52,8 +52,8 @@ final readonly class SnowPreset implements ExpandableAnimation, Preset
         $stack->setPresetMany([
             'particleCount' => 1,
             'startVelocity' => 0.0,
-            'colors' => ['#ffffff'],
-            'shapes' => [BuiltInShape::of(ConfettiShape::Circle)],
+            'colors'        => ['#ffffff'],
+            'shapes'        => [BuiltInShape::of(ConfettiShape::Circle)],
         ]);
 
         $draft->addAnimation(Animation::make(
@@ -63,11 +63,11 @@ final readonly class SnowPreset implements ExpandableAnimation, Preset
                 'ticksMin' => 200,
                 'ticksMax' => 500,
                 'skewFrom' => 1.0,
-                'skewTo' => 0.8,
+                'skewTo'   => 0.8,
                 'skewStep' => 0.001,
-                'gravity' => [0.4, 0.6],
-                'scalar' => [0.4, 1.0],
-                'drift' => [-0.4, 0.4],
+                'gravity'  => [0.4, 0.6],
+                'scalar'   => [0.4, 1.0],
+                'drift'    => [-0.4, 0.4],
             ],
         ));
     }
@@ -97,14 +97,14 @@ final readonly class SnowPreset implements ExpandableAnimation, Preset
             $skew = max($skewTo, $skew - $skewStep);
 
             $bursts[] = new Burst([
-                'ticks' => max($ticksMin, (int) ($ticksMax * ($timeLeft / $duration))),
+                'ticks'  => max($ticksMin, (int) ($ticksMax * ($timeLeft / $duration))),
                 'origin' => [
                     'x' => $seed->betweenRounded(0.0, 1.0),
                     'y' => round($seed->float() * $skew - 0.2, 4),
                 ],
                 'gravity' => $seed->betweenRounded($gravity[0], $gravity[1], 3),
-                'scalar' => $seed->betweenRounded($scalar[0], $scalar[1], 3),
-                'drift' => $seed->betweenRounded($drift[0], $drift[1], 3),
+                'scalar'  => $seed->betweenRounded($scalar[0], $scalar[1], 3),
+                'drift'   => $seed->betweenRounded($drift[0], $drift[1], 3),
             ], $elapsed);
         }
 

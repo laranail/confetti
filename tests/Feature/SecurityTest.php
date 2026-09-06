@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
-use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
-use Simtabi\Laranail\Confetti\Exceptions\InvalidEffect;
+use Simtabi\Laranail\Confetti\Support\Json;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
+use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
 use Simtabi\Laranail\Confetti\Support\EffectRegistry;
-use Simtabi\Laranail\Confetti\Support\Json;
-use Simtabi\Laranail\Confetti\View\ScriptTagBuilder;
+use Simtabi\Laranail\Confetti\Builder\ConfettiBuilder;
+use Simtabi\Laranail\Confetti\Exceptions\InvalidEffect;
 
 /**
  * The security properties this package claims, asserted rather than assumed.
@@ -43,12 +43,12 @@ describe('effect definitions cannot reach control flow', function (): void {
 
     it('still allows everything that configures an effect', function (): void {
         $registry = new EffectRegistry(['probe' => [
-            'count' => 30,
-            'palette' => 'gold',
-            'position' => 'top-left',
-            'preset' => 'stars',
+            'count'         => 30,
+            'palette'       => 'gold',
+            'position'      => 'top-left',
+            'preset'        => 'stars',
             'reducedMotion' => 'skip',
-            'option' => ['custom', 'value'],
+            'option'        => ['custom', 'value'],
         ]]);
 
         expect(fn (): ConfettiBuilder => $registry->apply('probe', Confetti::make()))->not->toThrow(InvalidEffect::class);

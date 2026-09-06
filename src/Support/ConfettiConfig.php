@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Simtabi\Laranail\Confetti\Support;
 
 use Simtabi\Laranail\Confetti\Enums\AssetMode;
+use Simtabi\Laranail\Confetti\Validation\Limits;
 use Simtabi\Laranail\Confetti\Enums\PresetExpansion;
-use Simtabi\Laranail\Confetti\Enums\ReducedMotionPolicy;
 use Simtabi\Laranail\Confetti\Enums\TransportDriver;
 use Simtabi\Laranail\Confetti\Exceptions\InvalidColor;
+use Simtabi\Laranail\Confetti\Enums\ReducedMotionPolicy;
 use Simtabi\Laranail\Confetti\Validation\ColorValidator;
-use Simtabi\Laranail\Confetti\Validation\Limits;
 
 /**
  * A typed reading of `config('laranail.confetti')`.
@@ -24,12 +24,12 @@ use Simtabi\Laranail\Confetti\Validation\Limits;
 final readonly class ConfettiConfig
 {
     /**
-     * @param  array<string, mixed>  $defaults
-     * @param  array<string, list<string>>  $palettes
-     * @param  array<string, mixed>  $assets
-     * @param  array<string, mixed>  $inject
-     * @param  array<string, mixed>  $runtime
-     * @param  array<string, mixed>  $integrations
+     * @param array<string, mixed> $defaults
+     * @param array<string, list<string>> $palettes
+     * @param array<string, mixed> $assets
+     * @param array<string, mixed> $inject
+     * @param array<string, mixed> $runtime
+     * @param array<string, mixed> $integrations
      */
     public function __construct(
         public bool $enabled = true,
@@ -179,7 +179,8 @@ final readonly class ConfettiConfig
     }
 
     /**
-     * @param  array<string, mixed>  $config
+     * @param array<string, mixed> $config
+     *
      * @return array<string, mixed>
      */
     private static function section(array $config, string $key): array
@@ -190,7 +191,8 @@ final readonly class ConfettiConfig
     }
 
     /**
-     * @param  array<string, mixed>  $palettes
+     * @param array<string, mixed> $palettes
+     *
      * @return array<string, list<string>>
      */
     private static function normalisePalettes(array $palettes): array

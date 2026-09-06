@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
-use Simtabi\Laranail\Confetti\Exceptions\ConfettiException;
-use Simtabi\Laranail\Confetti\Exceptions\InvalidColor;
-use Simtabi\Laranail\Confetti\Exceptions\InvalidOption;
-use Simtabi\Laranail\Confetti\Exceptions\InvalidShape;
 use Simtabi\Laranail\Confetti\Facades\Confetti;
+use Simtabi\Laranail\Confetti\Enums\ConfettiShape;
+use Simtabi\Laranail\Confetti\Exceptions\InvalidColor;
+use Simtabi\Laranail\Confetti\Exceptions\InvalidShape;
+use Simtabi\Laranail\Confetti\Exceptions\InvalidOption;
 use Simtabi\Laranail\Confetti\Validation\ColorValidator;
+use Simtabi\Laranail\Confetti\Exceptions\ConfettiException;
 
 describe('colours', function (): void {
     it('rejects anything that is not hex', function (): void {

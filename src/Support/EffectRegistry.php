@@ -83,7 +83,7 @@ final class EffectRegistry
     /**
      * Add an effect at runtime, for a package or a provider that ships its own.
      *
-     * @param  array<string, mixed>  $definition
+     * @param array<string, mixed> $definition
      */
     public function register(string $name, array $definition): self
     {
