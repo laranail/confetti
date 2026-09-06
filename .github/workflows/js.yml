@@ -23,7 +23,12 @@ jobs:
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: '22'
+          node-version: '24'
+          # Not 22. Node 22 ships npm 10.9.8, whose arborist crashes on this
+          # dependency set with "Cannot read properties of null (reading
+          # 'edgesOut')" - reproduced on a pristine directory with an isolated
+          # cache: npm 10.9.8 exits 1, npm 11.13.0 exits 0, same package.json.
+          # Node 24 ships npm 11.
 
       # Not `npm ci`: it requires a lockfile, and laranail packages do not
       # track one. Resolving fresh is the point of that convention, and the
