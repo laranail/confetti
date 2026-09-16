@@ -17,6 +17,13 @@ parameters:
         - src/Integrations/Filament/ConfettiPlugin.php
 
     ignoreErrors:
+        # larastan validates a view-string literal against a skeleton app that never
+        # boots this package's provider, so a namespace registered at RUNTIME is
+        # invisible to it and every `view()` / `View::make()` call reads as an error.
+        # The views exist; the suite renders them. Broad on purpose -- the narrow
+        # forms missed `static method`, `Contracts\View\Factory` and the helper,
+        # each of which had to be discovered from a red run.
+        - '#expects view-string, string given#'
         # Public extension points. PHPStan only scans src/, so a trait meant for
         # consuming applications looks unused from in here.
         -
@@ -46,3 +53,8 @@ parameters:
                 - src/View/Components/Scripts.php
 
     treatPhpDocTypesAsCertain: false
+
+    # Required BECAUSE of the ignore above: only larastan 3.x emits that error, so
+    # where an older one is installed the pattern would itself become an
+    # unmatched-ignore ERROR -- moving the failure rather than fixing it.
+    reportUnmatchedIgnoredErrors: false
