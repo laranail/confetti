@@ -23,6 +23,6 @@
     "devDependencies": {
         "esbuild": "^0.28.0",
         "happy-dom": "^20.0.0",
-        "vitest": "^4.0.0"
+        "vitest": "^5.0.0"
     }
 }
