@@ -3,64 +3,26 @@ name: Tests
 on:
   pull_request:
     branches: [main]
+    paths-ignore:
+      - '**.md'
   workflow_dispatch:
 
 concurrency:
-  group: tests-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: read
-
-# The laranail siblings resolve through git rather than Packagist, so every job
-# hits the GitHub API to enumerate their refs. Unauthenticated that shares one
-# low rate limit across the whole matrix, and jobs start failing with 504s and
-# auth errors that look like dependency problems. The token is the built-in
-# one; no secret to configure.
-env:
-  COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ secrets.GITHUB_TOKEN }}"}}'
-
+# Calls the one shared definition in laranail/.github. Everything this file used
+# to spell out -- the PHP matrix, the composer cache and its laranail eviction,
+# prefer-lowest, fail-fast, timeouts -- lives there now, so a change to how this
+# family tests is one edit instead of fifty.
 jobs:
   pest:
-    name: PHP ${{ matrix.php }} · ${{ matrix.deps }} · ${{ matrix.stability }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-
-    strategy:
-      fail-fast: false
-      matrix:
-        php: ['8.4', '8.5']
-        stability: [prefer-lowest, prefer-stable]
-        # "minimal" removes Filament, Livewire and Inertia entirely. It is the
-        # leg that proves the package works on a plain Laravel application.
-        # Without it, "Filament is optional" is a claim rather than a fact.
-        deps: [full, minimal]
-
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pdo, sqlite3, pdo_sqlite
-          ini-values: error_reporting=E_ALL
-          coverage: none
-
-      - name: Cache Composer packages
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.composer/cache/files
-          key: composer-${{ matrix.php }}-${{ matrix.deps }}-${{ matrix.stability }}-${{ hashFiles('composer.json') }}
-
-      - name: Remove the optional integrations
-        if: matrix.deps == 'minimal'
-        run: |
-          composer remove --dev --no-update --no-interaction \
-            filament/filament livewire/livewire inertiajs/inertia-laravel
-
-      - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
-
-      - name: Run the test suite
-        run: vendor/bin/pest --colors=always
+    uses: laranail/.github/.github/workflows/tests.yml@main
+    with:
+      # Pin nothing: resolve whatever composer.json allows. The shared workflow
+      # still defaults laravel-versions to ["13.*"], which runs
+      # `composer require illuminate/contracts` and REWRITES composer.json, so
+      # the suite would test a manifest this package does not ship. Remove this
+      # line only once that default is ["*"].
+      laravel-versions: '["*"]'
+      php-extensions: 'dom, curl, libxml, mbstring, zip, pdo, sqlite3, pdo_sqlite'
