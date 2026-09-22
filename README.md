@@ -4,7 +4,7 @@
 [![Static analysis](https://img.shields.io/github/actions/workflow/status/laranail/confetti/static-analysis.yml?branch=main&label=static%20analysis&style=flat-square)](https://github.com/laranail/confetti/actions/workflows/static-analysis.yml)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 
-`laranail/confetti` is not published to Packagist, so there is no registry-version badge to show — see [Install](#install).
+`laranail/confetti` is not published to Packagist, so there is no registry-version badge to show: see [Install](#install).
 
 > A fluent confetti builder for Laravel: canvas-confetti wrapped in a typed, validated PHP API, with Blade, Livewire, Inertia and Filament adapters.
 
