@@ -31,7 +31,25 @@ use Simtabi\Laranail\Confetti\Facades\Confetti;
 Confetti::realistic()->shoot();
 ```
 
-## Quick start
+## Quick start guide and usage
+
+### Getting started
+
+1. Put the runtime on your pages, once. Use the `<x-laranail-confetti::scripts />` component shown in Install, or let the middleware append it to every HTML response:
+
+   ```dotenv
+   CONFETTI_AUTO_INJECT=true
+   ```
+
+2. Check the setup. It reports the bundle, the asset delivery mode and any Content-Security-Policy directives you need:
+
+   ```bash
+   php artisan laranail::confetti.doctor
+   ```
+
+3. Optionally, `php artisan laranail::confetti.install` writes `config/laranail/confetti.php`; every setting has a working default.
+
+### Usage
 
 ```php
 use Simtabi\Laranail\Confetti\Facades\Confetti;
@@ -44,6 +62,15 @@ public function store(StoreOrderRequest $request)
 
     return redirect()->route('orders.show', $order);
 }
+```
+
+Several bursts at once, with shared options said once:
+
+```php
+Confetti::colors('#bb0000', '#ffffff')
+    ->left()->count(100)->then()
+    ->right()->count(100)
+    ->shoot();
 ```
 
 The full walkthrough is in [Getting started](docs/getting-started.md); everything else is in the [documentation index](#documentation).
