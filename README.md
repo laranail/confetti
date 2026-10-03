@@ -31,6 +31,23 @@ use Simtabi\Laranail\Confetti\Facades\Confetti;
 Confetti::realistic()->shoot();
 ```
 
+## Quick start
+
+```php
+use Simtabi\Laranail\Confetti\Facades\Confetti;
+
+public function store(StoreOrderRequest $request)
+{
+    $order = $this->placeOrder->handle($request->toData());
+
+    Confetti::realistic()->shoot();
+
+    return redirect()->route('orders.show', $order);
+}
+```
+
+The full walkthrough is in [Getting started](docs/getting-started.md); everything else is in the [documentation index](#documentation).
+
 ## <a name="documentation"></a>Documentation
 
 Full documentation is at
