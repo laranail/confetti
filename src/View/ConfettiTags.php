@@ -20,7 +20,11 @@ use Simtabi\Laranail\Confetti\Events\ConfettiRendered;
  */
 final readonly class ConfettiTags
 {
-    public const string VIEW = 'laranail-confetti::components.scripts';
+    /**
+     * The view, under the canonical `laranail/confetti` namespace. The `laranail-confetti` namespace
+     * still resolves the same file, including an override published under it.
+     */
+    public const string VIEW = 'laranail/confetti::components.scripts';
 
     public function __construct(
         private ConfettiConfig $config,

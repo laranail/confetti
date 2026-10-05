@@ -19,7 +19,7 @@ beforeEach(function (): void {
 
         // A page that already carries the component.
         Route::get('/explicit', fn (): string => '<html><body>'
-            . view('laranail-confetti::components.scripts', [
+            . view('laranail/confetti::components.scripts', [
                 'enabled'   => true,
                 'bootJson'  => app(BootConfig::class)->toJson(),
                 'scriptTag' => app(ScriptTagBuilder::class)->render(),

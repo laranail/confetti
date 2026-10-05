@@ -42,6 +42,10 @@ final class ConfettiServiceProvider extends PackageServiceProvider
         $package
             ->name('laranail/confetti')
             ->hasConfigFile()
+            // Declared under the hyphen form so overrides already published to
+            // resources/views/vendor/laranail-confetti keep winning; package-tools
+            // registers the canonical `laranail/confetti` namespace over the same
+            // paths, and the package renders through that one.
             ->hasViews('laranail-confetti')
             ->hasAssets()
             ->hasBladeComponentNamespace(

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
+use Simtabi\Laranail\Confetti\View\ConfettiTags;
+use Simtabi\Laranail\Package\Tools\Testing\NamingScope;
+use Simtabi\Laranail\Package\Tools\Testing\AssertsRegisteredNames;
+
+uses(AssertsRegisteredNames::class);
 
 /**
  * Every public name this package claims is prefixed with the org and the slug.
@@ -27,6 +32,22 @@ it('registers its views under the org-scoped namespace', function (): void {
 
     expect($hints)->toHaveKey(PREFIX);
     expect($hints)->not->toHaveKey('confetti');
+});
+
+it('registers both view namespace forms over the same paths, and renders through the canonical one', function (): void {
+    // basePath is resources/: package-tools v0.1.3 defaults ownership to the
+    // package root, which also claims vendor/ and tests/ registrations (fixed in v0.1.4).
+    $scope = NamingScope::for('laranail/confetti', 'Simtabi\\Laranail\\Confetti\\', basePath: dirname(__DIR__, 2) . '/resources');
+
+    expect($this->assertViewNamespacesScoped($scope, atLeast: 2))
+        ->toContain('laranail/confetti', PREFIX);
+
+    $hints = View::getFinder()->getHints();
+
+    expect($hints['laranail/confetti'])->toBe($hints[PREFIX]);
+    expect(ConfettiTags::VIEW)->toStartWith('laranail/confetti::');
+    expect(view('laranail-confetti::components.scripts')->getPath())
+        ->toBe(view(ConfettiTags::VIEW)->getPath());
 });
 
 it('registers its Blade components under the org-scoped prefix', function (): void {
