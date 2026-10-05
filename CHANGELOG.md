@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `laravel/framework ^13.0` is now declared in `require`. `src/` uses `Vite` from `Illuminate\Foundation`, which no `illuminate/*` component ships, so the dependency only arrived through the host application.
 - The package renders through `laranail/confetti::` (`ConfettiTags::VIEW`).
   `laranail-confetti::` still resolves the same files.
 - Requires `laranail/package-tools ^0.1.3`, the first release that registers
