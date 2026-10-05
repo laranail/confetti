@@ -58,6 +58,11 @@ final class ConfettiServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
+        // The install command takes the Package in its constructor, which the
+        // container cannot autowire. Binding it keeps the command registered by
+        // class name, so it is still only constructed when Artisan resolves it.
+        $this->app->bind(InstallCommand::class, fn (): InstallCommand => new InstallCommand($this->package));
+
         $this->app->singleton(ConfettiConfig::class, fn (): ConfettiConfig => ConfettiConfig::fromArray(
             (array) $this->app->make(Repository::class)->get('laranail.confetti', []),
         ));

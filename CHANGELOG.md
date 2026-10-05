@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `laranail::confetti.install` now extends laranail/package-tools'
+  `InstallCommand` and takes laranail/console's display API and run lifecycle
+  from its `InteractsWithConsoleServices` and `InteractsWithConsoleWriter`
+  traits instead of its `Command` base. Name, option, description, listing
+  visibility, output and exit codes are unchanged and pinned by a new contract
+  test. The command is bound in the container because the new base takes the
+  `Package` in its constructor, and `handle()`'s `ConfettiConfig` parameter is
+  now optional so the override stays compatible with the base's `handle(): int`.
+
 ### Fixed
 
 - **`tests.yml` no longer skips a markdown-only pull request.** The `pest`

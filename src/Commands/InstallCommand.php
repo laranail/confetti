@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Simtabi\Laranail\Confetti\Commands;
 
+use Simtabi\Laranail\Package\Tools\Package;
 use Simtabi\Laranail\Confetti\Enums\AssetMode;
-use Simtabi\Laranail\Console\Tools\Commands\Command;
 use Simtabi\Laranail\Confetti\Support\ConfettiConfig;
-use Simtabi\Laranail\Console\Tools\Commands\Concerns\SupportsNamespacedNames;
+use Simtabi\Laranail\Console\Tools\Commands\Concerns\InteractsWithConsoleWriter;
+use Simtabi\Laranail\Console\Tools\Commands\Concerns\InteractsWithConsoleServices;
+use Simtabi\Laranail\Package\Tools\Commands\InstallCommand as PackageToolsInstallCommand;
 
 /**
  * `laranail::confetti.install` publishes the config and explains what is left
@@ -17,17 +19,49 @@ use Simtabi\Laranail\Console\Tools\Commands\Concerns\SupportsNamespacedNames;
  * asset mode needs no publish step. The command exists to publish the config
  * for editing and to say plainly which of the three ways of getting the runtime
  * onto a page the application has chosen.
+ *
+ * The base is package-tools' install command, which carries the `::` name
+ * support. laranail/console's display API and managed run lifecycle come from
+ * its two traits rather than its base class, so neither package has to depend
+ * on the other. `handle()` is this command's own: the base's generic publish
+ * pipeline would print different steps, and the output here is the contract.
  */
-final class InstallCommand extends Command
+final class InstallCommand extends PackageToolsInstallCommand
 {
-    use SupportsNamespacedNames;
+    use InteractsWithConsoleServices;
+    use InteractsWithConsoleWriter;
 
-    protected $signature = 'laranail::confetti.install {--force : Overwrite an existing published config}';
+    public const string SIGNATURE = 'laranail::confetti.install {--force : Overwrite an existing published config}';
 
-    protected $description = 'Publish the confetti config and print the remaining setup steps';
+    public const string DESCRIPTION = 'Publish the confetti config and print the remaining setup steps';
 
-    public function handle(ConfettiConfig $config): int
+    public function __construct(Package $package)
     {
+        // Listed in `php artisan list`, as it always has been: the base hides
+        // install commands by default, so visibility is passed explicitly.
+        parent::__construct($package, self::SIGNATURE, hidden: false);
+
+        // The base writes `Install {package}` as the description during
+        // construction; restore the one this command has always shown. Both the
+        // property and Symfony's copy are set, because the parent constructor
+        // has already pushed the property through setDescription().
+        $this->description = self::DESCRIPTION;
+        $this->setDescription(self::DESCRIPTION);
+
+        // Booted eagerly, as console's own base does, so `$this->services`
+        // exists straight after construction.
+        $this->bootConsoleSupport();
+    }
+
+    /**
+     * The config stays method-injected, but optional: the base declares
+     * `handle(): int`, and a required parameter would be an incompatible
+     * override. Artisan still injects it on every run.
+     */
+    public function handle(?ConfettiConfig $config = null): int
+    {
+        $config ??= $this->laravel->make(ConfettiConfig::class);
+
         $this->callSilently('vendor:publish', array_filter([
             '--tag'   => 'laranail::confetti-config',
             '--force' => $this->option('force') ? true : null,
