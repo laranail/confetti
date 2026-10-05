@@ -7,8 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- The views also answer to the canonical `laranail/confetti` namespace
+  (`view('laranail/confetti::components.scripts')`), registered by
+  package-tools over the same paths as `laranail-confetti`, published overrides
+  included. A naming test asserts both forms against the live view finder.
+
 ### Changed
 
+- The package renders through `laranail/confetti::` (`ConfettiTags::VIEW`).
+  `laranail-confetti::` still resolves the same files.
+- Requires `laranail/package-tools ^0.1.3`, the first release that registers
+  both namespace forms.
 - `laranail::confetti.install` now extends laranail/package-tools'
   `InstallCommand` and takes laranail/console's display API and run lifecycle
   from its `InteractsWithConsoleServices` and `InteractsWithConsoleWriter`

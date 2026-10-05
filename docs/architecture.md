@@ -196,10 +196,16 @@ Everything this package registers is prefixed, and none of it is called just
 | Surface | Name | Used as |
 |---|---|---|
 | Blade component | `laranail-confetti` | `<x-laranail-confetti::scripts />` |
-| View namespace | `laranail-confetti` | `view('laranail-confetti::components.scripts')` |
+| View namespace | `laranail/confetti` (canonical), `laranail-confetti` (alias) | `view('laranail/confetti::components.scripts')` |
 | Route middleware | `laranail-confetti` | `->middleware('laranail-confetti')` |
 | Artisan commands | `laranail::confetti.` | `php artisan laranail::confetti.doctor` |
 | Alpine component | `laranailConfetti` | `<div x-data="laranailConfetti">` |
+
+The view namespace answers to both spellings over the same paths. `laranail/confetti`
+is canonical, because it is the composer package name, and the package renders
+through it. `laranail-confetti` is kept, not deprecated: it is the spelling a
+Blade tag needs, and overrides published to
+`resources/views/vendor/laranail-confetti` keep winning under either name.
 
 Laravel keeps view namespaces, component prefixes and middleware aliases in flat
 maps keyed by that name. Two packages claiming the same key do not collide
