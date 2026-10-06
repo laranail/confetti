@@ -8,33 +8,33 @@
 #
 # Three checks, because this package has now shipped every one of these failures.
 #
-#   1. CURRENCY -- the tag constrained consumers resolve must be on main.
+#   1. CURRENCY — the tag constrained consumers resolve must be on main.
 #
 #      Anchored on `extra.branch-alias`, NOT on the highest tag. That
 #      distinction is the whole point of this rewrite. laranail/enumerator
 #      carried v0.1.0 through v0.4.0; v0.4.0 pointed at main HEAD, so a check
-#      that took the highest tag reported everything healthy -- while all nine
+#      that took the highest tag reported everything healthy — while all nine
 #      consumers, every one of them on `^0.1`, resolved v0.1.0 two commits
 #      behind and silently missed a preset and an ordering bugfix. `^0.1` on a
 #      0.x package means `>=0.1.0 <0.2.0`; a v0.4.0 they cannot reach says
 #      nothing about what they get.
 #
-#      The package's own `branch-alias` declares which line is live --
-#      `0.1.x-dev` here, `0.7.x-dev` in db-tools -- so the check reads it rather
+#      The package's own `branch-alias` declares which line is live —
+#      `0.1.x-dev` here, `0.7.x-dev` in db-tools — so the check reads it rather
 #      than guessing.
 #
-#   2. REACHABILITY -- every tag must be an ancestor of the default branch.
+#   2. REACHABILITY — every tag must be an ancestor of the default branch.
 #
 #      Composer's VCS driver reads tags, not reachability. This package
 #      advertised v0.2.0, v0.2.1 and v0.3.0 pointing at abandoned history, so
 #      anyone writing `^0.2` got code that had been discarded months earlier,
 #      with nothing anywhere saying so.
 #
-#   3. THE HIGHEST TAG -- what an unconstrained `composer require` resolves.
+#   3. THE HIGHEST TAG — what an unconstrained `composer require` resolves.
 #
 #      Anchoring on branch-alias alone traded one blind spot for another. This
 #      package kept v0.4.0 three commits behind main while v0.1.0 was current,
-#      and a check that only knew about the live line called that healthy -- yet
+#      and a check that only knew about the live line called that healthy — yet
 #      v0.4.0 is exactly what a new consumer who names no constraint installs.
 #      Both are checked. The third only reports when it names a different tag,
 #      so an ordinary single-tag package does not hear it twice.
@@ -86,6 +86,24 @@ tag_commit() {
   fi
 }
 
+# A commit that touches only .github/ ships nothing (the directory is export-ignored), so it is not
+# unreleased code: a tag behind main by such commits still hands consumers exactly what main would.
+# Dependabot adds one weekly, so without this every package's scheduled check would go red on a
+# workflow bump. That holds for both tag models.
+#
+# When shipped code IS behind, the advice differs. A package on the moving-tag model holds exactly
+# one v* tag and moves it. A package that has cut a second tag is on real releases, and a published
+# release is immutable: moving it hands consumers who already resolved it different code under the
+# same name, so it gets a new patch instead. Called after ${tags} is read.
+released() { [ "$(printf '%s\n' "${tags}" | grep -c .)" -gt 1 ]; }
+
+ci_only() {
+  local files
+  files=$(gh api "repos/${REPO}/compare/$1...${head}" --jq '.files[].filename' 2>/dev/null) || return 1
+  [ -n "${files}" ] || return 1
+  ! printf '%s\n' "${files}" | grep -qvE '^\.github/'
+}
+
 # Not mapfile: macOS ships bash 3.2, which does not have it, and this has to run
 # on a maintainer's laptop as well as in CI.
 tags=$(gh api "repos/${REPO}/git/matching-refs/tags/v" --jq '.[].ref | sub("refs/tags/"; "")' 2>/dev/null | sort -V)
@@ -109,7 +127,7 @@ for tag in ${tags}; do
 
   case "${status}" in
     identical|ahead) printf '    %-10s %s  on %s\n' "${tag}" "${commit:0:12}" "${BRANCH}" ;;
-    *)               fail "${tag} (${commit:0:12}) is not an ancestor of ${BRANCH} -- it points at abandoned history, and Composer will still offer it." ;;
+    *)               fail "${tag} (${commit:0:12}) is not an ancestor of ${BRANCH} — it points at abandoned history, and Composer will still offer it." ;;
   esac
 done
 echo
@@ -167,7 +185,11 @@ if [ "${commit}" = "${head}" ]; then
       ok "${highest} is also on ${BRANCH}."
     else
       hbehind=$(gh api "repos/${REPO}/compare/${hcommit}...${head}" --jq '.ahead_by' 2>/dev/null || echo '?')
+      if ci_only "${hcommit}"; then
+        ok "${highest} is behind ${BRANCH} only by ${hbehind} commit(s) that touch only .github/."
+      else
       fail "${highest} is the highest tag and is ${hbehind} commit(s) behind ${BRANCH}. An unconstrained \`composer require ${REPO}\` resolves it, so it must be current or it must not exist."
+      fi
     fi
   fi
 else
@@ -178,7 +200,13 @@ else
     --jq '.commits[] | "    " + .sha[0:8] + "  " + (.commit.message | split("\n")[0])' 2>/dev/null || true
   echo
 
-  fail "${current} is behind ${BRANCH}. Move it (git tag -f ${current} ${BRANCH} && git push --force origin ${current}) or cut a new one."
+  if ci_only "${commit}"; then
+    ok "${current} is behind ${BRANCH} only by commits that touch only .github/, so nothing a consumer installs is unreleased."
+  elif released; then
+    fail "${current} is behind ${BRANCH}. It is a published release, so do not move it: cut ${current%.*}.$(( ${current##*.} + 1 ))."
+  else
+    fail "${current} is behind ${BRANCH}. Move it (git tag -f ${current} ${BRANCH} && git push --force origin ${current}) or cut a new one."
+  fi
 fi
 
 exit "${FAILED}"

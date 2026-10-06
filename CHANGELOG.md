@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `scripts/verify-tag-currency.sh` is now package-tools' current script: a tag behind `main` only by `.github/`-only commits (a Dependabot bump) passes, and a released package is told to cut a patch rather than move a published tag.
 - `laravel/framework ^13.0` is now declared in `require`. `src/` uses `Vite` from `Illuminate\Foundation`, which no `illuminate/*` component ships, so the dependency only arrived through the host application.
 - The package renders through `laranail/confetti::` (`ConfettiTags::VIEW`).
   `laranail-confetti::` still resolves the same files.
