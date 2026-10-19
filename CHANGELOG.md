@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- A guard now keeps literal credentials out of the tests, and every credential the tests generate is named with a single-word purpose, so secret scanning has nothing to report. `laranail/package-tools` in `require` is now `^0.1.10`, the first release with the purpose check.
 - `scripts/verify-tag-currency.sh` is now package-tools' current script: a tag behind `main` only by `.github/`-only commits (a Dependabot bump) passes, and a released package is told to cut a patch rather than move a published tag.
 - `laravel/framework ^13.0` is now declared in `require`. `src/` uses `Vite` from `Illuminate\Foundation`, which no `illuminate/*` component ships, so the dependency only arrived through the host application.
 - The package renders through `laranail/confetti::` (`ConfettiTags::VIEW`).
