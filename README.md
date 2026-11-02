@@ -104,4 +104,4 @@ by Kiril Vatev (ISC), bundled with the package.
 
 ## License
 
-MIT © Simtabi LLC. See [LICENSE](LICENSE).
+MIT © Simtabi LLC. See [LICENSE](LICENSE); the embedded `canvas-confetti` is ISC, see [attribution.md](attribution.md).
