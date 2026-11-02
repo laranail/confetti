@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `LICENSE` is the plain MIT text with every copyright line, so GitHub and Packagist detect it as MIT; the attribution prose moved to `attribution.md`.
+
 ## [0.1.1] - 2026-11-02
 
 ### Changed
