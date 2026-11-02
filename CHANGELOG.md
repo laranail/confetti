@@ -7,27 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-02
+
 ### Changed
 
 - The weekly release-currency check now runs through `laranail/.github`'s shared hygiene
   workflow, which uses `laranail/package-tools`' canonical script. Release tags are immutable, so a
   tag behind `main` is a warning that a release is due rather than a red run.
-
-### Deprecated
-
-- `scripts/verify-tag-currency.sh`. It prints a notice and delegates to the canonical script when
-  an installed `laranail/package-tools` already follows the immutable-tag model, and otherwise keeps
-  working, now advising the next patch instead of a moved tag. Earliest removal: the next minor
-  release.
-
-### Added
-
-- The views also answer to the canonical `laranail/confetti` namespace
-  (`view('laranail/confetti::components.scripts')`), registered by
-  package-tools over the same paths as `laranail-confetti`, published overrides
-  included. A naming test asserts both forms against the live view finder.
-
-### Changed
 
 - A guard now keeps literal credentials out of the tests, and every credential the tests generate is named with a single-word purpose, so secret scanning has nothing to report. `laranail/package-tools` in `require` is now `^0.1.10`, the first release with the purpose check.
 - `scripts/verify-tag-currency.sh` is now package-tools' current script: a tag behind `main` only by `.github/`-only commits (a Dependabot bump) passes, and a released package is told to cut a patch rather than move a published tag.
@@ -44,6 +30,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   test. The command is bound in the container because the new base takes the
   `Package` in its constructor, and `handle()`'s `ConfettiConfig` parameter is
   now optional so the override stays compatible with the base's `handle(): int`.
+
+### Deprecated
+
+- `scripts/verify-tag-currency.sh`. It prints a notice and delegates to the canonical script when
+  an installed `laranail/package-tools` already follows the immutable-tag model, and otherwise keeps
+  working, now advising the next patch instead of a moved tag. Earliest removal: the next minor
+  release.
+
+### Added
+
+- The views also answer to the canonical `laranail/confetti` namespace
+  (`view('laranail/confetti::components.scripts')`), registered by
+  package-tools over the same paths as `laranail-confetti`, published overrides
+  included. A naming test asserts both forms against the live view finder.
 
 ### Fixed
 
