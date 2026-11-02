@@ -110,21 +110,14 @@ jobs:
 
   tag:
     name: Release currency
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-
-    # Not on push: the tag is expected to lag between pushing a commit and
-    # moving it, and a job that fails for the minute in between is one people
-    # learn to ignore. Weekly is soon enough to catch a tag left behind.
+    # The shared hygiene workflow runs laranail/package-tools' canonical check,
+    # so this package no longer carries its own copy. Release tags are
+    # immutable: a tag behind main is a warning that a release is due, never a
+    # red run. The shared job already skips pull requests, and the other
+    # hygiene checks are off here because the jobs above run them.
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-
-    steps:
-      - uses: actions/checkout@v7
-
-      # Pre-1.0 the tag moves and consumers resolve ^0.1 through it, so a tag
-      # left behind ships them code without the fixes rather than merely
-      # without the features. v0.1.0 here sat behind a security fix.
-      - name: Verify the moving tag is on main
-        run: bash scripts/verify-tag-currency.sh ${{ github.repository }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: laranail/.github/.github/workflows/hygiene.yml@main
+    with:
+      run-action-pins: false
+      run-tag-currency: true
+      run-dist-integrity: false

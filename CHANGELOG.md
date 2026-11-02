@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- The weekly release-currency check now runs through `laranail/.github`'s shared hygiene
+  workflow, which uses `laranail/package-tools`' canonical script. Release tags are immutable, so a
+  tag behind `main` is a warning that a release is due rather than a red run.
+
+### Deprecated
+
+- `scripts/verify-tag-currency.sh`. It prints a notice and delegates to the canonical script when
+  an installed `laranail/package-tools` already follows the immutable-tag model, and otherwise keeps
+  working, now advising the next patch instead of a moved tag. Earliest removal: the next minor
+  release.
+
 ### Added
 
 - The views also answer to the canonical `laranail/confetti` namespace
