@@ -27,13 +27,18 @@ beforeEach(function (): void {
  * protected until then, so reflection is the way to see what a plugin
  * registered without standing up a whole panel lifecycle.
  *
- * @return array<string, array<string, array<Closure>>>
+ * The property is Filament's own and its shape is not a contract: up to 5.11
+ * it held `[hook][scope][] = Closure`, and from 5.12 it holds
+ * `[hook][] = ['hook' => Closure, 'scopes' => [...]]`. Callers below therefore
+ * take only the closures out of it, whatever surrounds them.
+ *
+ * @return array<string, array<array-key, mixed>>
  */
 function panelRenderHooks(Panel $panel): array
 {
     $property = new ReflectionProperty(Panel::class, 'renderHooks');
 
-    /** @var array<string, array<string, array<Closure>>> */
+    /** @var array<string, array<array-key, mixed>> */
     return $property->getValue($panel);
 }
 
@@ -43,6 +48,7 @@ function renderPanelHook(Panel $panel, string $hook): string
 
     return collect($hooks[$hook] ?? [])
         ->flatten()
+        ->filter(fn (mixed $entry): bool => $entry instanceof Closure)
         ->map(fn (Closure $callback): string => (string) $callback())
         ->implode('');
 }
